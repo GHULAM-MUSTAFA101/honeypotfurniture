@@ -4,7 +4,7 @@
 {% endcomment %}
 
 <section class="fabric-section">
-  <div class="page-width">
+  <div class="fabric-container">
     <div class="fabric-header">
       {% if section.settings.heading_number != blank %}
         <h2 class="fabric-number">{{ section.settings.heading_number }}</h2>
@@ -25,21 +25,22 @@
     <div class="fabric-grid">
       {% for block in section.blocks %}
         <div class="fabric-item">
-             {% if block.settings.title != blank %}
-            <p class="fabric-name">{{ block.settings.title }}</p>
-          {% endif %}
           {% if block.settings.image != blank %}
             <div class="fabric-image">
               <img src="{{ block.settings.image | img_url: '400x400' }}" alt="{{ block.settings.title | escape }}">
             </div>
           {% endif %}
-         
+          {% if block.settings.title != blank %}
+            <p class="fabric-name">{{ block.settings.title }}</p>
+          {% endif %}
         </div>
       {% endfor %}
     </div>
 
     <div class="fabric-footer">
-      <p class="fabric-subtitle">{{ section.settings.footer_title }}</p>
+      {% if section.settings.footer_title != blank %}
+        <p class="fabric-subtitle">{{ section.settings.footer_title }}</p>
+      {% endif %}
       <ul class="fabric-list">
         {% if section.settings.list_item_1 != blank %}
           <li>{{ section.settings.list_item_1 }}</li>
@@ -57,49 +58,54 @@
 
 <style>
 .fabric-section {
-     max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
   background: #fff;
   color: #000;
+  padding: 60px 20px;
+}
+
+.fabric-container {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .fabric-header {
-  text-align: left;
-  margin-bottom: 30px;
+  text-align: center;
+  margin-bottom: 40px;
 }
 
 .fabric-number {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
   color: #000;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 }
 
 .fabric-title {
-  font-size: 28px;
-  font-weight: 700;
+  font-size: 32px;
+  font-weight: 800;
   color: #000;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .fabric-points {
   list-style: disc;
   padding-left: 20px;
-  margin-bottom: 30px;
+  margin: 0 auto 30px;
+  display: inline-block;
+  text-align: left;
 }
 
 .fabric-points li {
   font-size: 16px;
   color: #000;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .fabric-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(5, 1fr);
   gap: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 }
 
 .fabric-item {
@@ -114,6 +120,11 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
+.fabric-image {
+  width: 100%;
+  overflow: hidden;
+}
+
 .fabric-image img {
   width: 100%;
   height: auto;
@@ -122,7 +133,7 @@
 
 .fabric-name {
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 600;
   color: #000;
   padding: 10px;
   border-top: 1px solid #e5e5e5;
@@ -130,13 +141,15 @@
 }
 
 .fabric-footer {
-  margin-top: 30px;
+  text-align: left;
+  margin-top: 40px;
 }
 
 .fabric-subtitle {
   font-weight: 700;
-  margin-bottom: 10px;
-  font-size: 16px;
+  font-size: 18px;
+  color: #000;
+  margin-bottom: 12px;
 }
 
 .fabric-list {
@@ -146,24 +159,30 @@
 
 .fabric-list li {
   font-size: 15px;
-  margin-bottom: 4px;
   color: #000;
+  margin-bottom: 6px;
 }
 
 /* Responsive */
+@media (max-width: 992px) {
+  .fabric-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   .fabric-title {
-    font-size: 22px;
+    font-size: 24px;
   }
   .fabric-grid {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 </style>
 
 {% schema %}
 {
-  "name": "Pick Your Fabric & Colour",
+  "name": "Fabric & Colour Picker",
   "settings": [
     {
       "type": "text",
@@ -181,13 +200,13 @@
       "type": "text",
       "id": "point_1",
       "label": "First Point",
-      "default": "Over 30 fabric types, each with more than 30 colours"
+      "default": "Over 30 fabric types, each with more than 30 colours."
     },
     {
       "type": "text",
       "id": "point_2",
       "label": "Second Point",
-      "default": "Ten curated looks make it easy to find the texture and style that fit your home"
+      "default": "Ten curated looks make it easy to find the texture and style that fit your home."
     },
     {
       "type": "text",
@@ -232,10 +251,10 @@
       ]
     }
   ],
-  "max_blocks": 12,
+  "max_blocks": 10,
   "presets": [
     {
-      "name": "Pick Your Fabric & Colour",
+      "name": "Fabric & Colour Picker",
       "category": "Custom Sections"
     }
   ]
