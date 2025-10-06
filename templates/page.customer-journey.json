@@ -331,6 +331,20 @@
         "list_item_2": "Honeypot Signatures",
         "list_item_3": "Performance Select / Luxe / Elite (all with FibreGuard for stain and pet protection)"
       }
+    },
+    "customer_journey_6_YHXknH": {
+      "type": "customer_journey_6",
+      "name": "customer jouney 6",
+      "settings": {
+        "heading_number": "06",
+        "heading": "customer jouney 6",
+        "description": "Once you’ve finalised your design and fabric choice, we craft your sofa to order and deliver it within 7–14 days.",
+        "image_1": "shopify://shop_images/Rectangle_34624271.png",
+        "image_2": "shopify://shop_images/Rectangle_34624270.png",
+        "bottom_heading": "Designing your sofa with Honeypot is simple:",
+        "steps_text": "Style → Size → Quote → Filling → Fabric → Delivery",
+        "bottom_desc": "From concept to comfort, we craft a sofa that’s just as unique as you."
+      }
     }
   },
   "order": [
@@ -341,6 +355,7 @@
     "customer_journey_2_i7LHUN",
     "customer_journey_3_6ew86H",
     "grid_image_text_qChzVn",
-    "customer_journey_5_xEHcez"
+    "customer_journey_5_xEHcez",
+    "customer_journey_6_YHXknH"
   ]
 }
