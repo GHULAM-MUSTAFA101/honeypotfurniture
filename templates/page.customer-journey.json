@@ -292,6 +292,20 @@
             "image": "shopify://shop_images/Suede.png",
             "title": "Suede"
           }
+        },
+        "fabric_HgPkBw": {
+          "type": "fabric",
+          "settings": {
+            "image": "shopify://shop_images/Leather_look.png",
+            "title": "Leather look"
+          }
+        },
+        "fabric_W6dgpn": {
+          "type": "fabric",
+          "settings": {
+            "image": "shopify://shop_images/JUMBO.png",
+            "title": "Jumbo"
+          }
         }
       },
       "block_order": [
@@ -302,7 +316,9 @@
         "fabric_Kgt4kn",
         "fabric_Y99Pyb",
         "fabric_xqALjy",
-        "fabric_8jkn4B"
+        "fabric_8jkn4B",
+        "fabric_HgPkBw",
+        "fabric_W6dgpn"
       ],
       "name": "Pick Your Fabric & Colour",
       "settings": {
