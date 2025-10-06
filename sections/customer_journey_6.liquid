@@ -1,0 +1,206 @@
+{% comment %}
+  Creation & Delivery Section
+  Responsive - with top content and bottom beige block
+{% endcomment %}
+
+<section class="creation-delivery">
+  <div class="page-width">
+    <div class="creation-top">
+      <div class="creation-text">
+        {% if section.settings.heading_number != blank %}
+          <h2 class="creation-number">{{ section.settings.heading_number }}</h2>
+        {% endif %}
+        {% if section.settings.heading != blank %}
+          <h3 class="creation-title">{{ section.settings.heading }}</h3>
+        {% endif %}
+        {% if section.settings.description != blank %}
+          <p class="creation-desc">{{ section.settings.description }}</p>
+        {% endif %}
+      </div>
+      <div class="creation-images">
+        {% if section.settings.image_1 != blank %}
+          <div class="creation-image">
+            <img src="{{ section.settings.image_1 | img_url: '600x600' }}" alt="Creation image 1">
+          </div>
+        {% endif %}
+        {% if section.settings.image_2 != blank %}
+          <div class="creation-image">
+            <img src="{{ section.settings.image_2 | img_url: '600x600' }}" alt="Creation image 2">
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="creation-bottom">
+    <div class="creation-bottom-inner">
+      {% if section.settings.bottom_heading != blank %}
+        <h4 class="bottom-heading">{{ section.settings.bottom_heading }}</h4>
+      {% endif %}
+      {% if section.settings.steps_text != blank %}
+        <p class="steps">{{ section.settings.steps_text }}</p>
+      {% endif %}
+      {% if section.settings.bottom_desc != blank %}
+        <p class="bottom-desc">{{ section.settings.bottom_desc }}</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+.creation-delivery {
+  background: #fff;
+  color: #000;
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.creation-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.creation-text {
+  flex: 1 1 40%;
+}
+
+.creation-number {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.creation-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.creation-desc {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.creation-images {
+  flex: 1 1 55%;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.creation-image {
+  flex: 1 1 calc(50% - 10px);
+}
+
+.creation-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Bottom Beige Section */
+.creation-bottom {
+  background: #f5eee8;
+  margin-top: 60px;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.bottom-heading {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.steps {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.bottom-desc {
+  font-size: 16px;
+  color: #000;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .creation-top {
+    flex-direction: column;
+    text-align: center;
+  }
+  .creation-images {
+    flex-direction: column;
+  }
+  .creation-image {
+    flex: 1 1 100%;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Creation & Delivery",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_number",
+      "label": "Heading Number",
+      "default": "06"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Creation & Delivery"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Once you’ve finalised your design and fabric choice, we craft your sofa to order and deliver it within 7–14 days."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Left Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Right Image"
+    },
+    {
+      "type": "text",
+      "id": "bottom_heading",
+      "label": "Bottom Heading",
+      "default": "Designing your sofa with Honeypot is simple:"
+    },
+    {
+      "type": "text",
+      "id": "steps_text",
+      "label": "Steps Text",
+      "default": "Style → Size → Quote → Filling → Fabric → Delivery"
+    },
+    {
+      "type": "text",
+      "id": "bottom_desc",
+      "label": "Bottom Description",
+      "default": "From concept to comfort, we craft a sofa that’s just as unique as you."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Creation & Delivery",
+      "category": "Custom Sections"
+    }
+  ]
+}
+{% endschema %}
