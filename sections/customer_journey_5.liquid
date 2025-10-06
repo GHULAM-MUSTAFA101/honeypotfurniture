@@ -25,14 +25,15 @@
     <div class="fabric-grid">
       {% for block in section.blocks %}
         <div class="fabric-item">
+             {% if block.settings.title != blank %}
+            <p class="fabric-name">{{ block.settings.title }}</p>
+          {% endif %}
           {% if block.settings.image != blank %}
             <div class="fabric-image">
               <img src="{{ block.settings.image | img_url: '400x400' }}" alt="{{ block.settings.title | escape }}">
             </div>
           {% endif %}
-          {% if block.settings.title != blank %}
-            <p class="fabric-name">{{ block.settings.title }}</p>
-          {% endif %}
+         
         </div>
       {% endfor %}
     </div>
