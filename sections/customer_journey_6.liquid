@@ -4,40 +4,49 @@
 {% endcomment %}
 
 <section class="creation-delivery">
-    <div class="creation-top">
-      <div class="creation-text">
-        {% if section.settings.heading_number != blank %}
-          <h2 class="creation-number">{{ section.settings.heading_number }}</h2>
-        {% endif %}
-        {% if section.settings.heading != blank %}
-          <h3 class="creation-title">{{ section.settings.heading }}</h3>
-        {% endif %}
-        {% if section.settings.description != blank %}
-          <p class="creation-desc">{{ section.settings.description }}</p>
-        {% endif %}
-      </div>
-      <div class="creation-images">
-        {% if section.settings.image_1 != blank %}
-          <div class="creation-image">
-            <img src="{{ section.settings.image_1 | img_url: '600x600' }}" alt="Creation image 1">
-          </div>
-        {% endif %}
-        {% if section.settings.image_2 != blank %}
-          <div class="creation-image">
-            <img src="{{ section.settings.image_2 | img_url: '600x600' }}" alt="Creation image 2">
-          </div>
-        {% endif %}
-      </div>
+  <div class="creation-top">
+    <div class="creation-text">
+      {% if section.settings.heading_number != blank %}
+        <h2 class="creation-number">{{ section.settings.heading_number }}</h2>
+      {% endif %}
+      {% if section.settings.heading != blank %}
+        <h3 class="creation-title">{{ section.settings.heading }}</h3>
+      {% endif %}
+      {% if section.settings.description != blank %}
+        <p class="creation-desc">{{ section.settings.description }}</p>
+      {% endif %}
     </div>
+    <div class="creation-images">
+      {% if section.settings.image_1 != blank %}
+        <div class="creation-image">
+          <img src="{{ section.settings.image_1 | img_url: '600x600' }}" alt="Creation image 1">
+        </div>
+      {% endif %}
+      {% if section.settings.image_2 != blank %}
+        <div class="creation-image">
+          <img src="{{ section.settings.image_2 | img_url: '600x600' }}" alt="Creation image 2">
+        </div>
+      {% endif %}
+    </div>
+  </div>
 </section>
+
 <section>
-      <div class="creation-bottom">
+  <div class="creation-bottom">
     <div class="creation-bottom-inner">
       {% if section.settings.bottom_heading != blank %}
         <h4 class="bottom-heading">{{ section.settings.bottom_heading }}</h4>
       {% endif %}
       {% if section.settings.steps_text != blank %}
-        <p class="steps">{{ section.settings.steps_text }}</p>
+        <div class="steps">
+          {% assign steps_array = section.settings.steps_text | split: "→" %}
+          {% for step in steps_array %}
+            <span class="step-item">{{ step | strip }}</span>
+            {% unless forloop.last %}
+              <span class="arrow">→</span>
+            {% endunless %}
+          {% endfor %}
+        </div>
       {% endif %}
       {% if section.settings.bottom_desc != blank %}
         <p class="bottom-desc">{{ section.settings.bottom_desc }}</p>
@@ -45,7 +54,6 @@
     </div>
   </div>
 </section>
-
 
 <style>
 .creation-delivery {
@@ -116,10 +124,26 @@
   margin-bottom: 15px;
 }
 
+/* Steps in one flex row */
 .steps {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.step-item {
   font-size: 18px;
   font-weight: 600;
-  margin-bottom: 10px;
+  white-space: nowrap;
+}
+
+.arrow {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
 }
 
 .bottom-desc {
