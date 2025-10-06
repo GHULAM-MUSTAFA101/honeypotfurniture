@@ -271,6 +271,27 @@
             "image": "shopify://shop_images/Textured.png",
             "title": "Boucle"
           }
+        },
+        "fabric_Y99Pyb": {
+          "type": "fabric",
+          "settings": {
+            "image": "shopify://shop_images/Chenille.png",
+            "title": "Chenille"
+          }
+        },
+        "fabric_xqALjy": {
+          "type": "fabric",
+          "settings": {
+            "image": "shopify://shop_images/Velvet.png",
+            "title": "Velvet"
+          }
+        },
+        "fabric_8jkn4B": {
+          "type": "fabric",
+          "settings": {
+            "image": "shopify://shop_images/Suede.png",
+            "title": "Suede"
+          }
         }
       },
       "block_order": [
@@ -278,7 +299,10 @@
         "fabric_baLGdH",
         "fabric_CgdwhX",
         "fabric_B6w8xQ",
-        "fabric_Kgt4kn"
+        "fabric_Kgt4kn",
+        "fabric_Y99Pyb",
+        "fabric_xqALjy",
+        "fabric_8jkn4B"
       ],
       "name": "Pick Your Fabric & Colour",
       "settings": {
