@@ -1,6 +1,6 @@
 {% comment %}
-  Customer Journey 6 Section
-  Perfectly aligned & fully responsive (matches screenshot)
+  customer jouney 6 Section
+  Responsive - with top content and bottom beige block
 {% endcomment %}
 
 <section class="creation-delivery">
@@ -17,16 +17,15 @@
           <p class="creation-desc">{{ section.settings.description }}</p>
         {% endif %}
       </div>
-
       <div class="creation-images">
         {% if section.settings.image_1 != blank %}
           <div class="creation-image">
-            <img src="{{ section.settings.image_1 | img_url: '800x800' }}" alt="Creation image 1">
+            <img src="{{ section.settings.image_1 | img_url: '600x600' }}" alt="Creation image 1">
           </div>
         {% endif %}
         {% if section.settings.image_2 != blank %}
           <div class="creation-image">
-            <img src="{{ section.settings.image_2 | img_url: '800x800' }}" alt="Creation image 2">
+            <img src="{{ section.settings.image_2 | img_url: '600x600' }}" alt="Creation image 2">
           </div>
         {% endif %}
       </div>
@@ -57,18 +56,16 @@
   margin: 0 auto;
 }
 
-/* --- TOP SECTION --- */
 .creation-top {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 40px;
   flex-wrap: wrap;
 }
 
 .creation-text {
-  flex: 1 1 50%;
-  max-width: 50%;
+  flex: 1 1 40%;
 }
 
 .creation-number {
@@ -78,7 +75,7 @@
 }
 
 .creation-title {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 700;
   margin-bottom: 10px;
 }
@@ -86,47 +83,31 @@
 .creation-desc {
   font-size: 16px;
   line-height: 1.6;
-  color: #000;
 }
 
 .creation-images {
-  flex: 1 1 50%;
-  max-width: 50%;
+  flex: 1 1 55%;
   display: flex;
+  gap: 15px;
   flex-wrap: wrap;
-  gap: 20px;
-  justify-content: flex-start;
 }
 
 .creation-image {
   flex: 1 1 calc(50% - 10px);
-  box-sizing: border-box;
 }
 
 .creation-image img {
   width: 100%;
   height: auto;
-  border: 1px solid #e5e5e5;
   display: block;
-  background: #f9f9f9;
-  transition: transform 0.3s ease;
 }
 
-.creation-image img:hover {
-  transform: scale(1.02);
-}
-
-/* --- BOTTOM SECTION --- */
+/* Bottom Beige Section */
 .creation-bottom {
   background: #f5eee8;
   margin-top: 60px;
   padding: 40px 20px;
   text-align: center;
-}
-
-.creation-bottom-inner {
-  max-width: 700px;
-  margin: 0 auto;
 }
 
 .bottom-heading {
@@ -144,42 +125,29 @@
 .bottom-desc {
   font-size: 16px;
   color: #000;
+  max-width: 600px;
+  margin: 0 auto;
   line-height: 1.6;
 }
 
-/* --- RESPONSIVE --- */
-@media (max-width: 991px) {
+/* Responsive */
+@media (max-width: 768px) {
   .creation-top {
     flex-direction: column;
-    align-items: center;
     text-align: center;
   }
-  .creation-text,
   .creation-images {
-    max-width: 100%;
-    flex: 1 1 100%;
+    flex-direction: column;
   }
-  .creation-images {
-    justify-content: center;
-  }
-}
-
-@media (max-width: 768px) {
   .creation-image {
     flex: 1 1 100%;
-  }
-  .creation-title {
-    font-size: 24px;
-  }
-  .steps {
-    font-size: 16px;
   }
 }
 </style>
 
 {% schema %}
 {
-  "name": "Customer Journey 6",
+  "name": "customer jouney 6",
   "settings": [
     {
       "type": "text",
@@ -190,24 +158,24 @@
     {
       "type": "text",
       "id": "heading",
-      "label": "Main Heading",
-      "default": "Customer Journey 6"
+      "label": "Heading",
+      "default": "customer jouney 6"
     },
     {
       "type": "textarea",
       "id": "description",
-      "label": "Top Description",
+      "label": "Description",
       "default": "Once you’ve finalised your design and fabric choice, we craft your sofa to order and deliver it within 7–14 days."
     },
     {
       "type": "image_picker",
       "id": "image_1",
-      "label": "First Image"
+      "label": "Left Image"
     },
     {
       "type": "image_picker",
       "id": "image_2",
-      "label": "Second Image"
+      "label": "Right Image"
     },
     {
       "type": "text",
@@ -230,7 +198,7 @@
   ],
   "presets": [
     {
-      "name": "Customer Journey 6",
+      "name": "customer jouney 6",
       "category": "Custom Sections"
     }
   ]
