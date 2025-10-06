@@ -233,6 +233,64 @@
         "foam_image2": "shopify://shop_images/Raha_Sofa_Beige_Left_Hand_Module_1_ddd1ec3e-c588-4809-a614-0bda19a9ab6b.jpg",
         "foam_content": "<h4><strong>Foam-filled</strong></h4><ul><li>Soft: The softest, most sink-in comfort (lower density foam)</li><li>Medium:  Medium comfort feel (a blended mix of soft and supportive foams)</li><li>Firm: Firmer comfort with extra resilience (higher density foam)!</li></ul>"
       }
+    },
+    "customer_journey_5_xEHcez": {
+      "type": "customer_journey_5",
+      "blocks": {
+        "fabric_jTzBkb": {
+          "type": "fabric",
+          "settings": {
+            "image": "shopify://shop_images/Natural_Linen.png",
+            "title": "Natural Linen"
+          }
+        },
+        "fabric_baLGdH": {
+          "type": "fabric",
+          "settings": {
+            "image": "shopify://shop_images/Linen_-_look.png",
+            "title": "Linen - look"
+          }
+        },
+        "fabric_CgdwhX": {
+          "type": "fabric",
+          "settings": {
+            "image": "shopify://shop_images/Cotton_-_look.png",
+            "title": "Cotton - look"
+          }
+        },
+        "fabric_B6w8xQ": {
+          "type": "fabric",
+          "settings": {
+            "image": "shopify://shop_images/Boucle.png",
+            "title": "Boucle"
+          }
+        },
+        "fabric_Kgt4kn": {
+          "type": "fabric",
+          "settings": {
+            "image": "shopify://shop_images/Textured.png",
+            "title": "Boucle"
+          }
+        }
+      },
+      "block_order": [
+        "fabric_jTzBkb",
+        "fabric_baLGdH",
+        "fabric_CgdwhX",
+        "fabric_B6w8xQ",
+        "fabric_Kgt4kn"
+      ],
+      "name": "Pick Your Fabric & Colour",
+      "settings": {
+        "heading_number": "05",
+        "heading": "Pick Your Fabric & Colour",
+        "point_1": "Over 30 fabric types, each with more than 30 colours",
+        "point_2": "Ten curated looks make it easy to find the texture and style that fit your home",
+        "footer_title": "Our Price Ranges are clearly grouped into five categories:",
+        "list_item_1": "Honeypot Classics",
+        "list_item_2": "Honeypot Signatures",
+        "list_item_3": "Performance Select / Luxe / Elite (all with FibreGuard for stain and pet protection)"
+      }
     }
   },
   "order": [
@@ -242,6 +300,7 @@
     "customer_journey_1_MPXCwG",
     "customer_journey_2_i7LHUN",
     "customer_journey_3_6ew86H",
-    "grid_image_text_qChzVn"
+    "grid_image_text_qChzVn",
+    "customer_journey_5_xEHcez"
   ]
 }
