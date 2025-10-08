@@ -1,107 +1,80 @@
 {% comment %}
-  Contact Section with Info, Form and Map — Dynamic SVG/PNG Icons
+  Contact With Map Section
+  - Left: Info Content
+  - Right: Form
+  - Bottom: Map
 {% endcomment %}
 
 <section class="contact-map-section">
-  <div class="contact-container">
-    <!-- Left Info Section -->
-    <div class="contact-info">
-      <h2 class="contact-title">{{ section.settings.heading }}</h2>
-      <p class="contact-description">{{ section.settings.description }}</p>
-
-      {% if section.settings.email_icon != blank or section.settings.email != blank %}
-      <div class="contact-item">
-        {% if section.settings.email_icon != blank %}
-        <div class="icon-wrapper">
-          <img src="{{ section.settings.email_icon | image_url }}" alt="Email Icon">
-        </div>
+  <div class="page-width contact-container">
+    <div class="contact-wrapper">
+      <!-- Left Side: Info -->
+      <div class="contact-info">
+        {% if section.settings.info_heading != blank %}
+          <h2 class="info-heading">{{ section.settings.info_heading }}</h2>
         {% endif %}
-        <div class="item-content">
-          <span class="label">Email</span>
-          <a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>
+
+        {% if section.settings.info_text != blank %}
+          <p class="info-text">{{ section.settings.info_text }}</p>
+        {% endif %}
+
+        <ul class="info-list">
+          {% for block in section.blocks %}
+            {% if block.type == 'info_item' %}
+              <li class="info-item">
+                {% if block.settings.icon != blank %}
+                  <img src="{{ block.settings.icon | img_url: '50x50' }}" alt="icon" class="info-icon">
+                {% endif %}
+                <div>
+                  <h4>{{ block.settings.title }}</h4>
+                  <p>{{ block.settings.text }}</p>
+                </div>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+
+        <!-- Social Media Icons -->
+        <div class="social-icons">
+          {% for block in section.blocks %}
+            {% if block.type == 'social_item' %}
+              <a href="{{ block.settings.link }}" target="_blank">
+                <img src="{{ block.settings.icon | img_url: '50x50' }}" alt="social icon" class="social-icon">
+              </a>
+            {% endif %}
+          {% endfor %}
         </div>
       </div>
-      {% endif %}
 
-      {% if section.settings.phone_icon != blank or section.settings.phone != blank %}
-      <div class="contact-item">
-        {% if section.settings.phone_icon != blank %}
-        <div class="icon-wrapper">
-          <img src="{{ section.settings.phone_icon | image_url }}" alt="Phone Icon">
-        </div>
-        {% endif %}
-        <div class="item-content">
-          <span class="label">Call Us</span>
-          <a href="tel:{{ section.settings.phone }}">{{ section.settings.phone }}</a>
-        </div>
-      </div>
-      {% endif %}
-
-      {% if section.settings.timing_icon != blank or section.settings.timing != blank %}
-      <div class="contact-item">
-        {% if section.settings.timing_icon != blank %}
-        <div class="icon-wrapper">
-          <img src="{{ section.settings.timing_icon | image_url }}" alt="Clock Icon">
-        </div>
-        {% endif %}
-        <div class="item-content">
-          <span class="label">{{ section.settings.timing }}</span>
-          <span>{{ section.settings.weekend }}</span>
-        </div>
-      </div>
-      {% endif %}
-
-      <div class="social-icons">
-        {% if section.settings.facebook_icon != blank and section.settings.facebook != blank %}
-        <a href="{{ section.settings.facebook }}" target="_blank" class="social-icon">
-          <img src="{{ section.settings.facebook_icon | image_url }}" alt="Facebook">
-        </a>
-        {% endif %}
-        {% if section.settings.instagram_icon != blank and section.settings.instagram != blank %}
-        <a href="{{ section.settings.instagram }}" target="_blank" class="social-icon">
-          <img src="{{ section.settings.instagram_icon | image_url }}" alt="Instagram">
-        </a>
-        {% endif %}
-        {% if section.settings.youtube_icon != blank and section.settings.youtube != blank %}
-        <a href="{{ section.settings.youtube }}" target="_blank" class="social-icon">
-          <img src="{{ section.settings.youtube_icon | image_url }}" alt="YouTube">
-        </a>
-        {% endif %}
-        {% if section.settings.whatsapp_icon != blank and section.settings.whatsapp != blank %}
-        <a href="{{ section.settings.whatsapp }}" target="_blank" class="social-icon">
-          <img src="{{ section.settings.whatsapp_icon | image_url }}" alt="WhatsApp">
-        </a>
-        {% endif %}
-      </div>
-    </div>
-
-    <!-- Right Form Section -->
-    <div class="contact-form">
-      <div class="form-wrapper">
-        <form method="post" action="/contact#contact_form" id="contact_form" accept-charset="UTF-8" class="contact-form-block">
+      <!-- Right Side: Form -->
+      <div class="contact-form-wrapper">
+        <form id="customContactForm" class="contact-form">
           <div class="form-row">
-            <input type="text" name="contact[name]" placeholder="Your name*" required>
-            <input type="email" name="contact[email]" placeholder="Email*" required>
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="email" name="email" placeholder="Email" required>
           </div>
           <div class="form-row">
-            <input type="text" name="contact[phone]" placeholder="Phone Number*" required>
-            <input type="text" name="contact[city]" placeholder="City*" required>
+            <input type="text" name="phone" placeholder="Phone Number" required>
+            <input type="text" name="city" placeholder="City" required>
           </div>
           <div class="form-row">
-            <textarea name="contact[body]" placeholder="Your Message" rows="4"></textarea>
+            <textarea name="message" placeholder="Message" required></textarea>
           </div>
-          <button type="submit" class="submit-btn">SUBMIT</button>
+          <button type="submit" class="contact-btn">Send Message</button>
         </form>
       </div>
     </div>
+
+    <!-- Map -->
+    {% if section.settings.map_embed != blank %}
+      <div class="map-container">
+        {{ section.settings.map_embed | raw }}
+      </div>
+    {% endif %}
   </div>
 
-  <!-- Map Section -->
-  {% if section.settings.map_embed != blank %}
-  <div class="map-container">
-    {{ section.settings.map_embed | raw }}
-  </div>
-  {% endif %}
+  <!-- Toaster -->
+  <div id="toast" class="toast">Message sent successfully! ✅</div>
 </section>
 
 <style>
@@ -109,85 +82,60 @@
   padding: 60px 0;
 }
 .contact-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.contact-wrapper {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   gap: 40px;
 }
 .contact-info {
   flex: 1;
-  min-width: 300px;
 }
-.contact-title {
-  font-size: 24px;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-.contact-description {
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 20px;
-}
-.contact-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-.icon-wrapper {
-  background: #f9f5f1;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 10px;
-}
-.icon-wrapper img {
-  max-width: 18px;
-  max-height: 18px;
-}
-.item-content .label {
-  color: #b18659;
-  font-size: 13px;
-  font-weight: 600;
-}
-.item-content a, .item-content span {
-  display: block;
-  font-size: 14px;
-  color: #000;
-  text-decoration: none;
-}
-.social-icons {
-  display: flex;
-  gap: 12px;
-  margin-top: 20px;
-}
-.social-icon {
-  width: 34px;
-  height: 34px;
-  background: #f9f5f1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  transition: 0.3s;
-}
-.social-icon img {
-  max-width: 18px;
-  max-height: 18px;
-}
-.social-icon:hover {
-  background: #b18659;
-}
-.contact-form {
+.contact-form-wrapper {
   flex: 1;
-  min-width: 300px;
-}
-.form-wrapper {
-  background: #f9f5f1;
+  background-color: #F0E9E3;
   padding: 30px;
   border-radius: 10px;
+}
+.info-heading {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.info-text {
+  margin-bottom: 20px;
+}
+.info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+.info-icon {
+  width: 40px;
+  height: 40px;
+}
+.social-icons {
+  margin-top: 20px;
+}
+.social-icons a {
+  display: inline-block;
+  margin-right: 10px;
+}
+.social-icon {
+  width: 35px;
+  height: 35px;
+  transition: transform 0.3s ease;
+}
+.social-icon:hover {
+  transform: scale(1.1);
 }
 .form-row {
   display: flex;
@@ -196,39 +144,55 @@
 }
 .form-row input,
 .form-row textarea {
-  width: 100%;
+  flex: 1;
   padding: 12px;
-  border: none;
-  background: #f5f5f5;
+  border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 14px;
 }
-.submit-btn {
-  background: transparent;
-  border: 1px solid #b18659;
-  color: #b18659;
-  padding: 10px 30px;
+.form-row textarea {
+  height: 120px;
+  resize: none;
+}
+.contact-btn {
+  background: black;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
   cursor: pointer;
-  transition: 0.3s;
-  font-size: 14px;
-  letter-spacing: 1px;
+  transition: background 0.3s ease;
 }
-.submit-btn:hover {
-  background: #b18659;
-  color: #fff;
-}
-.map-container {
-  margin-top: 40px;
-  overflow: hidden;
-  border-radius: 10px;
+.contact-btn:hover {
+  background: #333;
 }
 .map-container iframe {
   width: 100%;
-  height: 400px;
+  height: 350px;
   border: 0;
+  margin-top: 40px;
+  border-radius: 10px;
 }
-@media (max-width: 768px) {
-  .contact-container {
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: black;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 6px;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 999;
+}
+.toast.show {
+  display: block;
+  opacity: 1;
+}
+@media(max-width: 768px){
+  .contact-wrapper {
     flex-direction: column;
   }
   .form-row {
@@ -237,50 +201,83 @@
 }
 </style>
 
+<script>
+document.getElementById('customContactForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const toast = document.getElementById('toast');
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3000);
+  this.reset();
+});
+</script>
+
 {% schema %}
 {
-  "name": "Contact Section ",
+  "name": "Contact With Map",
   "settings": [
     {
       "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Get in touch with us"
+      "id": "info_heading",
+      "label": "Info Heading",
+      "default": "Get in Touch"
+    },
+    {
+      "type": "richtext",
+      "id": "info_text",
+      "label": "Info Text",
+      "default": "<p>We’d love to hear from you! Contact us through any of the following ways.</p>"
     },
     {
       "type": "textarea",
-      "id": "description",
-      "label": "Description",
-      "default": "Our friendly team are available online, in store or over the phone to help with any questions you may have."
+      "id": "map_embed",
+      "label": "Google Map Embed"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "info_item",
+      "name": "Info Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
     },
-
-    { "type": "image_picker", "id": "email_icon", "label": "Email Icon" },
-    { "type": "text", "id": "email", "label": "Email", "default": "Hello@honeypotfurniture.ae" },
-
-    { "type": "image_picker", "id": "phone_icon", "label": "Phone Icon" },
-    { "type": "text", "id": "phone", "label": "Phone Number", "default": "(00) 112 365 489" },
-
-    { "type": "image_picker", "id": "timing_icon", "label": "Timing Icon" },
-    { "type": "text", "id": "timing", "label": "Timing", "default": "Monday to Friday: 9am - 5pm" },
-    { "type": "text", "id": "weekend", "label": "Weekend", "default": "Saturday: 10am - 3pm" },
-
-    { "type": "textarea", "id": "map_embed", "label": "Google Map Embed Code" },
-
-    { "type": "image_picker", "id": "facebook_icon", "label": "Facebook Icon" },
-    { "type": "url", "id": "facebook", "label": "Facebook URL" },
-
-    { "type": "image_picker", "id": "instagram_icon", "label": "Instagram Icon" },
-    { "type": "url", "id": "instagram", "label": "Instagram URL" },
-
-    { "type": "image_picker", "id": "youtube_icon", "label": "YouTube Icon" },
-    { "type": "url", "id": "youtube", "label": "YouTube URL" },
-
-    { "type": "image_picker", "id": "whatsapp_icon", "label": "WhatsApp Icon" },
-    { "type": "url", "id": "whatsapp", "label": "WhatsApp URL" }
+    {
+      "type": "social_item",
+      "name": "Social Icon",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Social Icon"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Social Link"
+        }
+      ]
+    }
   ],
   "presets": [
     {
-      "name": "Contact Section "
+      "name": "Contact With Map",
+      "category": "Contact"
     }
   ]
 }
