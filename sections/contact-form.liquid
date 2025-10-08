@@ -6,24 +6,27 @@
 {% endcomment %}
 
 <section class="contact-map-section">
-  <div class="page-width contact-container">
-    <div class="contact-wrapper">
-      <!-- Left Side: Info -->
-      <div class="contact-info">
+  <div class="page-width contact-map-container">
+    <div class="contact-map-wrapper">
+      
+      <!-- LEFT SIDE - INFO -->
+      <div class="contact-map-info">
         {% if section.settings.info_heading != blank %}
-          <h2 class="info-heading">{{ section.settings.info_heading }}</h2>
+          <h2 class="contact-map-heading">{{ section.settings.info_heading }}</h2>
         {% endif %}
 
         {% if section.settings.info_text != blank %}
-          <p class="info-text">{{ section.settings.info_text }}</p>
+          <div class="contact-map-text">
+            {{ section.settings.info_text }}
+          </div>
         {% endif %}
 
-        <ul class="info-list">
+        <ul class="contact-map-info-list">
           {% for block in section.blocks %}
             {% if block.type == 'info_item' %}
-              <li class="info-item">
+              <li class="contact-map-info-item">
                 {% if block.settings.icon != blank %}
-                  <img src="{{ block.settings.icon | img_url: '50x50' }}" alt="icon" class="info-icon">
+                  <img src="{{ block.settings.icon | img_url: '50x50' }}" alt="icon" class="contact-map-info-icon">
                 {% endif %}
                 <div>
                   <h4>{{ block.settings.title }}</h4>
@@ -34,127 +37,147 @@
           {% endfor %}
         </ul>
 
-        <!-- Social Media Icons -->
-        <div class="social-icons">
+        <!-- SOCIAL ICONS -->
+        <div class="contact-map-social-icons">
           {% for block in section.blocks %}
             {% if block.type == 'social_item' %}
-              <a href="{{ block.settings.link }}" target="_blank">
-                <img src="{{ block.settings.icon | img_url: '50x50' }}" alt="social icon" class="social-icon">
+              <a href="{{ block.settings.link }}" target="_blank" class="contact-map-social-link">
+                <img src="{{ block.settings.icon | img_url: '50x50' }}" alt="social icon" class="contact-map-social-icon">
               </a>
             {% endif %}
           {% endfor %}
         </div>
       </div>
 
-      <!-- Right Side: Form -->
-      <div class="contact-form-wrapper">
-        <form id="customContactForm" class="contact-form">
-          <div class="form-row">
+      <!-- RIGHT SIDE - FORM -->
+      <div class="contact-map-form-wrapper">
+        <form id="customContactForm" class="contact-map-form">
+          <div class="contact-map-form-row">
             <input type="text" name="name" placeholder="Name" required>
             <input type="email" name="email" placeholder="Email" required>
           </div>
-          <div class="form-row">
+          <div class="contact-map-form-row">
             <input type="text" name="phone" placeholder="Phone Number" required>
             <input type="text" name="city" placeholder="City" required>
           </div>
-          <div class="form-row">
+          <div class="contact-map-form-row">
             <textarea name="message" placeholder="Message" required></textarea>
           </div>
-          <button type="submit" class="contact-btn">Send Message</button>
+          <button type="submit" class="contact-map-btn">Send Message</button>
         </form>
       </div>
     </div>
 
-    <!-- Map -->
+    <!-- MAP SECTION -->
     {% if section.settings.map_embed != blank %}
-      <div class="map-container">
+      <div class="contact-map-container-iframe">
         {{ section.settings.map_embed | raw }}
       </div>
     {% endif %}
   </div>
 
-  <!-- Toaster -->
-  <div id="toast" class="toast">Message sent successfully! ✅</div>
+  <!-- TOASTER -->
+  <div id="toast" class="contact-map-toast">Message sent successfully! ✅</div>
 </section>
 
 <style>
 .contact-map-section {
   padding: 60px 0;
 }
-.contact-container {
+
+.contact-map-container {
   max-width: 1200px;
   margin: 0 auto;
 }
-.contact-wrapper {
+
+.contact-map-wrapper {
   display: flex;
   flex-wrap: wrap;
   gap: 40px;
 }
-.contact-info {
+
+/* LEFT INFO */
+.contact-map-info {
   flex: 1;
 }
-.contact-form-wrapper {
-  flex: 1;
-  background-color: #F0E9E3;
-  padding: 30px;
-  border-radius: 10px;
-}
-.info-heading {
+
+.contact-map-heading {
   font-size: 28px;
   font-weight: 600;
   margin-bottom: 10px;
 }
-.info-text {
+
+.contact-map-text {
   margin-bottom: 20px;
 }
-.info-list {
+
+.contact-map-info-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.info-item {
+
+.contact-map-info-item {
   display: flex;
   align-items: center;
   gap: 15px;
   margin-bottom: 15px;
 }
-.info-icon {
+
+.contact-map-info-icon {
   width: 40px;
   height: 40px;
 }
-.social-icons {
+
+/* SOCIAL ICONS */
+.contact-map-social-icons {
   margin-top: 20px;
 }
-.social-icons a {
+
+.contact-map-social-link {
   display: inline-block;
   margin-right: 10px;
 }
-.social-icon {
+
+.contact-map-social-icon {
   width: 35px;
   height: 35px;
   transition: transform 0.3s ease;
 }
-.social-icon:hover {
+
+.contact-map-social-icon:hover {
   transform: scale(1.1);
 }
-.form-row {
+
+/* RIGHT FORM */
+.contact-map-form-wrapper {
+  flex: 1;
+  background-color: #F0E9E3;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.contact-map-form-row {
   display: flex;
   gap: 15px;
   margin-bottom: 15px;
 }
-.form-row input,
-.form-row textarea {
+
+.contact-map-form-row input,
+.contact-map-form-row textarea {
   flex: 1;
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 14px;
 }
-.form-row textarea {
+
+.contact-map-form-row textarea {
   height: 120px;
   resize: none;
 }
-.contact-btn {
+
+.contact-map-btn {
   background: black;
   color: white;
   padding: 12px 25px;
@@ -164,17 +187,22 @@
   cursor: pointer;
   transition: background 0.3s ease;
 }
-.contact-btn:hover {
+
+.contact-map-btn:hover {
   background: #333;
 }
-.map-container iframe {
+
+/* MAP */
+.contact-map-container-iframe iframe {
   width: 100%;
   height: 350px;
   border: 0;
   margin-top: 40px;
   border-radius: 10px;
 }
-.toast {
+
+/* TOAST */
+.contact-map-toast {
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -187,15 +215,18 @@
   transition: opacity 0.4s ease;
   z-index: 999;
 }
-.toast.show {
+
+.contact-map-toast.show {
   display: block;
   opacity: 1;
 }
-@media(max-width: 768px){
-  .contact-wrapper {
+
+/* RESPONSIVE */
+@media(max-width: 768px) {
+  .contact-map-wrapper {
     flex-direction: column;
   }
-  .form-row {
+  .contact-map-form-row {
     flex-direction: column;
   }
 }
