@@ -1,202 +1,211 @@
-<section class="contact-us-section spacing color-{{ section.settings.color_scheme }}">
-  <div class="{{ section.settings.section_width }} m-auto" {% if section.settings.section_width == 'customized-width' %}style="--page-width: {{ section.settings.customize_width }}px;"{% endif %}>
-    {% if section.settings.heading != blank %}
-      <div class="p-w__header center m-b-4">
-        <h2 class="p-w__heading">{{ section.settings.heading }}</h2>
-        {% if section.settings.subheading != blank %}
-          <p class="p-w__subheading">{{ section.settings.subheading }}</p>
+{% comment %}
+  📍 Contact + Info + Map Section
+{% endcomment %}
+
+<section class="contact-map-info">
+  <div class="container">
+    <div class="contact-wrapper">
+      <!-- LEFT: Information -->
+      <div class="contact-info">
+        {% if section.settings.info_heading != blank %}
+          <h2 class="info-heading">{{ section.settings.info_heading }}</h2>
         {% endif %}
-      </div>
-    {% endif %}
 
-    <div class="contact-us-grid d-flex f-wrap a-i-start j-c-between" style="--grid-gap: 3rem;">
-      <!-- LEFT SIDE -->
-      <div class="contact-info" style="flex: 1; min-width: 300px;">
-        <h3 class="contact-info-heading">{{ section.settings.info_heading }}</h3>
-        <p class="contact-info-text">{{ section.settings.info_text }}</p>
+        {% if section.settings.info_subheading != blank %}
+          <p class="info-subheading">{{ section.settings.info_subheading }}</p>
+        {% endif %}
 
-        <ul class="contact-list">
+        <ul class="info-list">
+          {% if section.settings.address != blank %}
+            <li><strong>Address:</strong> {{ section.settings.address }}</li>
+          {% endif %}
           {% if section.settings.email != blank %}
-            <li>
-              <img src="{{ section.settings.email_icon | image_url: width: 24 }}" alt="Email icon" class="icon">
-              <a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>
-            </li>
+            <li><strong>Email:</strong> <a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a></li>
           {% endif %}
-
           {% if section.settings.phone != blank %}
-            <li>
-              <img src="{{ section.settings.phone_icon | image_url: width: 24 }}" alt="Phone icon" class="icon">
-              <a href="tel:{{ section.settings.phone }}">{{ section.settings.phone }}</a>
-            </li>
-          {% endif %}
-
-          {% if section.settings.timing != blank %}
-            <li>
-              <img src="{{ section.settings.clock_icon | image_url: width: 24 }}" alt="Clock icon" class="icon">
-              {{ section.settings.timing }}
-            </li>
+            <li><strong>Phone:</strong> <a href="tel:{{ section.settings.phone }}">{{ section.settings.phone }}</a></li>
           {% endif %}
         </ul>
-
-        <div class="social-icons d-flex g-gap-3 m-t-4">
-          {% for block in section.blocks %}
-            {% if block.type == 'social_icon' %}
-              <a href="{{ block.settings.icon_link }}" target="_blank">
-                <img src="{{ block.settings.icon | image_url: width: 24 }}" alt="Social Icon" class="social-icon">
-              </a>
-            {% endif %}
-          {% endfor %}
-        </div>
       </div>
 
-      <!-- RIGHT SIDE -->
-      <div class="contact-form" style="flex: 1; min-width: 300px;">
-        {%- form 'contact', id: 'ContactForm', class: 'contact-form-wrapper' -%}
-          {% if form.posted_successfully? %}
-            <p class="form-status success">Thank you for contacting us. We will get back to you shortly.</p>
-          {% elsif form.errors %}
-            <p class="form-status error">Please correct the errors and try again.</p>
-          {% endif %}
+      <!-- MIDDLE: Contact Form -->
+      <div class="contact-form">
+        <h3>{{ section.settings.form_heading }}</h3>
+        <form method="post" action="/contact#contact_form" id="contact_form" accept-charset="UTF-8" class="contact-form-box">
+          <input type="hidden" name="form_type" value="contact">
+          <input type="hidden" name="utf8" value="✓">
+          <div class="form-group">
+            <input type="text" name="contact[name]" placeholder="Your Name" required>
+          </div>
+          <div class="form-group">
+            <input type="email" name="contact[email]" placeholder="Your Email" required>
+          </div>
+          <div class="form-group">
+            <textarea name="contact[body]" placeholder="Your Message" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">{{ section.settings.button_label }}</button>
+        </form>
+      </div>
 
-          <div class="form-group">
-            <input type="text" id="ContactForm-name" name="contact[name]" placeholder="Your name*" required>
-          </div>
-          <div class="form-group">
-            <input type="email" id="ContactForm-email" name="contact[email]" placeholder="Email*" required>
-          </div>
-          <div class="form-group">
-            <input type="tel" id="ContactForm-phone" name="contact[Phone]" placeholder="Phone Number">
-          </div>
-          <div class="form-group">
-            <input type="text" id="ContactForm-city" name="contact[City]" placeholder="City">
-          </div>
-          <div class="form-group">
-            <textarea id="ContactForm-message" name="contact[body]" rows="5" placeholder="Your Message"></textarea>
-          </div>
-          <button type="submit" class="button button--primary">{{ section.settings.button_label }}</button>
-        {%- endform -%}
+      <!-- RIGHT: Google Map -->
+      <div class="contact-map">
+        {% if section.settings.map_embed != blank %}
+          {{ section.settings.map_embed | raw }}
+        {% endif %}
       </div>
     </div>
-
-    <!-- MAP SECTION -->
-    {% if section.settings.map_embed != blank %}
-      <div class="contact-map m-t-8">
-        {{ section.settings.map_embed }}
-      </div>
-    {% endif %}
   </div>
 </section>
 
 <style>
-.contact-us-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--grid-gap);
+.contact-map-info {
+  padding: 50px 0;
+  background-color: #f9f9f9;
 }
-.contact-list {
+
+.contact-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+}
+
+.contact-info {
+  text-align: left;
+}
+
+.info-heading {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.info-subheading {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.info-list {
   list-style: none;
   padding: 0;
-  margin-top: 1rem;
 }
-.contact-list li {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.75rem;
+
+.info-list li {
+  margin-bottom: 10px;
+  color: #333;
 }
-.contact-list .icon {
-  width: 24px;
-  height: 24px;
+
+.info-list a {
+  color: inherit;
+  text-decoration: none;
 }
-.social-icons .social-icon {
-  width: 28px;
-  height: 28px;
-  transition: transform 0.3s ease;
+
+.contact-form h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
 }
-.social-icons .social-icon:hover {
-  transform: scale(1.1);
+
+.contact-form-box .form-group {
+  margin-bottom: 15px;
 }
-.contact-form-wrapper input,
-.contact-form-wrapper textarea {
+
+.contact-form-box input,
+.contact-form-box textarea {
   width: 100%;
-  padding: 0.75rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
+  padding: 12px;
+  border: 1px solid #ddd;
   border-radius: 5px;
+  font-size: 14px;
 }
-.contact-form-wrapper button {
-  background: #000;
+
+.submit-btn {
+  background-color: #000;
   color: #fff;
-  padding: 0.75rem 2rem;
+  padding: 12px 20px;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
-  border-radius: 4px;
+  transition: background 0.3s;
 }
-.contact-form-wrapper button:hover {
-  opacity: 0.9;
+
+.submit-btn:hover {
+  background-color: #444;
 }
+
 .contact-map iframe {
   width: 100%;
-  height: 350px;
+  height: 100%;
+  min-height: 300px;
   border: 0;
+  border-radius: 8px;
+}
+
+@media (max-width: 992px) {
+  .contact-wrapper {
+    grid-template-columns: 1fr;
+  }
+  .contact-info, .contact-form, .contact-map {
+    text-align: center;
+  }
 }
 </style>
 
 {% schema %}
 {
-  "name": "Custom Contact Us",
+  "name": "Contact + Info + Map",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Contact Us" },
-    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Thank you for getting in touch! Kindly fill the form, have a great day!" },
-    { "type": "text", "id": "info_heading", "label": "Info Heading", "default": "Get in touch with us" },
-    { "type": "textarea", "id": "info_text", "label": "Info Text", "default": "Our friendly team are available online, in store or over the phone to help with any questions you may have." },
-    { "type": "image_picker", "id": "email_icon", "label": "Email Icon" },
-    { "type": "text", "id": "email", "label": "Email", "default": "hello@honeyspotfurniture.ae" },
-    { "type": "image_picker", "id": "phone_icon", "label": "Phone Icon" },
-    { "type": "text", "id": "phone", "label": "Phone", "default": "+971 123 456 789" },
-    { "type": "image_picker", "id": "clock_icon", "label": "Clock Icon" },
-    { "type": "textarea", "id": "timing", "label": "Opening Hours", "default": "Monday to Friday: 8am - 5pm<br>Saturday: 10am - 3pm" },
-{
-  "type": "textarea",
-  "id": "map_embed",
-  "label": "Map Embed",
-  "default": "<iframe src='https://www.google.com/maps/embed?...' width='100%' height='300' style='border:0;' allowfullscreen='' loading='lazy'></iframe'>"
-},    { "type": "text", "id": "button_label", "label": "Button Label", "default": "Submit" },
     {
-      "type": "select",
-      "id": "section_width",
-      "options": [
-        { "value": "full-width", "label": "Full width" },
-        { "value": "page-width", "label": "Page width" },
-        { "value": "customized-width", "label": "Customized width" }
-      ],
-      "default": "customized-width",
-      "label": "Section Width"
+      "type": "text",
+      "id": "info_heading",
+      "label": "Info Heading",
+      "default": "Get in Touch"
     },
     {
-      "type": "range",
-      "id": "customize_width",
-      "min": 1000,
-      "max": 1800,
-      "step": 50,
-      "unit": "px",
-      "label": "Custom width",
-      "default": 1400
+      "type": "text",
+      "id": "info_subheading",
+      "label": "Info Subheading",
+      "default": "We’d love to hear from you. Reach us using the details below."
     },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color Scheme", "default": "background-1" }
-  ],
-  "blocks": [
     {
-      "type": "social_icon",
-      "name": "Social Icon",
-      "settings": [
-        { "type": "image_picker", "id": "icon", "label": "Social Icon" },
-        { "type": "url", "id": "icon_link", "label": "Social Icon Link" }
-      ]
+      "type": "text",
+      "id": "address",
+      "label": "Address",
+      "default": "123 Main Street, Dubai, UAE"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email",
+      "default": "info@example.com"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone",
+      "default": "+971 50 123 4567"
+    },
+    {
+      "type": "text",
+      "id": "form_heading",
+      "label": "Form Heading",
+      "default": "Send Us a Message"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Submit"
+    },
+    {
+      "type": "textarea",
+      "id": "map_embed",
+      "label": "Google Map Embed Code",
+      "default": "<iframe src='https://www.google.com/maps/embed?pb=YOUR_MAP_CODE' width='100%' height='300' style='border:0;' allowfullscreen='' loading='lazy'></iframe>"
     }
   ],
   "presets": [
-    { "name": "Contact Us - Custom" }
+    {
+      "name": "Contact + Info + Map"
+    }
   ]
 }
 {% endschema %}
