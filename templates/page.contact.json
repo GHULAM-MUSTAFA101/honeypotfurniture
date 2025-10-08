@@ -38,6 +38,7 @@
         "info_item_ttPekY": {
           "type": "info_item",
           "settings": {
+            "icon": "shopify://shop_images/Group_1000004176.svg",
             "title": "Email",
             "text": "EmailHello@honeypotfurniture.ae"
           }
@@ -45,6 +46,7 @@
         "info_item_C6WWPR": {
           "type": "info_item",
           "settings": {
+            "icon": "shopify://shop_images/Group_1000004175.svg",
             "title": "Call Us",
             "text": "(00) 112 365 489"
           }
@@ -52,6 +54,7 @@
         "info_item_G9xFHH": {
           "type": "info_item",
           "settings": {
+            "icon": "shopify://shop_images/Group_1000004174.svg",
             "title": "Monday to Friday: 9am - 5pm",
             "text": "Saturday: 10am - 3pm"
           }
@@ -59,6 +62,28 @@
         "social_item_89QW7M": {
           "type": "social_item",
           "settings": {
+            "icon": "shopify://shop_images/Group_1000004170.svg",
+            "link": ""
+          }
+        },
+        "social_item_9AhGBJ": {
+          "type": "social_item",
+          "settings": {
+            "icon": "shopify://shop_images/Group_1000004171.svg",
+            "link": ""
+          }
+        },
+        "social_item_Ddyyka": {
+          "type": "social_item",
+          "settings": {
+            "icon": "shopify://shop_images/Group_1000004172.svg",
+            "link": ""
+          }
+        },
+        "social_item_diAyBz": {
+          "type": "social_item",
+          "settings": {
+            "icon": "shopify://shop_images/Group_1000004173.svg",
             "link": ""
           }
         }
@@ -67,12 +92,15 @@
         "info_item_ttPekY",
         "info_item_C6WWPR",
         "info_item_G9xFHH",
-        "social_item_89QW7M"
+        "social_item_89QW7M",
+        "social_item_9AhGBJ",
+        "social_item_Ddyyka",
+        "social_item_diAyBz"
       ],
       "settings": {
         "info_heading": "Get in Touch",
         "info_text": "<p>We’d love to hear from you! Contact us through any of the following ways.</p>",
-        "map_embed": ""
+        "map_embed": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3608.7083682816314!2d55.53373387458483!3d25.24333267767569!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5a9501e1188f%3A0x9c1d8ff034d2eeb2!2sMAG%20Logistic%20Park!5e0!3m2!1sen!2sae!4v1728413420300!5m2!1sen!2sae\" width=\"100%\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\">\n</iframe>"
       }
     }
   },
