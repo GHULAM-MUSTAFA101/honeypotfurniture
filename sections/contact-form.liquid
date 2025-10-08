@@ -179,18 +179,19 @@
 
 .contact-map-form-row input,
 .contact-map-form-row textarea {
-  flex: 1;
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  background: #F0E9E3;
-}
+ flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    background: #F0E9E3;
 
-.contact-map-form-row input:focus,
-.contact-map-form-row textarea:focus {
-  outline: none;
-  box-shadow: none;
+}
+.contact-map-form-row input:hover, .contact-map-form-row input:focus, .contact-map-form-row input:active,
+.contact-map-form-row textarea:hover, .contact-map-form-row textarea:focus, .contact-map-form-row textarea:active{
+border:none;
+outline:none;
+box-shadow:none;
 }
 
 .contact-map-form-row textarea {
@@ -199,19 +200,20 @@
 }
 
 .contact-map-btn {
-  background: white;
-  color: #cead8e;
-  border: 1px solid #cead8e !important;
-  padding: 12px 25px;
-  border-radius: 1px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s ease;
+    background: white;
+    color: #cead8e;
+    border: 1px solid #cead8e !important;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 1px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
 }
 
 .contact-map-btn:hover {
   background: #cead8e;
-  color: white;
+  color:white; 
 }
 
 /* MAP */
@@ -237,7 +239,6 @@
   transition: opacity 0.4s ease;
   z-index: 999;
 }
-
 .contact-map-toast.show {
   display: block;
   opacity: 1;
