@@ -1,15 +1,14 @@
 {% comment %}
-  📍 Contact With Map Section
-  - Left: Info Content (Icons & Social Links — dynamic via Customizer)
-  - Right: Form (Background #F0E9E3)
-  - Bottom: Google Map Embed
-  - Toast Notification on Submit
+  Contact With Map Section
+  - Left: Info Content
+  - Right: Form
+  - Bottom: Map
 {% endcomment %}
 
 <section class="contact-map-section">
   <div class="page-width contact-map-container">
     <div class="contact-map-wrapper">
-
+      
       <!-- LEFT SIDE - INFO -->
       <div class="contact-map-info">
         {% if section.settings.info_heading != blank %}
@@ -78,7 +77,7 @@
   </div>
 
   <!-- TOASTER -->
-  <div id="toast" class="contact-map-toast">✅ Message sent successfully!</div>
+  <div id="toast" class="contact-map-toast">Message sent successfully! ✅</div>
 </section>
 
 <style>
@@ -133,16 +132,6 @@
   height: 40px;
 }
 
-.contact-map-info-list h4 {
-  color: #CEAD8E;
-  font-weight: 600;
-  margin: 0;
-}
-
-.contact-map-info-list p {
-  margin: 0;
-}
-
 /* SOCIAL ICONS */
 .contact-map-social-icons {
   margin-top: 20px;
@@ -161,6 +150,11 @@
 
 .contact-map-social-icon:hover {
   transform: scale(1.1);
+}
+.contact-map-form{
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
 }
 
 /* RIGHT FORM */
@@ -187,7 +181,7 @@
     background: #F0E9E3;
 
 }
-.contact-map-form-row input:hover, .contact-map-form-row input:focus, .contact-map-form-row input:active,
+.contact-map-form-row input:hover, .contact-map-form-row input:focus, .contact-map-form-row input:active
 .contact-map-form-row textarea:hover, .contact-map-form-row textarea:focus, .contact-map-form-row textarea:active{
 border:none;
 outline:none;
@@ -239,6 +233,14 @@ box-shadow:none;
   transition: opacity 0.4s ease;
   z-index: 999;
 }
+.contact-map-info-list h4{
+    color: #CEAD8E;
+    font-weight: 600;
+    margin:0px
+}
+.contact-map-info-list p{
+  margin:0px
+}
 .contact-map-toast.show {
   display: block;
   opacity: 1;
@@ -256,21 +258,14 @@ box-shadow:none;
 </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-  const form = document.getElementById('customContactForm');
+document.getElementById('customContactForm').addEventListener('submit', function(e){
+  e.preventDefault();
   const toast = document.getElementById('toast');
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    toast.classList.add('show');
-
-    setTimeout(() => {
-      toast.classList.remove('show');
-    }, 3000);
-
-    form.reset();
-  });
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3000);
+  this.reset();
 });
 </script>
 
