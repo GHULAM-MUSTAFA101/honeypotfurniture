@@ -11,6 +11,7 @@
   "sections": {
     "af56dcf8-8a72-482f-b12b-b4ef33768eeb": {
       "type": "map",
+      "disabled": true,
       "settings": {
         "map_address": "Warehouse 10, MAG Logistic Park - Maleha St - Warehouses Land - Sharjah - United Arab Emirates",
         "section_width": "full-width",
