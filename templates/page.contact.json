@@ -55,12 +55,19 @@
             "title": "Monday to Friday: 9am - 5pm",
             "text": "Saturday: 10am - 3pm"
           }
+        },
+        "social_item_89QW7M": {
+          "type": "social_item",
+          "settings": {
+            "link": ""
+          }
         }
       },
       "block_order": [
         "info_item_ttPekY",
         "info_item_C6WWPR",
-        "info_item_G9xFHH"
+        "info_item_G9xFHH",
+        "social_item_89QW7M"
       ],
       "settings": {
         "info_heading": "Get in Touch",
