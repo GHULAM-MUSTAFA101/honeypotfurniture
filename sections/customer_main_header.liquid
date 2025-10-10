@@ -10,6 +10,13 @@
       "default": true
     },
     {
+      "type": "text",
+      "id": "section_id",
+      "label": "Unique Section ID",
+      "default": "sofa-section-1",
+      "info": "Add a unique ID for this section (e.g., sofa-section-1, sofa-section-2)"
+    },
+    {
       "type": "header",
       "content": "Layout Switch"
     },
@@ -514,16 +521,9 @@
 {% endschema %}
 
 <style>
+  /* Base styles for all sections */
   .custom_main_sofa_section {
     width: 100%;
-    background-size: {{ section.settings.outer_bg_size }};
-    background-position: {{ section.settings.outer_bg_position }};
-    {% if section.settings.outer_bg_image %}
-      background-image: url('{{ section.settings.outer_bg_image | img_url: '2000x' }}');
-    {% endif %}
-    background-color: {{ section.settings.outer_bg_color }};
-    padding-top: {{ section.settings.outer_section_padding_top }}px;
-    padding-bottom: {{ section.settings.outer_section_padding_bottom }}px;
   }
 
   .custom-sofa-section {
@@ -532,14 +532,6 @@
     max-width: 1200px;
     margin: 0 auto;
     box-sizing: border-box;
-    background-size: {{ section.settings.bg_size }};
-    background-position: {{ section.settings.bg_position }};
-    {% if section.settings.section_bg_image %}
-      background-image: url('{{ section.settings.section_bg_image | img_url: '2000x' }}');
-    {% endif %}
-    background-color: {{ section.settings.section_bg_color }};
-    padding-top: {{ section.settings.section_padding_top }}px;
-    padding-bottom: {{ section.settings.section_padding_bottom }}px;
   }
   
   .custom-sofa-section.content-right {
@@ -552,27 +544,24 @@
     justify-content: center;
     padding: 40px;
     box-sizing: border-box;
-    width: {{ section.settings.content_width }}%;
   }
   
   .sofa-content.with-border-left {
-    border-left: {{ section.settings.border_width }}px solid {{ section.settings.border_color }};
+    border-left: 3px solid #000000;
   }
   
   .sofa-content.with-border-right {
-    border-right: {{ section.settings.border_width }}px solid {{ section.settings.border_color }};
+    border-right: 3px solid #000000;
   }
   
   .sofa-heading {
     margin-bottom: 20px;
     line-height: 1.2;
-    font-size: {{ section.settings.heading_size }}px;
   }
   
   .sofa-text {
     margin-bottom: 0;
     line-height: 1.6;
-    font-size: {{ section.settings.content_size }}px;
   }
   
   .sofa-button {
@@ -582,11 +571,6 @@
     font-weight: 500;
     border-radius: 4px;
     transition: all 0.3s ease;
-    background-color: {{ section.settings.button_bg_color }};
-    color: {{ section.settings.button_text_color }};
-    padding: {{ section.settings.button_padding_top }}px {{ section.settings.button_padding_sides }}px;
-    margin-top: {{ section.settings.button_margin_top }}px;
-    font-size: {{ section.settings.content_size | plus: 2 }}px;
   }
   
   .sofa-button:hover {
@@ -599,61 +583,34 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    width: {{ section.settings.image_width }}%;
   }
   
   .sofa-image img {
     width: 100%;
     height: auto;
     object-fit: cover;
-    border-radius: {{ section.settings.image_border_radius }}px;
   }
   
   /* Mobile Styles */
   @media (max-width: 768px) {
-    .custom_main_sofa_section {
-      padding-top: {{ section.settings.outer_mobile_section_padding_top }}px;
-      padding-bottom: {{ section.settings.outer_mobile_section_padding_bottom }}px;
-    }
-
     .custom-sofa-section {
-      flex-direction: {% if section.settings.mobile_layout == 'image_top' %}column{% else %}column-reverse{% endif %};
-      padding-top: {{ section.settings.mobile_section_padding_top }}px;
-      padding-bottom: {{ section.settings.mobile_section_padding_bottom }}px;
+      flex-direction: column;
     }
     
     .sofa-content {
       width: 100% !important;
       padding: 30px 20px;
-      min-height: {{ section.settings.mobile_content_height }}px;
     }
     
     .sofa-content.with-border-left,
     .sofa-content.with-border-right {
       border-left: none;
       border-right: none;
-      {% if section.settings.show_mobile_border %}
-        border-top: {{ section.settings.border_width }}px solid {{ section.settings.border_color }};
-      {% endif %}
-    }
-    
-    .sofa-heading {
-      font-size: {{ section.settings.mobile_heading_size }}px;
-    }
-    
-    .sofa-text {
-      font-size: {{ section.settings.mobile_content_size }}px;
-    }
-    
-    .sofa-button {
-      padding: {{ section.settings.mobile_button_padding_top }}px {{ section.settings.mobile_button_padding_sides }}px;
-      margin-top: {{ section.settings.mobile_button_margin_top }}px;
-      font-size: {{ section.settings.mobile_button_font_size }}px;
+      border-top: 3px solid #000000;
     }
     
     .sofa-image {
       width: 100% !important;
-      min-height: {{ section.settings.mobile_image_height }}px;
     }
     
     .sofa-image img {
@@ -661,41 +618,146 @@
       object-fit: cover;
     }
   }
+
+  /* Dynamic styles for this specific section instance */
+  #{{ section.settings.section_id | default: 'sofa-section-1' }} .custom_main_sofa_section {
+    background-size: {{ section.settings.outer_bg_size }};
+    background-position: {{ section.settings.outer_bg_position }};
+    {% if section.settings.outer_bg_image %}
+      background-image: url('{{ section.settings.outer_bg_image | img_url: '2000x' }}');
+    {% endif %}
+    background-color: {{ section.settings.outer_bg_color }};
+    padding-top: {{ section.settings.outer_section_padding_top }}px;
+    padding-bottom: {{ section.settings.outer_section_padding_bottom }}px;
+  }
+
+  #{{ section.settings.section_id | default: 'sofa-section-1' }} .custom-sofa-section {
+    background-size: {{ section.settings.bg_size }};
+    background-position: {{ section.settings.bg_position }};
+    {% if section.settings.section_bg_image %}
+      background-image: url('{{ section.settings.section_bg_image | img_url: '2000x' }}');
+    {% endif %}
+    background-color: {{ section.settings.section_bg_color }};
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+  }
+  
+  #{{ section.settings.section_id | default: 'sofa-section-1' }} .sofa-content {
+    width: {{ section.settings.content_width }}%;
+  }
+  
+  #{{ section.settings.section_id | default: 'sofa-section-1' }} .sofa-content.with-border-left {
+    border-left: {{ section.settings.border_width }}px solid {{ section.settings.border_color }};
+  }
+  
+  #{{ section.settings.section_id | default: 'sofa-section-1' }} .sofa-content.with-border-right {
+    border-right: {{ section.settings.border_width }}px solid {{ section.settings.border_color }};
+  }
+  
+  #{{ section.settings.section_id | default: 'sofa-section-1' }} .sofa-heading {
+    font-size: {{ section.settings.heading_size }}px;
+  }
+  
+  #{{ section.settings.section_id | default: 'sofa-section-1' }} .sofa-text {
+    font-size: {{ section.settings.content_size }}px;
+  }
+  
+  #{{ section.settings.section_id | default: 'sofa-section-1' }} .sofa-button {
+    background-color: {{ section.settings.button_bg_color }};
+    color: {{ section.settings.button_text_color }};
+    padding: {{ section.settings.button_padding_top }}px {{ section.settings.button_padding_sides }}px;
+    margin-top: {{ section.settings.button_margin_top }}px;
+    font-size: {{ section.settings.content_size | plus: 2 }}px;
+  }
+  
+  #{{ section.settings.section_id | default: 'sofa-section-1' }} .sofa-image {
+    width: {{ section.settings.image_width }}%;
+  }
+  
+  #{{ section.settings.section_id | default: 'sofa-section-1' }} .sofa-image img {
+    border-radius: {{ section.settings.image_border_radius }}px;
+  }
+  
+  /* Mobile specific styles for this section */
+  @media (max-width: 768px) {
+    #{{ section.settings.section_id | default: 'sofa-section-1' }} .custom_main_sofa_section {
+      padding-top: {{ section.settings.outer_mobile_section_padding_top }}px;
+      padding-bottom: {{ section.settings.outer_mobile_section_padding_bottom }}px;
+    }
+
+    #{{ section.settings.section_id | default: 'sofa-section-1' }} .custom-sofa-section {
+      flex-direction: {% if section.settings.mobile_layout == 'image_top' %}column{% else %}column-reverse{% endif %};
+      padding-top: {{ section.settings.mobile_section_padding_top }}px;
+      padding-bottom: {{ section.settings.mobile_section_padding_bottom }}px;
+    }
+    
+    #{{ section.settings.section_id | default: 'sofa-section-1' }} .sofa-content {
+      min-height: {{ section.settings.mobile_content_height }}px;
+    }
+    
+    #{{ section.settings.section_id | default: 'sofa-section-1' }} .sofa-content.with-border-left,
+    #{{ section.settings.section_id | default: 'sofa-section-1' }} .sofa-content.with-border-right {
+      {% if section.settings.show_mobile_border %}
+        border-top: {{ section.settings.border_width }}px solid {{ section.settings.border_color }};
+      {% else %}
+        border-top: none;
+      {% endif %}
+    }
+    
+    #{{ section.settings.section_id | default: 'sofa-section-1' }} .sofa-heading {
+      font-size: {{ section.settings.mobile_heading_size }}px;
+    }
+    
+    #{{ section.settings.section_id | default: 'sofa-section-1' }} .sofa-text {
+      font-size: {{ section.settings.mobile_content_size }}px;
+    }
+    
+    #{{ section.settings.section_id | default: 'sofa-section-1' }} .sofa-button {
+      padding: {{ section.settings.mobile_button_padding_top }}px {{ section.settings.mobile_button_padding_sides }}px;
+      margin-top: {{ section.settings.mobile_button_margin_top }}px;
+      font-size: {{ section.settings.mobile_button_font_size }}px;
+    }
+    
+    #{{ section.settings.section_id | default: 'sofa-section-1' }} .sofa-image {
+      min-height: {{ section.settings.mobile_image_height }}px;
+    }
+  }
 </style>
 
-<div class="custom_main_sofa_section">
-  <!-- Section HTML -->
-  <div class="custom-sofa-section {% if section.settings.layout_direction == 'content_right' %}content-right{% endif %}" 
-       {% unless section.settings.show_section %}style="display: none;"{% endunless %}>
-    
-    <!-- Content Block -->
-    <div class="sofa-content {% if section.settings.show_content_border %}{% if section.settings.border_side == 'left' %}with-border-left{% else %}with-border-right{% endif %}{% endif %}">
-      <h2 class="sofa-heading">
-        {{ section.settings.heading }}
-      </h2>
+<div id="{{ section.settings.section_id | default: 'sofa-section-1' }}">
+  <div class="custom_main_sofa_section">
+    <div class="custom-sofa-section {% if section.settings.layout_direction == 'content_right' %}content-right{% endif %}" 
+         {% unless section.settings.show_section %}style="display: none;"{% endunless %}>
       
-      <div class="sofa-text">
-        {{ section.settings.content }}
+      <!-- Content Block -->
+      <div class="sofa-content {% if section.settings.show_content_border %}{% if section.settings.border_side == 'left' %}with-border-left{% else %}with-border-right{% endif %}{% endif %}">
+        <h2 class="sofa-heading">
+          {{ section.settings.heading }}
+        </h2>
+        
+        <div class="sofa-text">
+          {{ section.settings.content }}
+        </div>
+        
+        {% if section.settings.button_text != blank %}
+          <a href="{{ section.settings.button_link }}" 
+             class="sofa-button">
+            {{ section.settings.button_text }}
+          </a>
+        {% endif %}
       </div>
       
-      {% if section.settings.button_text != blank %}
-        <a href="{{ section.settings.button_link }}" 
-           class="sofa-button">
-          {{ section.settings.button_text }}
-        </a>
-      {% endif %}
-    </div>
-    
-    <!-- Image Block -->
-    <div class="sofa-image">
-      {% if section.settings.section_image != blank %}
-        <img src="{{ section.settings.section_image | img_url: '800x' }}" 
-             alt="{{ section.settings.heading | escape }}" />
-      {% else %}
-        <div style="background: #f5f5f5; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; border-radius: {{ section.settings.image_border_radius }}px;">
-          <p>Add an image in the theme editor</p>
-        </div>
-      {% endif %}
+      <!-- Image Block -->
+      <div class="sofa-image">
+        {% if section.settings.section_image != blank %}
+          <img src="{{ section.settings.section_image | img_url: '800x' }}" 
+               alt="{{ section.settings.heading | escape }}" />
+        {% else %}
+          <div style="background: #f5f5f5; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; border-radius: {{ section.settings.image_border_radius }}px;">
+            <p>Add an image in the theme editor</p>
+          </div>
+        {% endif %}
+      </div>
     </div>
   </div>
 </div>
