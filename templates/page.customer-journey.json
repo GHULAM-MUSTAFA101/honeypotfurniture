@@ -49,6 +49,13 @@
       "name": "Custom Sofa Journey",
       "settings": {
         "show_section": true,
+        "outer_bg_color": "#ededed",
+        "outer_bg_size": "cover",
+        "outer_bg_position": "center center",
+        "outer_section_padding_top": 0,
+        "outer_section_padding_bottom": 0,
+        "outer_mobile_section_padding_top": 0,
+        "outer_mobile_section_padding_bottom": 0,
         "layout": "image_right",
         "mobile_layout": "image_top",
         "section_bg_color": "#ededed",
