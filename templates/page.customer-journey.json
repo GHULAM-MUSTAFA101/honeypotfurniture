@@ -435,10 +435,48 @@
             "column_title": "Honeypot Classics",
             "column_color": "#fff9c4"
           }
+        },
+        "column_7KWaFJ": {
+          "type": "column",
+          "settings": {
+            "column_title": "Honeypot Classics",
+            "column_color": "#fff9c4"
+          }
+        },
+        "column_drQNpQ": {
+          "type": "column",
+          "settings": {
+            "column_title": "Honeypot Classics",
+            "column_color": "#fff9c4"
+          }
+        },
+        "row_E3J9zf": {
+          "type": "row",
+          "settings": {
+            "row_title": "Feather Filling",
+            "row_color": "#fbe9e7",
+            "price_1": "dh 8,950",
+            "price_2": "dh 10,650",
+            "price_3": "dh 12,150"
+          }
+        },
+        "row_EfedbN": {
+          "type": "row",
+          "settings": {
+            "row_title": "Feather Filling",
+            "row_color": "#fbe9e7",
+            "price_1": "dh 8,950",
+            "price_2": "dh 10,650",
+            "price_3": "dh 12,150"
+          }
         }
       },
       "block_order": [
-        "column_C8LeUj"
+        "column_C8LeUj",
+        "column_7KWaFJ",
+        "column_drQNpQ",
+        "row_E3J9zf",
+        "row_EfedbN"
       ],
       "name": "Customer Journey 3 ",
       "settings": {
