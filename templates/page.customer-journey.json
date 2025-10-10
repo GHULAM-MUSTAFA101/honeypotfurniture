@@ -439,14 +439,14 @@
         "column_7KWaFJ": {
           "type": "column",
           "settings": {
-            "column_title": "Honeypot Classics",
+            "column_title": "Honeypot Signatures",
             "column_color": "#fff9c4"
           }
         },
         "column_drQNpQ": {
           "type": "column",
           "settings": {
-            "column_title": "Honeypot Classics",
+            "column_title": "Honeypot Performance",
             "column_color": "#fff9c4"
           }
         },
@@ -463,11 +463,11 @@
         "row_EfedbN": {
           "type": "row",
           "settings": {
-            "row_title": "Feather Filling",
+            "row_title": "Foam Filling",
             "row_color": "#fbe9e7",
-            "price_1": "dh 8,950",
-            "price_2": "dh 10,650",
-            "price_3": "dh 12,150"
+            "price_1": "dh 8,100",
+            "price_2": "dh 9,750",
+            "price_3": "dh 11,300"
           }
         }
       },
@@ -487,7 +487,7 @@
         "section_margin_top": 0,
         "section_margin_bottom": 0,
         "background_color": "#ffffff",
-        "number": "03",
+        "number": "STEP 03",
         "number_color": "#000000",
         "number_font_size": 28,
         "number_font_weight": "600",
@@ -495,7 +495,7 @@
         "heading": "Get a Tailored Quote",
         "heading_color": "#000000",
         "heading_font_size": 24,
-        "heading_font_weight": "700",
+        "heading_font_weight": "500",
         "heading_margin_bottom": 15,
         "paragraph": "<p>Your chosen style and size lead straight to a clear, upfront price that includes both filling types and all three fabric categories.</p><p>We provide a price for every fabric so you can easily see what fits your budget, because transparency matters. No surprises, just clarity and choice.</p>",
         "text_color": "#555555",
