@@ -207,49 +207,6 @@
         "mobile_steps_gap": 5
       }
     },
-    "customer_journey_1_MPXCwG": {
-      "type": "customer_journey_1",
-      "blocks": {
-        "image_3a6J8t": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/image_4__11zon.webp"
-          }
-        },
-        "image_PN4PUj": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/image_5__11zon.webp"
-          }
-        },
-        "image_pA8hJ8": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/image_11zon.webp"
-          }
-        },
-        "image_fTNRHC": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/image_6__11zon.webp"
-          }
-        }
-      },
-      "block_order": [
-        "image_3a6J8t",
-        "image_PN4PUj",
-        "image_pA8hJ8",
-        "image_fTNRHC"
-      ],
-      "name": "customer journey 1",
-      "settings": {
-        "number": "01",
-        "heading": "Choose Your Style",
-        "paragraph": "Mix & Match: Adjust arm shapes, back styles, or combine elements from different sofa styles.",
-        "extra_text1": "Start with one of our base designs, or bring your own inspiration photo.",
-        "extra_text2": "<br>\nWhether you prefer modern designs or a classic look, the style is entirely yours."
-      }
-    },
     "customer_journey_2_i7LHUN": {
       "type": "customer_journey_2",
       "blocks": {
@@ -364,13 +321,56 @@
       "name": "Customer Journey 2 - Customise Size",
       "settings": {
         "number": "02",
-        "heading": "Customise Your Size",
-        "subheading": "Create any shape:",
-        "paragraph": "L-shape, U-shape, 3 Seater, 4 Seater, 5 Seater – anything you need.",
-        "middle_text": "Specify every detail from seat depth and armrest width, to backrest height so your sofa fits your space and design perfectly.",
-        "measurements_title": "Measurements you can tailor include:",
+        "heading": "Customise your Size & Layout",
+        "subheading": "Design the shape and size that perfectly fits your home:",
+        "paragraph": "L-shape, U-shape, 3-Seater, 4-Seater, 5-Seater - anything you need.",
+        "middle_text": "",
+        "measurements_title": "Specify every detail from seat depth and armrest width,to backrest height so your sofa sits beautifully in your space:",
         "note": "No awkward gaps, no wasted space!",
         "main_image": "shopify://shop_images/Untitled_design_3_1_11zon.webp"
+      }
+    },
+    "customer_journey_1_MPXCwG": {
+      "type": "customer_journey_1",
+      "blocks": {
+        "image_3a6J8t": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_4__11zon.webp"
+          }
+        },
+        "image_PN4PUj": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_5__11zon.webp"
+          }
+        },
+        "image_pA8hJ8": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_11zon.webp"
+          }
+        },
+        "image_fTNRHC": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_6__11zon.webp"
+          }
+        }
+      },
+      "block_order": [
+        "image_3a6J8t",
+        "image_PN4PUj",
+        "image_pA8hJ8",
+        "image_fTNRHC"
+      ],
+      "name": "customer journey 1",
+      "settings": {
+        "number": "01",
+        "heading": "Choose Your Style",
+        "paragraph": "Mix & Match: Adjust arm shapes, back styles, or combine elements from different sofa styles.",
+        "extra_text1": "Start with one of our base designs, or bring your own inspiration photo.",
+        "extra_text2": "<br>\nWhether you prefer modern designs or a classic look, the style is entirely yours."
       }
     },
     "customer_journey_3_6ew86H": {
@@ -503,8 +503,8 @@
     "breadcrump_with_bg_bka7Qq",
     "customer_main_header_XeBfft",
     "customer_journey_6_YHXknH",
-    "customer_journey_1_MPXCwG",
     "customer_journey_2_i7LHUN",
+    "customer_journey_1_MPXCwG",
     "customer_journey_3_6ew86H",
     "grid_image_text_qChzVn",
     "customer_journey_5_xEHcez"
