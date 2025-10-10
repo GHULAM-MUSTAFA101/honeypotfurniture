@@ -486,7 +486,7 @@
         "section_padding_sides": 20,
         "section_margin_top": 0,
         "section_margin_bottom": 0,
-        "background_color": "#ffffff",
+        "background_color": "#ededed",
         "number": "STEP 03",
         "number_color": "#000000",
         "number_font_size": 28,
