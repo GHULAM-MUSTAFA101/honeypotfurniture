@@ -559,7 +559,7 @@
         "foam_content": "<ul><li><strong>Soft:</strong> The softest, most sink-in comfort (lower density foam)</li><li><strong>Medium:</strong>  Medium comfort feel (a blended mix of soft and supportive foams)</li><li><strong>Firm:</strong> Firmer comfort with extra resilience (higher density foam)!</li></ul>",
         "content_text_color": "#000000",
         "content_font_size": 14,
-        "content_line_height": 1.6,
+        "content_line_height": 2,
         "content_text_align": "left",
         "content_margin_top": 20
       }
