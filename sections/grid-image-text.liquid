@@ -27,7 +27,7 @@
       
       <div class="section-subheading" style="
         max-width: {{ section.settings.subheading_max_width }}px;
-        margin: 0 auto {{ section.settings.subheading_margin_bottom }}px;
+        margin: 0 auto;
       ">
         <p style="
           color: {{ section.settings.subheading_color }};
@@ -40,38 +40,32 @@
     </div>
 
     <!-- Filling Options Grid -->
-    <div class="filling-grid" style="gap: {{ section.settings.grid_gap }}px;">
+    <div class="filling-grid" style="gap: {{ section.settings.grid_gap }}px; margin-top: {{ section.settings.grid_margin_top }}px;">
       
-      <!-- Feather Filled Options -->
+      <!-- Left Column - Feather Filled -->
       <div class="filling-column">
-        <div class="filling-type-header" style="
-          background-color: {{ section.settings.feather_header_bg }};
-          margin-bottom: {{ section.settings.header_margin_bottom }}px;
-        ">
-          <h4 style="
-            color: {{ section.settings.feather_header_text }};
-            font-size: {{ section.settings.type_header_font_size }}px;
-            font-weight: {{ section.settings.type_header_font_weight }};
-            margin: 0;
-            padding: {{ section.settings.type_header_padding }}px;
-            text-align: center;
-          ">{{ section.settings.feather_heading }}</h4>
-        </div>
-        
-        <div class="filling-images" style="gap: {{ section.settings.image_gap }}px; margin-bottom: {{ section.settings.image_margin_bottom }}px;">
-          {% if section.settings.feather_image1 %}
-            <div class="filling-image-wrapper" style="width: {{ section.settings.image_width }}%;">
-              {{ section.settings.feather_image1 | image_url: width: 400 | image_tag: class: 'filling-image', style: 'border-radius: ' | append: section.settings.image_border_radius | append: 'px;' }}
-            </div>
-          {% endif %}
-          {% if section.settings.feather_image2 %}
-            <div class="filling-image-wrapper" style="width: {{ section.settings.image_width }}%;">
-              {{ section.settings.feather_image2 | image_url: width: 400 | image_tag: class: 'filling-image', style: 'border-radius: ' | append: section.settings.image_border_radius | append: 'px;' }}
+        <div class="image-with-label">
+          {% if section.settings.feather_image %}
+            <div class="image-container">
+              {{ section.settings.feather_image | image_url: width: 600 | image_tag: 
+                class: 'filling-image', 
+                style: 'border-radius: ' | append: section.settings.image_border_radius | append: 'px; width: 100%; height: auto;' 
+              }}
+              <div class="image-label" style="
+                background-color: {{ section.settings.feather_label_bg }};
+                color: {{ section.settings.feather_label_text }};
+                font-size: {{ section.settings.label_font_size }}px;
+                font-weight: {{ section.settings.label_font_weight }};
+                padding: {{ section.settings.label_padding }}px;
+                border-radius: 0 {{ section.settings.label_border_radius }}px 0 0;
+              ">
+                {{ section.settings.feather_label }}
+              </div>
             </div>
           {% endif %}
         </div>
         
-        <div class="filling-content">
+        <div class="filling-content" style="margin-top: {{ section.settings.content_margin_top }}px;">
           <div style="
             color: {{ section.settings.content_text_color }};
             font-size: {{ section.settings.content_font_size }}px;
@@ -81,36 +75,30 @@
         </div>
       </div>
 
-      <!-- Foam Filled Options -->
+      <!-- Right Column - Foam Filled -->
       <div class="filling-column">
-        <div class="filling-type-header" style="
-          background-color: {{ section.settings.foam_header_bg }};
-          margin-bottom: {{ section.settings.header_margin_bottom }}px;
-        ">
-          <h4 style="
-            color: {{ section.settings.foam_header_text }};
-            font-size: {{ section.settings.type_header_font_size }}px;
-            font-weight: {{ section.settings.type_header_font_weight }};
-            margin: 0;
-            padding: {{ section.settings.type_header_padding }}px;
-            text-align: center;
-          ">{{ section.settings.foam_heading }}</h4>
-        </div>
-        
-        <div class="filling-images" style="gap: {{ section.settings.image_gap }}px; margin-bottom: {{ section.settings.image_margin_bottom }}px;">
-          {% if section.settings.foam_image1 %}
-            <div class="filling-image-wrapper" style="width: {{ section.settings.image_width }}%;">
-              {{ section.settings.foam_image1 | image_url: width: 400 | image_tag: class: 'filling-image', style: 'border-radius: ' | append: section.settings.image_border_radius | append: 'px;' }}
-            </div>
-          {% endif %}
-          {% if section.settings.foam_image2 %}
-            <div class="filling-image-wrapper" style="width: {{ section.settings.image_width }}%;">
-              {{ section.settings.foam_image2 | image_url: width: 400 | image_tag: class: 'filling-image', style: 'border-radius: ' | append: section.settings.image_border_radius | append: 'px;' }}
+        <div class="image-with-label">
+          {% if section.settings.foam_image %}
+            <div class="image-container">
+              {{ section.settings.foam_image | image_url: width: 600 | image_tag: 
+                class: 'filling-image', 
+                style: 'border-radius: ' | append: section.settings.image_border_radius | append: 'px; width: 100%; height: auto;' 
+              }}
+              <div class="image-label" style="
+                background-color: {{ section.settings.foam_label_bg }};
+                color: {{ section.settings.foam_label_text }};
+                font-size: {{ section.settings.label_font_size }}px;
+                font-weight: {{ section.settings.label_font_weight }};
+                padding: {{ section.settings.label_padding }}px;
+                border-radius: 0 {{ section.settings.label_border_radius }}px 0 0;
+              ">
+                {{ section.settings.foam_label }}
+              </div>
             </div>
           {% endif %}
         </div>
         
-        <div class="filling-content">
+        <div class="filling-content" style="margin-top: {{ section.settings.content_margin_top }}px;">
           <div style="
             color: {{ section.settings.content_text_color }};
             font-size: {{ section.settings.content_font_size }}px;
@@ -146,34 +134,33 @@
   flex-direction: column;
 }
 
-.filling-images {
-  display: flex;
-  justify-content: center;
+.image-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.image-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
 }
 
 .filling-image {
-  max-width: 100%;
-  height: auto;
-}
-
-.filling-type-header {
-  border-radius: 8px;
+  display: block;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
   .filling-grid {
     grid-template-columns: 1fr;
+    gap: 30px !important;
   }
   
-  .filling-images {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .filling-image-wrapper {
-    width: 100% !important;
-    max-width: 300px;
+  .image-label {
+    font-size: 14px !important;
+    padding: 8px 12px !important;
   }
 }
 </style>
@@ -243,6 +230,16 @@
       "unit": "px"
     },
     {
+      "type": "range",
+      "id": "grid_margin_top",
+      "label": "Grid Margin Top",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "default": 40,
+      "unit": "px"
+    },
+    {
       "type": "header",
       "content": "Step Number"
     },
@@ -250,7 +247,7 @@
       "type": "text",
       "id": "number",
       "label": "Step Number",
-      "default": "STEP 4"
+      "default": "04"
     },
     {
       "type": "color",
@@ -387,140 +384,18 @@
       "unit": "px"
     },
     {
-      "type": "range",
-      "id": "subheading_margin_bottom",
-      "label": "Subheading Margin Bottom",
-      "min": 0,
-      "max": 50,
-      "step": 1,
-      "default": 30,
-      "unit": "px"
-    },
-    {
-      "type": "header",
-      "content": "Type Headers"
-    },
-    {
-      "type": "text",
-      "id": "feather_heading",
-      "label": "Feather Heading",
-      "default": "Feather-Filled Options"
-    },
-    {
-      "type": "color",
-      "id": "feather_header_bg",
-      "label": "Feather Header Background",
-      "default": "#fff9c4"
-    },
-    {
-      "type": "color",
-      "id": "feather_header_text",
-      "label": "Feather Header Text Color",
-      "default": "#000000"
-    },
-    {
-      "type": "text",
-      "id": "foam_heading",
-      "label": "Foam Heading",
-      "default": "Foam-Filled Options"
-    },
-    {
-      "type": "color",
-      "id": "foam_header_bg",
-      "label": "Foam Header Background",
-      "default": "#e0e0e0"
-    },
-    {
-      "type": "color",
-      "id": "foam_header_text",
-      "label": "Foam Header Text Color",
-      "default": "#000000"
-    },
-    {
-      "type": "range",
-      "id": "type_header_font_size",
-      "label": "Type Header Font Size",
-      "min": 14,
-      "max": 32,
-      "step": 1,
-      "default": 18,
-      "unit": "px"
-    },
-    {
-      "type": "select",
-      "id": "type_header_font_weight",
-      "label": "Type Header Font Weight",
-      "options": [
-        {"value": "400", "label": "Normal"},
-        {"value": "500", "label": "Medium"},
-        {"value": "600", "label": "Semi Bold"},
-        {"value": "700", "label": "Bold"}
-      ],
-      "default": "600"
-    },
-    {
-      "type": "range",
-      "id": "type_header_padding",
-      "label": "Type Header Padding",
-      "min": 5,
-      "max": 30,
-      "step": 1,
-      "default": 10,
-      "unit": "px"
-    },
-    {
-      "type": "range",
-      "id": "header_margin_bottom",
-      "label": "Header Margin Bottom",
-      "min": 10,
-      "max": 50,
-      "step": 5,
-      "default": 20,
-      "unit": "px"
-    },
-    {
       "type": "header",
       "content": "Image Settings"
     },
     {
       "type": "image_picker",
-      "id": "feather_image1",
-      "label": "Feather Image 1"
+      "id": "feather_image",
+      "label": "Feather Filling Image"
     },
     {
       "type": "image_picker",
-      "id": "feather_image2",
-      "label": "Feather Image 2"
-    },
-    {
-      "type": "image_picker",
-      "id": "foam_image1",
-      "label": "Foam Image 1"
-    },
-    {
-      "type": "image_picker",
-      "id": "foam_image2",
-      "label": "Foam Image 2"
-    },
-    {
-      "type": "range",
-      "id": "image_width",
-      "label": "Image Width (%)",
-      "min": 40,
-      "max": 60,
-      "step": 5,
-      "default": 50,
-      "unit": "%"
-    },
-    {
-      "type": "range",
-      "id": "image_gap",
-      "label": "Image Gap",
-      "min": 10,
-      "max": 50,
-      "step": 5,
-      "default": 20,
-      "unit": "px"
+      "id": "foam_image",
+      "label": "Foam Filling Image"
     },
     {
       "type": "range",
@@ -533,13 +408,85 @@
       "unit": "px"
     },
     {
+      "type": "header",
+      "content": "Image Labels"
+    },
+    {
+      "type": "text",
+      "id": "feather_label",
+      "label": "Feather Image Label",
+      "default": "Feather-Filled Options"
+    },
+    {
+      "type": "color",
+      "id": "feather_label_bg",
+      "label": "Feather Label Background",
+      "default": "#fff9c4"
+    },
+    {
+      "type": "color",
+      "id": "feather_label_text",
+      "label": "Feather Label Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "text",
+      "id": "foam_label",
+      "label": "Foam Image Label",
+      "default": "Foam-Filled Options"
+    },
+    {
+      "type": "color",
+      "id": "foam_label_bg",
+      "label": "Foam Label Background",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "foam_label_text",
+      "label": "Foam Label Text Color",
+      "default": "#000000"
+    },
+    {
       "type": "range",
-      "id": "image_margin_bottom",
-      "label": "Image Margin Bottom",
-      "min": 10,
-      "max": 50,
-      "step": 5,
-      "default": 20,
+      "id": "label_font_size",
+      "label": "Label Font Size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "label_font_weight",
+      "label": "Label Font Weight",
+      "options": [
+        {"value": "400", "label": "Normal"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi Bold"},
+        {"value": "700", "label": "Bold"}
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "label_padding",
+      "label": "Label Padding",
+      "min": 5,
+      "max": 20,
+      "step": 1,
+      "default": 10,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "label_border_radius",
+      "label": "Label Border Radius",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "default": 8,
       "unit": "px"
     },
     {
@@ -594,6 +541,16 @@
         {"value": "right", "label": "Right"}
       ],
       "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "content_margin_top",
+      "label": "Content Margin Top",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
     }
   ],
   "presets": [
