@@ -151,7 +151,7 @@
         "bottom_padding_top": 40,
         "bottom_padding_bottom": 40,
         "bottom_padding_sides": 20,
-        "bottom_margin_top": 60,
+        "bottom_margin_top": 0,
         "bottom_alignment": "center",
         "bottom_heading": "Designing your sofa with Honeypot is simple:",
         "bottom_heading_size": 22,
