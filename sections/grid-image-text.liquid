@@ -82,7 +82,7 @@
             <div class="image-container">
               {{ section.settings.foam_image | image_url: width: 600 | image_tag: 
                 class: 'filling-image', 
-                style: 'border-radius: ' | append: section.settings.image_border_radius | append: 'px; width: 100%; height: auto;' 
+                style: 'border-radius: ' | append: section.settings.image_border_radius | append: '' 
               }}
               <div class="image-label" style="
                 background-color: {{ section.settings.foam_label_bg }};
