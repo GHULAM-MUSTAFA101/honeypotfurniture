@@ -33,6 +33,7 @@
     },
     "breadcrump_with_bg_bka7Qq": {
       "type": "breadcrump_with_bg",
+      "disabled": true,
       "name": "Breadcrumb with Banner",
       "settings": {
         "banner_bg": "shopify://shop_images/Untitled_1080_x_1920_px_1920_x_1080_px_1_11zon.webp",
@@ -41,6 +42,29 @@
         "banner_text": "This is your paragraph text",
         "banner_button_text": "",
         "banner_button_link": "shopify://collections/all"
+      }
+    },
+    "customer_main_header_XeBfft": {
+      "type": "customer_main_header",
+      "name": "Custom Sofa Journey",
+      "settings": {
+        "show_section": true,
+        "layout": "image_right",
+        "left_width": 40,
+        "right_width": 55,
+        "heading": "Your Custom Sofa Journey",
+        "heading_size": 50,
+        "content": "<p>With Honeypot Furniture</p>",
+        "content_size": 24,
+        "show_left_border": true,
+        "button_text": "",
+        "button_link": "",
+        "button_bg_color": "#000000",
+        "button_text_color": "#ffffff",
+        "button_padding_top": 12,
+        "button_padding_sides": 24,
+        "button_margin_top": 20,
+        "right_image": "shopify://shop_images/image_31_11zon.webp"
       }
     },
     "customer_journey_1_MPXCwG": {
@@ -351,6 +375,7 @@
     "main",
     "custom_liquid_T7RRLB",
     "breadcrump_with_bg_bka7Qq",
+    "customer_main_header_XeBfft",
     "customer_journey_1_MPXCwG",
     "customer_journey_2_i7LHUN",
     "customer_journey_3_6ew86H",
