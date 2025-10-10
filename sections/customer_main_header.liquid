@@ -11,6 +11,26 @@
     },
     {
       "type": "header",
+      "content": "Layout Switch"
+    },
+    {
+      "type": "select",
+      "id": "layout_direction",
+      "label": "Content & Image Position",
+      "options": [
+        {
+          "value": "content_left",
+          "label": "Content Left - Image Right"
+        },
+        {
+          "value": "content_right",
+          "label": "Content Right - Image Left"
+        }
+      ],
+      "default": "content_left"
+    },
+    {
+      "type": "header",
       "content": "Outer Section Background"
     },
     {
@@ -103,22 +123,6 @@
       "step": 5,
       "unit": "px",
       "default": 0
-    },
-    {
-      "type": "select",
-      "id": "layout",
-      "label": "Desktop Layout",
-      "options": [
-        {
-          "value": "image_left",
-          "label": "Image on Left"
-        },
-        {
-          "value": "image_right",
-          "label": "Image on Right"
-        }
-      ],
-      "default": "image_right"
     },
     {
       "type": "select",
@@ -237,8 +241,8 @@
     },
     {
       "type": "range",
-      "id": "left_width",
-      "label": "Left Content Width",
+      "id": "content_width",
+      "label": "Content Block Width",
       "min": 30,
       "max": 70,
       "step": 5,
@@ -247,8 +251,8 @@
     },
     {
       "type": "range",
-      "id": "right_width",
-      "label": "Right Content Width",
+      "id": "image_width",
+      "label": "Image Block Width",
       "min": 30,
       "max": 70,
       "step": 5,
@@ -281,7 +285,7 @@
     },
     {
       "type": "header",
-      "content": "Left Content"
+      "content": "Content Settings"
     },
     {
       "type": "text",
@@ -337,9 +341,25 @@
     },
     {
       "type": "checkbox",
-      "id": "show_left_border",
-      "label": "Show Left Border",
+      "id": "show_content_border",
+      "label": "Show Content Border",
       "default": true
+    },
+    {
+      "type": "select",
+      "id": "border_side",
+      "label": "Border Side",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left Side"
+        },
+        {
+          "value": "right",
+          "label": "Right Side"
+        }
+      ],
+      "default": "left"
     },
     {
       "type": "checkbox",
@@ -466,12 +486,12 @@
     },
     {
       "type": "header",
-      "content": "Right Content"
+      "content": "Image Settings"
     },
     {
       "type": "image_picker",
-      "id": "right_image",
-      "label": "Right Side Image"
+      "id": "section_image",
+      "label": "Section Image"
     },
     {
       "type": "range",
@@ -522,7 +542,7 @@
     padding-bottom: {{ section.settings.section_padding_bottom }}px;
   }
   
-  .custom-sofa-section.reverse {
+  .custom-sofa-section.content-right {
     flex-direction: row-reverse;
   }
   
@@ -532,10 +552,15 @@
     justify-content: center;
     padding: 40px;
     box-sizing: border-box;
+    width: {{ section.settings.content_width }}%;
   }
   
-  .sofa-content.with-border {
+  .sofa-content.with-border-left {
     border-left: {{ section.settings.border_width }}px solid {{ section.settings.border_color }};
+  }
+  
+  .sofa-content.with-border-right {
+    border-right: {{ section.settings.border_width }}px solid {{ section.settings.border_color }};
   }
   
   .sofa-heading {
@@ -574,6 +599,7 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    width: {{ section.settings.image_width }}%;
   }
   
   .sofa-image img {
@@ -602,15 +628,10 @@
       min-height: {{ section.settings.mobile_content_height }}px;
     }
     
-    .sofa-content.with-border {
+    .sofa-content.with-border-left,
+    .sofa-content.with-border-right {
       border-left: none;
-      {% if section.settings.show_mobile_border %}
-        border-top: {{ section.settings.border_width }}px solid {{ section.settings.border_color }};
-      {% endif %}
-    }
-    
-    .custom-sofa-section.reverse .sofa-content.with-border {
-      border-left: none;
+      border-right: none;
       {% if section.settings.show_mobile_border %}
         border-top: {{ section.settings.border_width }}px solid {{ section.settings.border_color }};
       {% endif %}
@@ -644,12 +665,11 @@
 
 <div class="custom_main_sofa_section">
   <!-- Section HTML -->
-  <div class="custom-sofa-section {% if section.settings.layout == 'image_left' %}reverse{% endif %}" 
+  <div class="custom-sofa-section {% if section.settings.layout_direction == 'content_right' %}content-right{% endif %}" 
        {% unless section.settings.show_section %}style="display: none;"{% endunless %}>
     
-    <!-- Left Content Block -->
-    <div class="sofa-content {% if section.settings.show_left_border %}with-border{% endif %}" 
-         style="width: {{ section.settings.left_width }}%;">
+    <!-- Content Block -->
+    <div class="sofa-content {% if section.settings.show_content_border %}{% if section.settings.border_side == 'left' %}with-border-left{% else %}with-border-right{% endif %}{% endif %}">
       <h2 class="sofa-heading">
         {{ section.settings.heading }}
       </h2>
@@ -666,10 +686,10 @@
       {% endif %}
     </div>
     
-    <!-- Right Image Block -->
-    <div class="sofa-image" style="width: {{ section.settings.right_width }}%;">
-      {% if section.settings.right_image != blank %}
-        <img src="{{ section.settings.right_image | img_url: '800x' }}" 
+    <!-- Image Block -->
+    <div class="sofa-image">
+      {% if section.settings.section_image != blank %}
+        <img src="{{ section.settings.section_image | img_url: '800x' }}" 
              alt="{{ section.settings.heading | escape }}" />
       {% else %}
         <div style="background: #f5f5f5; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; border-radius: {{ section.settings.image_border_radius }}px;">
