@@ -10,6 +10,101 @@
       "default": true
     },
     {
+      "type": "header",
+      "content": "Outer Section Background"
+    },
+    {
+      "type": "color",
+      "id": "outer_bg_color",
+      "label": "Outer Background Color",
+      "default": "transparent"
+    },
+    {
+      "type": "image_picker",
+      "id": "outer_bg_image",
+      "label": "Outer Background Image"
+    },
+    {
+      "type": "select",
+      "id": "outer_bg_size",
+      "label": "Outer Background Size",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Cover"
+        },
+        {
+          "value": "contain",
+          "label": "Contain"
+        },
+        {
+          "value": "auto",
+          "label": "Auto"
+        }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "select",
+      "id": "outer_bg_position",
+      "label": "Outer Background Position",
+      "options": [
+        {
+          "value": "center center",
+          "label": "Center"
+        },
+        {
+          "value": "left top",
+          "label": "Left Top"
+        },
+        {
+          "value": "right top",
+          "label": "Right Top"
+        }
+      ],
+      "default": "center center"
+    },
+    {
+      "type": "range",
+      "id": "outer_section_padding_top",
+      "label": "Outer Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "outer_section_padding_bottom",
+      "label": "Outer Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "outer_mobile_section_padding_top",
+      "label": "Mobile Outer Section Padding Top",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "outer_mobile_section_padding_bottom",
+      "label": "Mobile Outer Section Padding Bottom",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
       "type": "select",
       "id": "layout",
       "label": "Desktop Layout",
@@ -43,23 +138,23 @@
     },
     {
       "type": "header",
-      "content": "Section Background"
+      "content": "Inner Section Background"
     },
     {
       "type": "color",
       "id": "section_bg_color",
-      "label": "Background Color",
+      "label": "Inner Background Color",
       "default": "#ffffff"
     },
     {
       "type": "image_picker",
       "id": "section_bg_image",
-      "label": "Background Image"
+      "label": "Inner Background Image"
     },
     {
       "type": "select",
       "id": "bg_size",
-      "label": "Background Size",
+      "label": "Inner Background Size",
       "options": [
         {
           "value": "cover",
@@ -79,7 +174,7 @@
     {
       "type": "select",
       "id": "bg_position",
-      "label": "Background Position",
+      "label": "Inner Background Position",
       "options": [
         {
           "value": "center center",
@@ -99,7 +194,7 @@
     {
       "type": "range",
       "id": "section_padding_top",
-      "label": "Section Padding Top",
+      "label": "Inner Section Padding Top",
       "min": 0,
       "max": 100,
       "step": 5,
@@ -109,7 +204,7 @@
     {
       "type": "range",
       "id": "section_padding_bottom",
-      "label": "Section Padding Bottom",
+      "label": "Inner Section Padding Bottom",
       "min": 0,
       "max": 100,
       "step": 5,
@@ -119,7 +214,7 @@
     {
       "type": "range",
       "id": "mobile_section_padding_top",
-      "label": "Mobile Section Padding Top",
+      "label": "Mobile Inner Section Padding Top",
       "min": 0,
       "max": 80,
       "step": 5,
@@ -129,7 +224,7 @@
     {
       "type": "range",
       "id": "mobile_section_padding_bottom",
-      "label": "Mobile Section Padding Bottom",
+      "label": "Mobile Inner Section Padding Bottom",
       "min": 0,
       "max": 80,
       "step": 5,
@@ -399,6 +494,18 @@
 {% endschema %}
 
 <style>
+  .custom_main_sofa_section {
+    width: 100%;
+    background-size: {{ section.settings.outer_bg_size }};
+    background-position: {{ section.settings.outer_bg_position }};
+    {% if section.settings.outer_bg_image %}
+      background-image: url('{{ section.settings.outer_bg_image | img_url: '2000x' }}');
+    {% endif %}
+    background-color: {{ section.settings.outer_bg_color }};
+    padding-top: {{ section.settings.outer_section_padding_top }}px;
+    padding-bottom: {{ section.settings.outer_section_padding_bottom }}px;
+  }
+
   .custom-sofa-section {
     display: flex;
     width: 100%;
@@ -478,6 +585,11 @@
   
   /* Mobile Styles */
   @media (max-width: 768px) {
+    .custom_main_sofa_section {
+      padding-top: {{ section.settings.outer_mobile_section_padding_top }}px;
+      padding-bottom: {{ section.settings.outer_mobile_section_padding_bottom }}px;
+    }
+
     .custom-sofa-section {
       flex-direction: {% if section.settings.mobile_layout == 'image_top' %}column{% else %}column-reverse{% endif %};
       padding-top: {{ section.settings.mobile_section_padding_top }}px;
@@ -531,40 +643,39 @@
 </style>
 
 <div class="custom_main_sofa_section">
-<!-- Section HTML -->
-<div class="custom-sofa-section {% if section.settings.layout == 'image_left' %}reverse{% endif %}" 
-     {% unless section.settings.show_section %}style="display: none;"{% endunless %}>
-  
-  <!-- Left Content Block -->
-  <div class="sofa-content {% if section.settings.show_left_border %}with-border{% endif %}" 
-       style="width: {{ section.settings.left_width }}%;">
-    <h2 class="sofa-heading">
-      {{ section.settings.heading }}
-    </h2>
+  <!-- Section HTML -->
+  <div class="custom-sofa-section {% if section.settings.layout == 'image_left' %}reverse{% endif %}" 
+       {% unless section.settings.show_section %}style="display: none;"{% endunless %}>
     
-    <div class="sofa-text">
-      {{ section.settings.content }}
+    <!-- Left Content Block -->
+    <div class="sofa-content {% if section.settings.show_left_border %}with-border{% endif %}" 
+         style="width: {{ section.settings.left_width }}%;">
+      <h2 class="sofa-heading">
+        {{ section.settings.heading }}
+      </h2>
+      
+      <div class="sofa-text">
+        {{ section.settings.content }}
+      </div>
+      
+      {% if section.settings.button_text != blank %}
+        <a href="{{ section.settings.button_link }}" 
+           class="sofa-button">
+          {{ section.settings.button_text }}
+        </a>
+      {% endif %}
     </div>
     
-    {% if section.settings.button_text != blank %}
-      <a href="{{ section.settings.button_link }}" 
-         class="sofa-button">
-        {{ section.settings.button_text }}
-      </a>
-    {% endif %}
-  </div>
-  
-  <!-- Right Image Block -->
-  <div class="sofa-image" style="width: {{ section.settings.right_width }}%;">
-    {% if section.settings.right_image != blank %}
-      <img src="{{ section.settings.right_image | img_url: '800x' }}" 
-           alt="{{ section.settings.heading | escape }}" />
-    {% else %}
-      <div style="background: #f5f5f5; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; border-radius: {{ section.settings.image_border_radius }}px;">
-        <p>Add an image in the theme editor</p>
-      </div>
-    {% endif %}
+    <!-- Right Image Block -->
+    <div class="sofa-image" style="width: {{ section.settings.right_width }}%;">
+      {% if section.settings.right_image != blank %}
+        <img src="{{ section.settings.right_image | img_url: '800x' }}" 
+             alt="{{ section.settings.heading | escape }}" />
+      {% else %}
+        <div style="background: #f5f5f5; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; border-radius: {{ section.settings.image_border_radius }}px;">
+          <p>Add an image in the theme editor</p>
+        </div>
+      {% endif %}
+    </div>
   </div>
 </div>
-
- </div>
