@@ -571,71 +571,144 @@
         "fabric_jTzBkb": {
           "type": "fabric",
           "settings": {
-            "image": "shopify://shop_images/Natural_Linen.png",
-            "title": "Natural Linen"
+            "main_image": "shopify://shop_images/Rectangle_34624293_11zon.webp",
+            "title": "Natural Linen",
+            "color_swatch_1": "",
+            "color_image_1": "shopify://shop_images/JUMBO.png",
+            "color_swatch_2": "",
+            "color_image_2": "shopify://shop_images/Leather_look.png",
+            "color_swatch_3": "",
+            "color_swatch_4": "",
+            "color_swatch_5": "",
+            "color_swatch_6": "",
+            "color_swatch_7": "",
+            "color_swatch_8": ""
           }
         },
         "fabric_baLGdH": {
           "type": "fabric",
           "settings": {
-            "image": "shopify://shop_images/Linen_-_look.png",
-            "title": "Linen - look"
+            "title": "Linen - look",
+            "color_swatch_1": "",
+            "color_swatch_2": "",
+            "color_swatch_3": "",
+            "color_swatch_4": "",
+            "color_swatch_5": "",
+            "color_swatch_6": "",
+            "color_swatch_7": "",
+            "color_swatch_8": ""
           }
         },
         "fabric_CgdwhX": {
           "type": "fabric",
           "settings": {
-            "image": "shopify://shop_images/Cotton_-_look.png",
-            "title": "Cotton - look"
+            "title": "Cotton - look",
+            "color_swatch_1": "",
+            "color_swatch_2": "",
+            "color_swatch_3": "",
+            "color_swatch_4": "",
+            "color_swatch_5": "",
+            "color_swatch_6": "",
+            "color_swatch_7": "",
+            "color_swatch_8": ""
           }
         },
         "fabric_B6w8xQ": {
           "type": "fabric",
           "settings": {
-            "image": "shopify://shop_images/Boucle.png",
-            "title": "Boucle"
+            "title": "Boucle",
+            "color_swatch_1": "",
+            "color_swatch_2": "",
+            "color_swatch_3": "",
+            "color_swatch_4": "",
+            "color_swatch_5": "",
+            "color_swatch_6": "",
+            "color_swatch_7": "",
+            "color_swatch_8": ""
           }
         },
         "fabric_Kgt4kn": {
           "type": "fabric",
           "settings": {
-            "image": "shopify://shop_images/Textured.png",
-            "title": "Boucle"
+            "title": "Boucle",
+            "color_swatch_1": "",
+            "color_swatch_2": "",
+            "color_swatch_3": "",
+            "color_swatch_4": "",
+            "color_swatch_5": "",
+            "color_swatch_6": "",
+            "color_swatch_7": "",
+            "color_swatch_8": ""
           }
         },
         "fabric_Y99Pyb": {
           "type": "fabric",
           "settings": {
-            "image": "shopify://shop_images/Chenille.png",
-            "title": "Chenille"
+            "title": "Chenille",
+            "color_swatch_1": "",
+            "color_swatch_2": "",
+            "color_swatch_3": "",
+            "color_swatch_4": "",
+            "color_swatch_5": "",
+            "color_swatch_6": "",
+            "color_swatch_7": "",
+            "color_swatch_8": ""
           }
         },
         "fabric_xqALjy": {
           "type": "fabric",
           "settings": {
-            "image": "shopify://shop_images/Velvet.png",
-            "title": "Velvet"
+            "title": "Velvet",
+            "color_swatch_1": "",
+            "color_swatch_2": "",
+            "color_swatch_3": "",
+            "color_swatch_4": "",
+            "color_swatch_5": "",
+            "color_swatch_6": "",
+            "color_swatch_7": "",
+            "color_swatch_8": ""
           }
         },
         "fabric_8jkn4B": {
           "type": "fabric",
           "settings": {
-            "image": "shopify://shop_images/Suede.png",
-            "title": "Suede"
+            "title": "Suede",
+            "color_swatch_1": "",
+            "color_swatch_2": "",
+            "color_swatch_3": "",
+            "color_swatch_4": "",
+            "color_swatch_5": "",
+            "color_swatch_6": "",
+            "color_swatch_7": "",
+            "color_swatch_8": ""
           }
         },
         "fabric_HgPkBw": {
           "type": "fabric",
           "settings": {
-            "image": "shopify://shop_images/Leather_look.png",
-            "title": "Leather look"
+            "title": "Leather look",
+            "color_swatch_1": "",
+            "color_swatch_2": "",
+            "color_swatch_3": "",
+            "color_swatch_4": "",
+            "color_swatch_5": "",
+            "color_swatch_6": "",
+            "color_swatch_7": "",
+            "color_swatch_8": ""
           }
         },
         "fabric_W6dgpn": {
           "type": "fabric",
           "settings": {
-            "image": "shopify://shop_images/JUMBO.png",
-            "title": "Jumbo"
+            "title": "Jumbo",
+            "color_swatch_1": "",
+            "color_swatch_2": "",
+            "color_swatch_3": "",
+            "color_swatch_4": "",
+            "color_swatch_5": "",
+            "color_swatch_6": "",
+            "color_swatch_7": "",
+            "color_swatch_8": ""
           }
         }
       },
