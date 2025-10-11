@@ -76,24 +76,23 @@
       <!-- Right Column - Foam Filled -->
       <div class="filling-column">
         <div class="image-with-label">
-          {% if section.settings.foam_image %}
-            <div class="image-container">
-              {{ section.settings.foam_image | image_url: width: 600 | image_tag: 
-                class: 'filling-image', 
-                style: 'border-radius: ' | append: section.settings.image_border_radius 
-              }}
-              <div class="image-label" style="
-                background-color: {{ section.settings.foam_label_bg }};
-                color: {{ section.settings.foam_label_text }};
-                font-size: {{ section.settings.label_font_size }}px;
-                font-weight: {{ section.settings.label_font_weight }};
-                padding: {{ section.settings.label_padding }}px;
-                border-radius: 0 {{ section.settings.label_border_radius }}px 0 0;
-              ">
-                {{ section.settings.foam_label }}
-              </div>
-            </div>
-          {% endif %}
+          <!-- Foam Filling Image -->
+{% if section.settings.foam_image %}
+  <div class="image-container">
+    {{ section.settings.foam_image | image_url: width: 600 | image_tag: class: 'filling-image' }}
+    <div class="image-label" style="
+      background-color: {{ section.settings.foam_label_bg }};
+      color: {{ section.settings.foam_label_text }};
+      font-size: {{ section.settings.label_font_size }}px;
+      font-weight: {{ section.settings.label_font_weight }};
+      padding: {{ section.settings.label_padding }}px;
+      border-radius: 0 {{ section.settings.label_border_radius }}px 0 0;
+    ">
+      {{ section.settings.foam_label }}
+    </div>
+  </div>
+{% endif %}
+
         </div>
         
         <div class="filling-content" style="margin-top: {{ section.settings.content_margin_top }}px;">
