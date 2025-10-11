@@ -544,7 +544,7 @@
         "subheading_max_width": 600,
         "feather_image": "shopify://shop_images/Rectangle_34624276_11zon.webp",
         "foam_image": "shopify://shop_images/Rectangle_34624273_11zon.webp",
-        "image_border_radius": 8,
+        "image_border_radius": 0,
         "feather_label": "Feather-Filled Options",
         "feather_label_bg": "#f0e9e3",
         "feather_label_text": "#000000",
