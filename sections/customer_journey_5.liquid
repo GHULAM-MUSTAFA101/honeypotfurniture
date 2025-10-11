@@ -47,12 +47,17 @@
             {% comment %} Show swatch if EITHER color OR image is present {% endcomment %}
             {% if swatch_color != blank or swatch_image != blank %}
               <span
-                class="fabric-swatch {% if swatch_color == blank %}no-color{% endif %}"
+                class="fabric-swatch {% if swatch_color == blank %}no-color{% endif %} {% if swatch_image != blank %}has-image{% else %}no-image{% endif %}"
                 style="{% if swatch_color != blank %}background-color: {{ swatch_color }};{% endif %}"
-                data-swatch-image="{% if swatch_image != blank %}{{ swatch_image | img_url: '400x400' }}{% else %}{% endif %}"
+                {% if swatch_image != blank %}
+                  data-swatch-image="{{ swatch_image | img_url: '400x400' }}"
+                {% endif %}
                 title="Swatch {{ i }}">
                 {% if swatch_color == blank and swatch_image != blank %}
                   <span class="swatch-preview">Img</span>
+                {% endif %}
+                {% if swatch_image == blank and swatch_color != blank %}
+                  <span class="swatch-preview">Color</span>
                 {% endif %}
               </span>
             {% endif %}
@@ -133,6 +138,7 @@
   width: 100%;
   height: auto;
   display: block;
+  transition: opacity 0.3s ease;
 }
 .placeholder-image {
   width: 100%;
@@ -159,8 +165,8 @@
   margin-top: 8px;
 }
 .fabric-swatch {
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   border: 1px solid #ccc;
   cursor: pointer;
@@ -168,11 +174,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 .fabric-swatch.no-color {
   background: #f0f0f0;
 }
-.fabric-swatch:hover {
+.fabric-swatch.has-image {
+  cursor: pointer;
+}
+.fabric-swatch.no-image {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.fabric-swatch.has-image:hover {
   transform: scale(1.2);
   border: 1px solid #000;
 }
@@ -182,6 +196,7 @@
 .swatch-preview {
   font-size: 8px;
   color: #666;
+  font-weight: bold;
 }
 .fabric-footer {
   margin-top: 30px;
@@ -217,17 +232,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const mainImg = item.querySelector('[data-fabric-main-image]');
     const swatches = item.querySelectorAll('.fabric-swatch');
 
+    // Set first swatch with image as active by default
+    const firstSwatchWithImage = item.querySelector('.fabric-swatch.has-image');
+    if (firstSwatchWithImage && mainImg) {
+      firstSwatchWithImage.classList.add('active');
+    }
+
     swatches.forEach(function(swatch) {
       swatch.addEventListener('click', function() {
-        const newImg = swatch.getAttribute('data-swatch-image');
-
-        // Only update image if a swatch image is available
-        if (newImg) {
+        // Only proceed if swatch has an image
+        if (swatch.classList.contains('has-image')) {
+          const newImg = swatch.getAttribute('data-swatch-image');
+          
+          // Remove active class from all swatches
           swatches.forEach(s => s.classList.remove('active'));
+          
+          // Add active class to clicked swatch
           swatch.classList.add('active');
 
-          if (mainImg) {
-            mainImg.src = newImg;
+          // Update main image with smooth transition
+          if (mainImg && newImg) {
+            mainImg.style.opacity = '0';
+            setTimeout(() => {
+              mainImg.src = newImg;
+              mainImg.style.opacity = '1';
+            }, 150);
           }
         }
       });
