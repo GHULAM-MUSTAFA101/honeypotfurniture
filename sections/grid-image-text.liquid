@@ -88,7 +88,7 @@
                 font-size: {{ section.settings.label_font_size }}px;
                 font-weight: {{ section.settings.label_font_weight }};
                 padding: {{ section.settings.label_padding }}px;
-                border-radius: 0 {{ section.settings.label_border_radius }}px 0 0;
+                {% comment %} border-radius: 0 {{ section.settings.label_border_radius }}px 0 0; {% endcomment %}
               ">
                 {{ section.settings.foam_label }}
               </div>
