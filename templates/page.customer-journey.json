@@ -478,6 +478,7 @@
         "row_E3J9zf",
         "row_EfedbN"
       ],
+      "disabled": true,
       "name": "Customer Journey 3 ",
       "settings": {
         "container_max_width": 1200,
