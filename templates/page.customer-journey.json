@@ -573,22 +573,14 @@
           "settings": {
             "main_image": "shopify://shop_images/Rectangle_34624293_11zon.webp",
             "title": "Natural Linen",
-            "color_swatch_1": "",
-            "color_image_1": "shopify://shop_images/JUMBO.png",
-            "color_swatch_2": "",
-            "color_image_2": "shopify://shop_images/Leather_look.png",
-            "color_swatch_3": "",
-            "color_image_3": "shopify://shop_images/Suede.png",
-            "color_swatch_4": "",
-            "color_image_4": "shopify://shop_images/Boucle.png",
-            "color_swatch_5": "",
-            "color_image_5": "shopify://shop_images/Natural_Linen.png",
+            "color_swatch_1": "#b36868",
+            "color_swatch_2": "#f0e9e3",
+            "color_swatch_3": "#912d2d",
+            "color_swatch_4": "#764040",
+            "color_swatch_5": "#FFC507",
             "color_swatch_6": "",
-            "color_image_6": "shopify://shop_images/Chenille.png",
             "color_swatch_7": "",
-            "color_image_7": "shopify://shop_images/Velvet.png",
-            "color_swatch_8": "",
-            "color_image_8": "shopify://shop_images/Linen_-_look.png"
+            "color_swatch_8": ""
           }
         },
         "fabric_baLGdH": {
