@@ -1,8 +1,8 @@
 {% comment %}
-  ✅ Pick Your Fabric & Colour Section - FIXED
-  - Main image updates when swatch clicked
-  - Swatches always show when added
-  - Fully responsive
+✅ Pick Your Fabric & Colour Section (Optimized)
+- Single main image
+- Color swatches only (no image swapping)
+- Fast loading & easy to manage
 {% endcomment %}
 
 <section class="fabric-section">
@@ -25,12 +25,12 @@
 
   <div class="fabric-grid">
     {% for block in section.blocks %}
-      <div class="fabric-item" data-fabric-item>
+      <div class="fabric-item">
         <div class="fabric-image">
           {% if block.settings.main_image != blank %}
-            <img src="{{ block.settings.main_image | img_url: '400x400' }}" alt="{{ block.settings.title | escape }}" data-fabric-main-image>
+            <img src="{{ block.settings.main_image | img_url: '400x400' }}" alt="{{ block.settings.title | escape }}">
           {% else %}
-            <div class="placeholder-image">No image set</div>
+            <div class="placeholder-image">No image</div>
           {% endif %}
         </div>
         {% if block.settings.title != blank %}
@@ -40,20 +40,13 @@
         <div class="fabric-swatches">
           {% for i in (1..8) %}
             {% assign color_key = 'color_swatch_' | append: i %}
-            {% assign image_key = 'color_image_' | append: i %}
             {% assign swatch_color = block.settings[color_key] %}
-            {% assign swatch_image = block.settings[image_key] %}
 
-            {% comment %} Show swatch if EITHER color OR image is present {% endcomment %}
-            {% if swatch_color != blank or swatch_image != blank %}
+            {% if swatch_color != blank %}
               <span
-                class="fabric-swatch {% if swatch_color == blank %}no-color{% endif %}"
-                style="{% if swatch_color != blank %}background-color: {{ swatch_color }};{% endif %}"
-                data-swatch-image="{% if swatch_image != blank %}{{ swatch_image | img_url: '400x400' }}{% else %}{% endif %}"
+                class="fabric-swatch"
+                style="background-color: {{ swatch_color }};"
                 title="Swatch {{ i }}">
-                {% if swatch_color == blank and swatch_image != blank %}
-                  <span class="swatch-preview">Img</span>
-                {% endif %}
               </span>
             {% endif %}
           {% endfor %}
@@ -90,17 +83,11 @@
   text-align: left;
   margin-bottom: 30px;
 }
-.fabric-number {
+.fabric-number, .fabric-title {
   font-size: 28px;
   font-weight: 600;
   color: #000;
-  margin-bottom: 5px;
-}
-.fabric-title {
-  font-size: 28px;
-  font-weight: 600;
-  color: #000;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 .fabric-points {
   list-style: disc;
@@ -165,23 +152,10 @@
   border: 1px solid #ccc;
   cursor: pointer;
   transition: transform 0.2s ease, border 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.fabric-swatch.no-color {
-  background: #f0f0f0;
 }
 .fabric-swatch:hover {
   transform: scale(1.2);
   border: 1px solid #000;
-}
-.fabric-swatch.active {
-  border: 2px solid #000;
-}
-.swatch-preview {
-  font-size: 8px;
-  color: #666;
 }
 .fabric-footer {
   margin-top: 30px;
@@ -211,31 +185,6 @@
 }
 </style>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('[data-fabric-item]').forEach(function(item) {
-    const mainImg = item.querySelector('[data-fabric-main-image]');
-    const swatches = item.querySelectorAll('.fabric-swatch');
-
-    swatches.forEach(function(swatch) {
-      swatch.addEventListener('click', function() {
-        const newImg = swatch.getAttribute('data-swatch-image');
-
-        // Only update image if a swatch image is available
-        if (newImg) {
-          swatches.forEach(s => s.classList.remove('active'));
-          swatch.classList.add('active');
-
-          if (mainImg) {
-            mainImg.src = newImg;
-          }
-        }
-      });
-    });
-  });
-});
-</script>
-
 {% schema %}
 {
   "name": "Pick Your Fabric & Colour",
@@ -257,21 +206,13 @@ document.addEventListener('DOMContentLoaded', function() {
         { "type": "image_picker", "id": "main_image", "label": "Main Fabric Image" },
         { "type": "text", "id": "title", "label": "Fabric Name" },
         { "type": "color", "id": "color_swatch_1", "label": "Swatch 1 Color" },
-        { "type": "image_picker", "id": "color_image_1", "label": "Swatch 1 Image" },
         { "type": "color", "id": "color_swatch_2", "label": "Swatch 2 Color" },
-        { "type": "image_picker", "id": "color_image_2", "label": "Swatch 2 Image" },
         { "type": "color", "id": "color_swatch_3", "label": "Swatch 3 Color" },
-        { "type": "image_picker", "id": "color_image_3", "label": "Swatch 3 Image" },
         { "type": "color", "id": "color_swatch_4", "label": "Swatch 4 Color" },
-        { "type": "image_picker", "id": "color_image_4", "label": "Swatch 4 Image" },
         { "type": "color", "id": "color_swatch_5", "label": "Swatch 5 Color" },
-        { "type": "image_picker", "id": "color_image_5", "label": "Swatch 5 Image" },
         { "type": "color", "id": "color_swatch_6", "label": "Swatch 6 Color" },
-        { "type": "image_picker", "id": "color_image_6", "label": "Swatch 6 Image" },
         { "type": "color", "id": "color_swatch_7", "label": "Swatch 7 Color" },
-        { "type": "image_picker", "id": "color_image_7", "label": "Swatch 7 Image" },
-        { "type": "color", "id": "color_swatch_8", "label": "Swatch 8 Color" },
-        { "type": "image_picker", "id": "color_image_8", "label": "Swatch 8 Image" }
+        { "type": "color", "id": "color_swatch_8", "label": "Swatch 8 Color" }
       ]
     }
   ],
