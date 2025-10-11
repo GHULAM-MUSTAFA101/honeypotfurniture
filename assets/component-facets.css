@@ -1075,7 +1075,7 @@ details.menu-opening .mobile-facets__close {
   }
 
   .facets-vertical .facets__wrapper-vertical .facets__summary {
-    font-size: clamp(2rem, calc(var(--font-body-size) + 0.4rem), 2.4rem);
+    font-size: clamp(1.6rem,var(--font-body-size) ,2.4rem);
     padding: 0.6rem 0 1rem;
     border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.7);
   }
@@ -1228,7 +1228,7 @@ details.menu-opening .mobile-facets__close {
   }
 
   .section__m-collection.style-special .product-grid-container {
-    padding-top: 7rem;
+    padding-top: 4.8rem;
   }
 
   /* style-horizontal-plus */

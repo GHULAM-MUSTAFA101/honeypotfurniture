@@ -112,7 +112,7 @@
         {% endif %}
         "
       >
-        <div class="p-w__header--wrapper left">
+        <div class="p-w__header--wrapper p-w__custom-header center">
           {%- liquid 
             if section.settings.breadcrumb_size == 'default'
               assign breadcrumb_size = ''
@@ -127,7 +127,7 @@
             padding_bottom: breadcrumb_padding_bottom, 
             alignment: 'start' 
           %}
-          <h1 class="p-w__heading p-w__heading--page f-bold m-0 {{ section.settings.heading_size | prepend: 'heading-size-' }} m-spacing"
+          <h1 class="p-w__heading p-w__heading--page f-medium m-0 {{ section.settings.heading_size | prepend: 'heading-size-' }} m-spacing"
             style="--m-spacing-b: {{ section.settings.heading_margin_bottom }}px;"
           >
             {{ collection.title | escape }}

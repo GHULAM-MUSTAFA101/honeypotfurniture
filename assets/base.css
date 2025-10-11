@@ -3944,6 +3944,8 @@ summary::-webkit-details-marker {
   font-weight: var(--font-body-weight-bold);
   line-height: calc(1 + 0.5 / var(--font-body-scale));
   color: rgb(var(--color-default-price), 1);
+  letter-spacing: 1.48px;
+  text-transform: uppercase;
 }
 
 .price--large {
@@ -7550,6 +7552,12 @@ slideshow-component .swiper-pagination-bullet:not(.cus-bullet) {
   .style-popup-advanced-default
   .card__heading {
   font-size: clamp(1.4rem, var(--font-body-size), 3rem);
+}
+
+.card__heading {
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  color: #171717;
 }
 
 .section__f-collection-tab.style--special
@@ -26818,4 +26826,66 @@ body.multitasking__show .newsletter-popup-opener {
 .country-selector img {
   height: 21px;
   padding-bottom: 4px;
+}
+
+.card .card__inner {
+  position: relative;
+}
+
+.card__inner-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 5rem;
+  flex-direction: column;
+}
+
+.color-item.rounded-custom {
+  border-radius: 50%;
+}
+
+.card__inner-overlay .color-item {
+  width: 1.6rem;
+  height: 1.6rem;
+  margin-right: 10px;
+  margin-top: 15px;
+  border-radius: 50%;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Outer ring visible when active */
+.card__inner-overlay .color-item.active {
+  outline: 1px solid #000;
+  outline-offset: 2px; 
+}
+
+.card__delivery-text {
+  margin: 11px 0 0;
+  padding-top: 13px;
+  border-top: 1px solid;
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.p-w__custom-header nav.breadcrumb {
+  text-align: left;
+}
+
+.clickslice-top-description {
+  max-width: 963px;
+  margin: 0 auto;
+  font-size: 14px;
+  color: #565656;
+}
+
+.p-w__content {
+  padding-top: 38px;
+  border-top: 1px solid #A1A1A1;
 }

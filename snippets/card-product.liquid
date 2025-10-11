@@ -48,7 +48,43 @@
       "
     >
       <div class="card__inner pos-relative o-h w-100{% if card_style_popup == 'advanced-default' %} rounded-ovh{% endif %}">
+          {% comment %} Colour Swatches {% endcomment %}
+      
+        <div class="card__inner-overlay">
+          {%- if card_product.metafields.custom.product_colour_list != blank -%}
+            <div
+              class="product__variant {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+              style="padding-top: 0px;"
+              {{ block.shopify_attributes }}
+            >
+              <div class="color-list" style="display: inline-flex !important;">
+                {% for p in card_product.metafields.custom.product_colour_list.value %}
+                  {% if p.metafields.custom.color_2.value %}
+                    <!-- Two colors with a diagonal split -->
+                    <div
+                      class="color-item rounded-custom {% if forloop.first %}active{% endif %}"
+                      style="
+                        background: linear-gradient(
+                          to bottom right,
+                          {{ p.metafields.custom.color.value }} 50%,
+                          {{ p.metafields.custom.color_2.value }} 50%
+                        );
+                      "
+                    ></div>
+                  {% else %}
+                    <!-- Only one color -->
+                    <div
+                      class="color-item rounded-custom {% if forloop.first %}active{% endif %}"
+                      style="background-color: {{ p.metafields.custom.color.value }};"
+                    ></div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          {%- endif -%}
 
+          <p class="card__delivery-text">Delivery From Tomorrow</p>
+        </div>
         {% if section.settings.christmas_delivery_eta_toggle == true %}
           {% if section.settings.christmas_image != blank %}
             {% assign current_variant = card_product.selected_or_first_available_variant %}
@@ -531,39 +567,7 @@
         {%- endif -%}
       {%- endif -%}
 
-      {% comment %} Colour Swatches {% endcomment %}
-      {%- if card_product.metafields.custom.product_colour_list != blank -%}
-        <div
-          class="product__variant {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
-          style="padding-top: 0px;"
-          {{ block.shopify_attributes }}
-        >
-          <div class="color-list" style="display: inline-flex !important;">
-            {% for p in card_product.metafields.custom.product_colour_list.value %}
-              {% if p.metafields.custom.color_2.value %}
-                <!-- Two colors with a diagonal split -->
-                <div
-                  class="color-item"
-                  style="
-                    background: linear-gradient(
-                      to bottom right,
-                      {{ p.metafields.custom.color.value }} 50%,
-                      {{ p.metafields.custom.color_2.value }} 50%
-                    );
-                     height: 3.5rem; width: 3.5rem; margin-right: 5px; margin-top: 15px;
-                  "
-                ></div>
-              {% else %}
-                <!-- Only one color -->
-                <div
-                  class="color-item"
-                  style="background-color: {{ p.metafields.custom.color.value }}; height: 3.5rem; width: 3.5rem; margin-right: 5px; margin-top: 15px;"
-                ></div>
-              {% endif %}
-            {% endfor %}
-          </div>
-        </div>
-      {%- endif -%}              
+                    
       
       <div class="card__content w-100{% if product_cards_style == 'card' or product_cards_style == 'advanced-card' %} pos-absolute top-0 left-0 h-100 e-none{% else %} d-grid{% endif %}{% unless show_swatch_mobile %} hide-q-add-mobile{% endunless %}">
         <div class="card__information{% if product_cards_style == 'card' or product_cards_style == 'advanced-card' %} h-100{% if product_cards_style == 'advanced-card' %} d-grid f-row j-c-between a-i-end{% else %} d-flex f-column{% endif %}{% endif %}"
@@ -1004,13 +1008,13 @@
                     | append: delivery_date_suffix_2
                   -%}
                 
-                  <div class="d-inline-flex" style="font-size: 14px;">
+                  <div class="d-inline-flex" style="font-size: 14px; font-family: 'Assitant';">
 
                     {% comment %} <script>
                       console.log('Product: ', {{ card_product | json }});
                     </script> {% endcomment %}
                     
-                    <svg 
+                    {% comment %} <svg 
                       class="icon icon-fast-truck" 
                       height="16" aria-hidden="true" 
                       focusable="false" 
@@ -1022,37 +1026,37 @@
                       style="margin-top: 2px;"
                     >
                       <path d="M280 192c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8H40c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h240zm352 192h-24V275.9c0-16.8-6.8-33.3-18.8-45.2l-83.9-83.9c-11.8-12-28.3-18.8-45.2-18.8H416V78.6c0-25.7-22.2-46.6-49.4-46.6H113.4C86.2 32 64 52.9 64 78.6V96H8c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h240c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8H96V78.6c0-8.1 7.8-14.6 17.4-14.6h253.2c9.6 0 17.4 6.5 17.4 14.6V384H207.6C193 364.7 170 352 144 352c-18.1 0-34.6 6.2-48 16.4V288H64v144c0 44.2 35.8 80 80 80s80-35.8 80-80c0-5.5-.6-10.8-1.6-16h195.2c-1.1 5.2-1.6 10.5-1.6 16 0 44.2 35.8 80 80 80s80-35.8 80-80c0-5.5-.6-10.8-1.6-16H632c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8zm-488 96c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm272-320h44.1c8.4 0 16.7 3.4 22.6 9.4l83.9 83.9c.8.8 1.1 1.9 1.8 2.8H416V160zm80 320c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm80-96h-16.4C545 364.7 522 352 496 352s-49 12.7-63.6 32H416v-96h160v96zM256 248v-16c0-4.4-3.6-8-8-8H8c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h240c4.4 0 8-3.6 8-8z"></path>
-                    </svg>
+                    </svg> {% endcomment %}
                     {%- if section.settings.collection_delivery_eta_heading != blank -%}
-                      <div class="ml-2">
+                      <div class="">
                         {{ section.settings.collection_delivery_eta_heading | escape }}: 
 
                         {%- if section.settings.date_type == 'UAE' -%}
                           {%- if in_stock == true -%}
-                            <strong class="pr-1 mr-1"> Tomorrow</strong>
+                            <span class="pr-1 mr-1"> Tomorrow</span>
                           {%- else -%}
                             {%- if card_product.vendor == "Honeypot Furniture UAE" -%}
-                              <strong class="pr-1 mr-1"> 1 - 2 weeks</strong>
+                              <span class="pr-1 mr-1"> 1 - 2 weeks</span>
                             {%- else -%}
-                              <strong class="pr-1 mr-1"> 6 - 8 weeks</strong>
+                              <span class="pr-1 mr-1"> 6 - 8 weeks</span>
                             {%- endif -%}
                           {%- endif -%}
                         {%- elsif section.settings.date_type == 'accurate' -%}
-                          <strong>{{ formatted_date_1 }}</strong> 
+                          <span>{{ formatted_date_1 }}</span> 
                           to 
-                          <strong>{{ formatted_date_2 }}</strong>
+                          <span>{{ formatted_date_2 }}</span>
                         {%- else -%}
                           {%- if in_stock == true -%}
-                            <strong class="pr-1 mr-1"> Tomorrow</strong>
+                            <span class="pr-1 mr-1"> Tomorrow</span>
                           {%- else -%}
                             {%- if section.settings.tiers == 'on' -%}
                               {%- if card_product.metafields.Details.ProductTier == 1 -%}
-                                <strong class="pr-1 mr-1"> 1 - 6 weeks</strong>
+                                <span class="pr-1 mr-1"> 1 - 6 weeks</span>
                               {%- elsif card_product.metafields.Details.ProductTier == 2 -%}
-                                <strong class="pr-1 mr-1"> 6 - 12 weeks</strong>
+                                <span class="pr-1 mr-1"> 6 - 12 weeks</span>
                               {%- endif -%}
                             {%- else -%}
-                              <strong class="pr-1 mr-1"> 2 weeks</strong>
+                              <span class="pr-1 mr-1"> 2 weeks</span>
                             {%- endif -%}
                           {%- endif -%}
                         {%- endif -%}
