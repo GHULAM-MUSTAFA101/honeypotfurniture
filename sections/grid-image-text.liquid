@@ -7,14 +7,7 @@
     
     <!-- Header Section - Centered -->
     <div class="section-header" style="text-align: center;">
-      <div class="section-number" style="margin-bottom: {{ section.settings.number_margin_bottom }}px;">
-        <h2 style="
-          color: {{ section.settings.number_color }};
-          font-size: {{ section.settings.number_font_size }}px;
-          font-weight: {{ section.settings.number_font_weight }};
-          margin: 0;
-        ">{{ section.settings.number }}</h2>
-      </div>
+      {% comment %} Section number removed from here {% endcomment %}
       
       <div class="section-heading" style="margin-bottom: {{ section.settings.heading_margin_bottom }}px;">
         <h3 style="
@@ -88,7 +81,7 @@
                 font-size: {{ section.settings.label_font_size }}px;
                 font-weight: {{ section.settings.label_font_weight }};
                 padding: {{ section.settings.label_padding }}px;
-                {% comment %} border-radius: 0 {{ section.settings.label_border_radius }}px 0 0; {% endcomment %}
+                border-radius: 0 {{ section.settings.label_border_radius }}px 0 0;
               ">
                 {{ section.settings.foam_label }}
               </div>
@@ -235,55 +228,6 @@
       "max": 100,
       "step": 5,
       "default": 40,
-      "unit": "px"
-    },
-    {
-      "type": "header",
-      "content": "Step Number"
-    },
-    {
-      "type": "text",
-      "id": "number",
-      "label": "Step Number",
-      "default": "04"
-    },
-    {
-      "type": "color",
-      "id": "number_color",
-      "label": "Number Color",
-      "default": "#000000"
-    },
-    {
-      "type": "range",
-      "id": "number_font_size",
-      "label": "Number Font Size",
-      "min": 16,
-      "max": 60,
-      "step": 1,
-      "default": 28,
-      "unit": "px"
-    },
-    {
-      "type": "select",
-      "id": "number_font_weight",
-      "label": "Number Font Weight",
-      "options": [
-        {"value": "300", "label": "Light"},
-        {"value": "400", "label": "Normal"},
-        {"value": "500", "label": "Medium"},
-        {"value": "600", "label": "Semi Bold"},
-        {"value": "700", "label": "Bold"}
-      ],
-      "default": "600"
-    },
-    {
-      "type": "range",
-      "id": "number_margin_bottom",
-      "label": "Number Margin Bottom",
-      "min": 0,
-      "max": 50,
-      "step": 1,
-      "default": 8,
       "unit": "px"
     },
     {
