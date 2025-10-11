@@ -1,7 +1,7 @@
 {% comment %}
-  ✅ Pick Your Fabric & Colour Section - FIXED
-  - Main image updates when swatch clicked
-  - Swatches always show when added
+  ✅ Pick Your Fabric & Colour Section - COMPLETELY FIXED
+  - Swatches properly show when added
+  - Click on swatch changes main image
   - Fully responsive
 {% endcomment %}
 
@@ -44,19 +44,29 @@
             {% assign swatch_color = block.settings[color_key] %}
             {% assign swatch_image = block.settings[image_key] %}
 
-            {% comment %} Show swatch if EITHER color OR image is present {% endcomment %}
+            {% comment %} DEBUG: Check what values we have {% endcomment %}
             {% if swatch_color != blank or swatch_image != blank %}
               <span
-                class="fabric-swatch {% if swatch_color == blank %}no-color{% endif %}"
+                class="fabric-swatch {% if swatch_color == blank %}no-color{% endif %} {% if swatch_image != blank %}has-image{% endif %}"
                 style="{% if swatch_color != blank %}background-color: {{ swatch_color }};{% endif %}"
-                data-swatch-image="{% if swatch_image != blank %}{{ swatch_image | img_url: '400x400' }}{% else %}{% endif %}"
-                title="Swatch {{ i }}">
+                {% if swatch_image != blank %}
+                  data-swatch-image="{{ swatch_image | img_url: '400x400' }}"
+                {% endif %}
+                title="Swatch {{ i }} - {% if swatch_color != blank %}Color: {{ swatch_color }}{% endif %} {% if swatch_image != blank %}Has Image{% endif %}">
                 {% if swatch_color == blank and swatch_image != blank %}
                   <span class="swatch-preview">Img</span>
+                {% elsif swatch_color != blank and swatch_image == blank %}
+                  <span class="swatch-preview">C</span>
                 {% endif %}
               </span>
             {% endif %}
           {% endfor %}
+        </div>
+        
+        {% comment %} Debug info - remove this after testing {% endcomment %}
+        <div class="debug-info" style="display: none; font-size: 10px; color: #999;">
+          Swatches: {{ block.settings.color_swatch_1 }} | {{ block.settings.color_swatch_2 }} | {{ block.settings.color_swatch_3 }}
+          Images: {{ block.settings.color_image_1 }} | {{ block.settings.color_image_2 }} | {{ block.settings.color_image_3 }}
         </div>
       </div>
     {% endfor %}
@@ -124,6 +134,7 @@
   background: #fff;
   transition: all 0.3s ease;
   padding-bottom: 10px;
+  position: relative;
 }
 .fabric-item:hover {
   transform: translateY(-5px);
@@ -133,6 +144,7 @@
   width: 100%;
   height: auto;
   display: block;
+  transition: opacity 0.3s ease;
 }
 .placeholder-image {
   width: 100%;
@@ -153,35 +165,39 @@
 .fabric-swatches {
   display: flex;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
   flex-wrap: wrap;
   padding: 0 10px;
   margin-top: 8px;
+  min-height: 25px;
 }
 .fabric-swatch {
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   border: 1px solid #ccc;
   cursor: pointer;
-  transition: transform 0.2s ease, border 0.2s ease;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 .fabric-swatch.no-color {
   background: #f0f0f0;
 }
-.fabric-swatch:hover {
+.fabric-swatch.has-image:hover {
   transform: scale(1.2);
   border: 1px solid #000;
 }
 .fabric-swatch.active {
   border: 2px solid #000;
+  transform: scale(1.1);
 }
 .swatch-preview {
-  font-size: 8px;
+  font-size: 9px;
   color: #666;
+  font-weight: bold;
 }
 .fabric-footer {
   margin-top: 30px;
@@ -200,6 +216,12 @@
   margin-bottom: 4px;
   color: #000;
 }
+
+/* Loading state for images */
+.fabric-image.loading img {
+  opacity: 0.7;
+}
+
 @media (max-width: 992px) {
   .fabric-grid { grid-template-columns: repeat(3, 1fr); }
 }
@@ -213,22 +235,70 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('[data-fabric-item]').forEach(function(item) {
+  console.log('Fabric section script loaded');
+  
+  document.querySelectorAll('[data-fabric-item]').forEach(function(item, index) {
     const mainImg = item.querySelector('[data-fabric-main-image]');
     const swatches = item.querySelectorAll('.fabric-swatch');
+    
+    console.log(`Fabric item ${index + 1}:`, {
+      mainImg: mainImg ? mainImg.src : 'No main image',
+      swatchesCount: swatches.length
+    });
 
-    swatches.forEach(function(swatch) {
+    // Set first swatch with image as active by default
+    const firstSwatchWithImage = Array.from(swatches).find(swatch => 
+      swatch.classList.contains('has-image')
+    );
+    
+    if (firstSwatchWithImage && mainImg) {
+      firstSwatchWithImage.classList.add('active');
+      console.log('Set default active swatch:', firstSwatchWithImage);
+    }
+
+    swatches.forEach(function(swatch, swatchIndex) {
+      console.log(`Swatch ${swatchIndex + 1}:`, {
+        hasImage: swatch.classList.contains('has-image'),
+        imageUrl: swatch.getAttribute('data-swatch-image'),
+        color: swatch.style.backgroundColor
+      });
+
       swatch.addEventListener('click', function() {
         const newImg = swatch.getAttribute('data-swatch-image');
+        
+        console.log('Swatch clicked:', {
+          newImg: newImg,
+          hasImage: swatch.classList.contains('has-image')
+        });
 
-        // Only update image if a swatch image is available
-        if (newImg) {
+        // Only update if swatch has an image
+        if (swatch.classList.contains('has-image') && newImg) {
+          // Remove active class from all swatches
           swatches.forEach(s => s.classList.remove('active'));
+          
+          // Add active class to clicked swatch
           swatch.classList.add('active');
 
+          // Update main image with loading effect
           if (mainImg) {
-            mainImg.src = newImg;
+            // Add loading class
+            mainImg.parentElement.classList.add('loading');
+            
+            // Create new image to preload
+            const tempImg = new Image();
+            tempImg.onload = function() {
+              mainImg.src = newImg;
+              mainImg.parentElement.classList.remove('loading');
+              console.log('Image updated successfully:', newImg);
+            };
+            tempImg.onerror = function() {
+              console.error('Failed to load image:', newImg);
+              mainImg.parentElement.classList.remove('loading');
+            };
+            tempImg.src = newImg;
           }
+        } else {
+          console.log('Swatch has no image, skipping update');
         }
       });
     });
