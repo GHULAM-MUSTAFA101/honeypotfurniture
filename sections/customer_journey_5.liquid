@@ -1,5 +1,5 @@
 {% comment %}
-  ✅ Pick Your Fabric & Colour Section
+  ✅ Pick Your Fabric & Colour Section - FIXED
   - Main image updates when swatch clicked
   - Swatches always show when added
   - Fully responsive
@@ -29,6 +29,8 @@
         <div class="fabric-image">
           {% if block.settings.main_image != blank %}
             <img src="{{ block.settings.main_image | img_url: '400x400' }}" alt="{{ block.settings.title | escape }}" data-fabric-main-image>
+          {% else %}
+            <div class="placeholder-image">No image set</div>
           {% endif %}
         </div>
         {% if block.settings.title != blank %}
@@ -42,11 +44,16 @@
             {% assign swatch_color = block.settings[color_key] %}
             {% assign swatch_image = block.settings[image_key] %}
 
-            {% if swatch_color != blank and swatch_image != blank %}
+            {% comment %} Show swatch if EITHER color OR image is present {% endcomment %}
+            {% if swatch_color != blank or swatch_image != blank %}
               <span
-                class="fabric-swatch"
-                style="background-color: {{ swatch_color }};"
-                data-swatch-image="{{ swatch_image | img_url: '400x400' }}">
+                class="fabric-swatch {% if swatch_color == blank %}no-color{% endif %}"
+                style="{% if swatch_color != blank %}background-color: {{ swatch_color }};{% endif %}"
+                data-swatch-image="{% if swatch_image != blank %}{{ swatch_image | img_url: '400x400' }}{% else %}{% endif %}"
+                title="Swatch {{ i }}">
+                {% if swatch_color == blank and swatch_image != blank %}
+                  <span class="swatch-preview">Img</span>
+                {% endif %}
               </span>
             {% endif %}
           {% endfor %}
@@ -127,6 +134,15 @@
   height: auto;
   display: block;
 }
+.placeholder-image {
+  width: 100%;
+  height: 200px;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+}
 .fabric-name {
   font-size: 15px;
   font-weight: 500;
@@ -149,6 +165,12 @@
   border: 1px solid #ccc;
   cursor: pointer;
   transition: transform 0.2s ease, border 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fabric-swatch.no-color {
+  background: #f0f0f0;
 }
 .fabric-swatch:hover {
   transform: scale(1.2);
@@ -156,6 +178,10 @@
 }
 .fabric-swatch.active {
   border: 2px solid #000;
+}
+.swatch-preview {
+  font-size: 8px;
+  color: #666;
 }
 .fabric-footer {
   margin-top: 30px;
@@ -195,11 +221,14 @@ document.addEventListener('DOMContentLoaded', function() {
       swatch.addEventListener('click', function() {
         const newImg = swatch.getAttribute('data-swatch-image');
 
-        swatches.forEach(s => s.classList.remove('active'));
-        swatch.classList.add('active');
+        // Only update image if a swatch image is available
+        if (newImg) {
+          swatches.forEach(s => s.classList.remove('active'));
+          swatch.classList.add('active');
 
-        if (mainImg && newImg) {
-          mainImg.src = newImg;
+          if (mainImg) {
+            mainImg.src = newImg;
+          }
         }
       });
     });
