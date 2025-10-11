@@ -1,9 +1,9 @@
 {% comment %}
-  ✅ Pick Your Fabric & Colour Section - FIXED
-  - Main image updates when swatch clicked
-  - Swatches always show when added
-  - Fully responsive
-  - FIXED: Swatches without images are no longer clickable
+✅ Pick Your Fabric & Colour Section - FIXED & UPDATED
+- Shows swatch images and colors correctly
+- Main image changes when swatch clicked
+- First swatch auto-activates
+- Fully responsive
 {% endcomment %}
 
 <section class="fabric-section">
@@ -29,7 +29,7 @@
       <div class="fabric-item" data-fabric-item>
         <div class="fabric-image">
           {% if block.settings.main_image != blank %}
-            <img src="{{ block.settings.main_image | img_url: '400x400' }}" alt="{{ block.settings.title | escape }}" data-fabric-main-image>
+            <img src="{{ block.settings.main_image | image_url: width: 400 }}" alt="{{ block.settings.title | escape }}" data-fabric-main-image>
           {% else %}
             <div class="placeholder-image">No image set</div>
           {% endif %}
@@ -44,16 +44,15 @@
             {% assign image_key = 'color_image_' | append: i %}
             {% assign swatch_color = block.settings[color_key] %}
             {% assign swatch_image = block.settings[image_key] %}
-
-            {% comment %} Show swatch if EITHER color OR image is present {% endcomment %}
+            
             {% if swatch_color != blank or swatch_image != blank %}
               <span
-                class="fabric-swatch {% if swatch_color == blank %}no-color{% endif %} {% if swatch_image != blank %}has-image{% else %}no-image{% endif %}"
+                class="fabric-swatch {% if swatch_image != blank %}has-image{% else %}no-image{% endif %}"
                 style="{% if swatch_color != blank %}background-color: {{ swatch_color }};{% endif %}"
-                data-swatch-image="{% if swatch_image != blank %}{{ swatch_image | img_url: '400x400' }}{% else %}{% endif %}"
-                title="Swatch {{ i }}">
-                {% if swatch_color == blank and swatch_image != blank %}
-                  <span class="swatch-preview">Img</span>
+                data-swatch-image="{% if swatch_image != blank %}{{ swatch_image | image_url: width: 400 }}{% endif %}">
+
+                {% if swatch_image != blank %}
+                  <img src="{{ swatch_image | image_url: width: 40 }}" alt="Swatch {{ i }}" class="swatch-thumb">
                 {% endif %}
               </span>
             {% endif %}
@@ -160,8 +159,8 @@
   margin-top: 8px;
 }
 .fabric-swatch {
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   border: 1px solid #ccc;
   cursor: pointer;
@@ -169,27 +168,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  position: relative;
 }
-.fabric-swatch.no-color {
-  background: #f0f0f0;
+.fabric-swatch img.swatch-thumb {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
 }
 .fabric-swatch.has-image:hover {
   transform: scale(1.2);
   border: 1px solid #000;
 }
-.fabric-swatch.has-image.active {
+.fabric-swatch.active {
   border: 2px solid #000;
 }
 .fabric-swatch.no-image {
   cursor: default;
-}
-.fabric-swatch.no-image:hover {
-  transform: none;
-  border: 1px solid #ccc;
-}
-.swatch-preview {
-  font-size: 8px;
-  color: #666;
+  background: #f0f0f0;
 }
 .fabric-footer {
   margin-top: 30px;
@@ -208,6 +206,8 @@
   margin-bottom: 4px;
   color: #000;
 }
+
+/* Responsive */
 @media (max-width: 992px) {
   .fabric-grid { grid-template-columns: repeat(3, 1fr); }
 }
@@ -225,21 +225,25 @@ document.addEventListener('DOMContentLoaded', function() {
     const mainImg = item.querySelector('[data-fabric-main-image]');
     const swatches = item.querySelectorAll('.fabric-swatch');
 
+    if (!swatches.length) return;
+
+    // Auto-activate first swatch with image
+    let firstImageSwatch = Array.from(swatches).find(s => s.dataset.swatchImage);
+    if (firstImageSwatch && mainImg) {
+      firstImageSwatch.classList.add('active');
+      mainImg.src = firstImageSwatch.dataset.swatchImage;
+    }
+
     swatches.forEach(function(swatch) {
-      // Only add click event if swatch has an image
-      if (swatch.classList.contains('has-image')) {
-        swatch.addEventListener('click', function() {
-          const newImg = swatch.getAttribute('data-swatch-image');
+      swatch.addEventListener('click', function() {
+        const newImg = swatch.getAttribute('data-swatch-image');
+        if (!newImg) return;
 
-          // Update image and active state
-          swatches.forEach(s => s.classList.remove('active'));
-          swatch.classList.add('active');
+        swatches.forEach(s => s.classList.remove('active'));
+        swatch.classList.add('active');
 
-          if (mainImg && newImg) {
-            mainImg.src = newImg;
-          }
-        });
-      }
+        if (mainImg) mainImg.src = newImg;
+      });
     });
   });
 });
