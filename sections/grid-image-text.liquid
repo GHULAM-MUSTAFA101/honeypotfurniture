@@ -1,11 +1,9 @@
-<!-- sections/select-filling.liquid -->
 <section class="select-filling" style="
   background-color: {{ section.settings.background_color }};
   padding: {{ section.settings.section_padding_top }}px {{ section.settings.section_padding_sides }}px {{ section.settings.section_padding_bottom }}px {{ section.settings.section_padding_sides }}px;
 ">
   <div class="container">
-    
-    <!-- Header Section - Centered -->
+    <!-- Header Section -->
     <div class="section-header" style="text-align: center;">
       <div class="section-number" style="margin-bottom: {{ section.settings.number_margin_bottom }}px;">
         <h2 style="
@@ -15,7 +13,6 @@
           margin: 0;
         ">{{ section.settings.number }}</h2>
       </div>
-      
       <div class="section-heading" style="margin-bottom: {{ section.settings.heading_margin_bottom }}px;">
         <h3 style="
           color: {{ section.settings.heading_color }};
@@ -24,11 +21,7 @@
           margin: 0;
         ">{{ section.settings.heading }}</h3>
       </div>
-      
-      <div class="section-subheading" style="
-        max-width: {{ section.settings.subheading_max_width }}px;
-        margin: 0 auto;
-      ">
+      <div class="section-subheading" style="max-width: {{ section.settings.subheading_max_width }}px; margin: 0 auto;">
         <p style="
           color: {{ section.settings.subheading_color }};
           font-size: {{ section.settings.subheading_font_size }}px;
@@ -40,15 +33,15 @@
     </div>
 
     <div class="filling-grid" style="gap: {{ section.settings.grid_gap }}px; margin-top: {{ section.settings.grid_margin_top }}px;">
-      
+      <!-- Feather Column -->
       <div class="filling-column">
         <div class="image-with-label">
           {% if section.settings.feather_image %}
             <div class="image-container">
               {{ section.settings.feather_image | image_url: width: 600 | image_tag: 
                 class: 'filling-image', 
-                style: 'border-radius: ' | append: section.settings.image_border_radius
-              }}
+                style: 'border-radius:' | append: section.settings.image_border_radius | append: 'px;'
+              | replace: '">', '" />' }}
               <div class="image-label" style="
                 background-color: {{ section.settings.feather_label_bg }};
                 color: {{ section.settings.feather_label_text }};
@@ -62,7 +55,6 @@
             </div>
           {% endif %}
         </div>
-        
         <div class="filling-content" style="margin-top: {{ section.settings.content_margin_top }}px;">
           <div style="
             color: {{ section.settings.content_text_color }};
@@ -73,15 +65,15 @@
         </div>
       </div>
 
-      <!-- Right Column - Foam Filled -->
+      <!-- Foam Column -->
       <div class="filling-column">
         <div class="image-with-label">
           {% if section.settings.foam_image %}
             <div class="image-container">
               {{ section.settings.foam_image | image_url: width: 600 | image_tag: 
                 class: 'filling-image', 
-                style: 'border-radius: ' | append: section.settings.image_border_radius 
-              }}
+                style: 'border-radius:' | append: section.settings.image_border_radius | append: 'px;'
+              | replace: '">', '" />' }}
               <div class="image-label" style="
                 background-color: {{ section.settings.foam_label_bg }};
                 color: {{ section.settings.foam_label_text }};
@@ -95,7 +87,6 @@
             </div>
           {% endif %}
         </div>
-        
         <div class="filling-content" style="margin-top: {{ section.settings.content_margin_top }}px;">
           <div style="
             color: {{ section.settings.content_text_color }};
@@ -105,7 +96,6 @@
           ">{{ section.settings.foam_content }}</div>
         </div>
       </div>
-      
     </div>
   </div>
 </section>
@@ -155,13 +145,13 @@
     grid-template-columns: 1fr;
     gap: 30px !important;
   }
-  
   .image-label {
     font-size: 14px !important;
     padding: 8px 12px !important;
   }
 }
 </style>
+
 
 {% schema %}
 {
