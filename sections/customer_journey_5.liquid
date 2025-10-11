@@ -3,6 +3,7 @@
   - Main image updates when swatch clicked
   - Swatches always show when added
   - Fully responsive
+  - FIXED: Swatches without images are no longer clickable
 {% endcomment %}
 
 <section class="fabric-section">
@@ -47,7 +48,7 @@
             {% comment %} Show swatch if EITHER color OR image is present {% endcomment %}
             {% if swatch_color != blank or swatch_image != blank %}
               <span
-                class="fabric-swatch {% if swatch_color == blank %}no-color{% endif %}"
+                class="fabric-swatch {% if swatch_color == blank %}no-color{% endif %} {% if swatch_image != blank %}has-image{% else %}no-image{% endif %}"
                 style="{% if swatch_color != blank %}background-color: {{ swatch_color }};{% endif %}"
                 data-swatch-image="{% if swatch_image != blank %}{{ swatch_image | img_url: '400x400' }}{% else %}{% endif %}"
                 title="Swatch {{ i }}">
@@ -172,12 +173,19 @@
 .fabric-swatch.no-color {
   background: #f0f0f0;
 }
-.fabric-swatch:hover {
+.fabric-swatch.has-image:hover {
   transform: scale(1.2);
   border: 1px solid #000;
 }
-.fabric-swatch.active {
+.fabric-swatch.has-image.active {
   border: 2px solid #000;
+}
+.fabric-swatch.no-image {
+  cursor: default;
+}
+.fabric-swatch.no-image:hover {
+  transform: none;
+  border: 1px solid #ccc;
 }
 .swatch-preview {
   font-size: 8px;
@@ -218,19 +226,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const swatches = item.querySelectorAll('.fabric-swatch');
 
     swatches.forEach(function(swatch) {
-      swatch.addEventListener('click', function() {
-        const newImg = swatch.getAttribute('data-swatch-image');
+      // Only add click event if swatch has an image
+      if (swatch.classList.contains('has-image')) {
+        swatch.addEventListener('click', function() {
+          const newImg = swatch.getAttribute('data-swatch-image');
 
-        // Only update image if a swatch image is available
-        if (newImg) {
+          // Update image and active state
           swatches.forEach(s => s.classList.remove('active'));
           swatch.classList.add('active');
 
-          if (mainImg) {
+          if (mainImg && newImg) {
             mainImg.src = newImg;
           }
-        }
-      });
+        });
+      }
     });
   });
 });
