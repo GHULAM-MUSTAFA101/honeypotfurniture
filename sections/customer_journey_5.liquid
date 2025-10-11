@@ -1,6 +1,8 @@
 {% comment %}
-  Pick Your Fabric & Colour Section
-  Responsive with color swatch image change
+  ✅ Pick Your Fabric & Colour Section
+  - Main image updates when swatch clicked
+  - Swatches always show when added
+  - Fully responsive
 {% endcomment %}
 
 <section class="fabric-section">
@@ -32,24 +34,23 @@
         {% if block.settings.title != blank %}
           <p class="fabric-name">{{ block.settings.title }}</p>
         {% endif %}
-        {% if block.settings.color_swatch_1 != blank %}
-      <div class="fabric-swatches">
-  {% for i in (1..8) %}
-    {% assign color_key = 'color_swatch_' | append: i %}
-    {% assign image_key = 'color_image_' | append: i %}
-    {% assign swatch_color = block.settings[color_key] %}
-    {% assign swatch_image = block.settings[image_key] %}
 
-    {% if swatch_color != blank and swatch_image != blank %}
-      <span
-        class="fabric-swatch"
-        style="background-color: {{ swatch_color }};"
-        data-swatch-image="{{ swatch_image | img_url: '400x400' }}">
-      </span>
-    {% endif %}
-  {% endfor %}
-</div>
-        {% endif %}
+        <div class="fabric-swatches">
+          {% for i in (1..8) %}
+            {% assign color_key = 'color_swatch_' | append: i %}
+            {% assign image_key = 'color_image_' | append: i %}
+            {% assign swatch_color = block.settings[color_key] %}
+            {% assign swatch_image = block.settings[image_key] %}
+
+            {% if swatch_color != blank and swatch_image != blank %}
+              <span
+                class="fabric-swatch"
+                style="background-color: {{ swatch_color }};"
+                data-swatch-image="{{ swatch_image | img_url: '400x400' }}">
+              </span>
+            {% endif %}
+          {% endfor %}
+        </div>
       </div>
     {% endfor %}
   </div>
@@ -139,17 +140,22 @@
   gap: 6px;
   flex-wrap: wrap;
   padding: 0 10px;
+  margin-top: 8px;
 }
 .fabric-swatch {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   border: 1px solid #ccc;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, border 0.2s ease;
 }
 .fabric-swatch:hover {
   transform: scale(1.2);
+  border: 1px solid #000;
+}
+.fabric-swatch.active {
+  border: 2px solid #000;
 }
 .fabric-footer {
   margin-top: 30px;
@@ -188,6 +194,10 @@ document.addEventListener('DOMContentLoaded', function() {
     swatches.forEach(function(swatch) {
       swatch.addEventListener('click', function() {
         const newImg = swatch.getAttribute('data-swatch-image');
+
+        swatches.forEach(s => s.classList.remove('active'));
+        swatch.classList.add('active');
+
         if (mainImg && newImg) {
           mainImg.src = newImg;
         }
