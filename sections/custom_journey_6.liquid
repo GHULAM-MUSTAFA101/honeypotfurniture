@@ -1,0 +1,160 @@
+{% comment %}
+======================================================
+SOFA STEP 6 - Creation & Delivery (Unique Classes, Fixed Schema)
+Main wrapper: .creation_delivery
+======================================================
+{% endcomment %}
+
+<section class="creation_delivery">
+  <div class="creation_delivery__container">
+    
+    <div class="creation_delivery__text-area">
+      {% if section.settings.step_title != blank %}
+        <h2 class="creation_delivery__title">{{ section.settings.step_title }}</h2>
+      {% endif %}
+
+      {% if section.settings.subtitle != blank %}
+        <p class="creation_delivery__subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+
+      {% if section.settings.description != blank %}
+        <p class="creation_delivery__description">{{ section.settings.description }}</p>
+      {% endif %}
+
+      {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+        <a href="{{ section.settings.button_link }}" class="creation_delivery__btn">{{ section.settings.button_label }}</a>
+      {% endif %}
+    </div>
+
+    <div class="creation_delivery__image-area">
+      {% if section.settings.image != blank %}
+        <img 
+          src="{{ section.settings.image | image_url: width: 800 }}" 
+          alt="{{ section.settings.image_alt | escape }}" 
+          class="creation_delivery__image">
+      {% endif %}
+    </div>
+    
+  </div>
+</section>
+
+<style>
+  .creation_delivery {
+    padding: 50px 20px;
+    background: #fff;
+    text-align: center;
+  }
+  .creation_delivery__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+  }
+  .creation_delivery__text-area {
+    flex: 1 1 400px;
+  }
+  .creation_delivery__title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .creation_delivery__subtitle {
+    font-size: 1.4rem;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  .creation_delivery__description {
+    font-size: 1rem;
+    color: #555;
+    max-width: 500px;
+    margin: 0 auto 25px;
+  }
+  .creation_delivery__btn {
+    display: inline-block;
+    background-color: #e0e0e0;
+    color: #333;
+    padding: 12px 25px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background 0.3s ease;
+  }
+  .creation_delivery__btn:hover {
+    background-color: #ccc;
+  }
+  .creation_delivery__image-area {
+    flex: 1 1 400px;
+    text-align: center;
+  }
+  .creation_delivery__image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+  @media (max-width: 768px) {
+    .creation_delivery__container {
+      flex-direction: column;
+      text-align: center;
+    }
+    .creation_delivery__description {
+      max-width: 100%;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Sofa Step Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "step_title",
+      "label": "Step Title",
+      "default": "STEP 6"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Creation & Delivery"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Once you've finalised your design and fabric choice, we handcraft your sofa to order and deliver it within 7–14 days."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Main Image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image Alt Text",
+      "default": "Custom Sofa Creation & Delivery"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "CUSTOMISE YOUR SOFA"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link",
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sofa Step Section",
+      "category": "Custom Sections"
+    }
+  ]
+}
+{% endschema %}
