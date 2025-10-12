@@ -506,7 +506,7 @@
         "table_margin_top": 30,
         "table_font_size": 18,
         "table_header_font_size": 18,
-        "table_header_font_weight": "500",
+        "table_header_font_weight": "600",
         "table_row_header_font_weight": "500",
         "table_cell_padding": 15,
         "table_border_width": 1,
