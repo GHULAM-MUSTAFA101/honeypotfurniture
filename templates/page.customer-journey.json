@@ -741,11 +741,11 @@
       "settings": {
         "step_title": "STEP 6",
         "subtitle": "Creation & Delivery",
-        "description": "Once you've finalised your design and fabric choice, we handcraft your sofa to order and deliver it within 7–14 days.",
         "image": "shopify://shop_images/Mask_group_4__11zon.webp",
         "image_alt": "Custom Sofa Creation & Delivery",
+        "description": "Once you've finalised your design and fabric choice, we handcraft your sofa to order and deliver it within 7–14 days.",
         "button_label": "CUSTOMISE YOUR SOFA",
-        "button_link": ""
+        "button_link": "shopify://collections/all"
       }
     }
   },
