@@ -571,7 +571,7 @@
           "type": "fabric",
           "settings": {
             "title": "Natural Linen",
-            "main_image": "shopify://shop_images/Rectangle_34624293_11zon.webp",
+            "main_image": "shopify://shop_images/Rectangle_34624293_1__11zon.webp",
             "color_swatch_1": "rgba(0,0,0,0)",
             "color_image_1": "shopify://shop_images/JUMBO.png",
             "color_swatch_2": "rgba(0,0,0,0)",
@@ -596,6 +596,7 @@
           "type": "fabric",
           "settings": {
             "title": "Linen - look",
+            "main_image": "shopify://shop_images/Linen_-_look.png",
             "color_swatch_1": "",
             "color_swatch_2": "",
             "color_swatch_3": "",
@@ -612,6 +613,7 @@
           "type": "fabric",
           "settings": {
             "title": "Cotton - look",
+            "main_image": "shopify://shop_images/Rectangle_34624295_11zon.webp",
             "color_swatch_1": "",
             "color_swatch_2": "",
             "color_swatch_3": "",
@@ -628,6 +630,7 @@
           "type": "fabric",
           "settings": {
             "title": "Boucle",
+            "main_image": "shopify://shop_images/Rectangle_34624296_11zon.webp",
             "color_swatch_1": "",
             "color_swatch_2": "",
             "color_swatch_3": "",
@@ -644,6 +647,7 @@
           "type": "fabric",
           "settings": {
             "title": "Boucle",
+            "main_image": "shopify://shop_images/Rectangle_34624297_11zon_1.webp",
             "color_swatch_1": "",
             "color_swatch_2": "",
             "color_swatch_3": "",
@@ -660,6 +664,7 @@
           "type": "fabric",
           "settings": {
             "title": "Chenille",
+            "main_image": "shopify://shop_images/Rectangle_34624298_11zon.webp",
             "color_swatch_1": "",
             "color_swatch_2": "",
             "color_swatch_3": "",
@@ -676,6 +681,7 @@
           "type": "fabric",
           "settings": {
             "title": "Velvet",
+            "main_image": "shopify://shop_images/Rectangle_34624299_11zon.webp",
             "color_swatch_1": "",
             "color_swatch_2": "",
             "color_swatch_3": "",
@@ -692,6 +698,7 @@
           "type": "fabric",
           "settings": {
             "title": "Suede",
+            "main_image": "shopify://shop_images/Rectangle_34624300_11zon.webp",
             "color_swatch_1": "",
             "color_swatch_2": "",
             "color_swatch_3": "",
