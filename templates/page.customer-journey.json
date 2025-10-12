@@ -432,21 +432,21 @@
         "column_C8LeUj": {
           "type": "column",
           "settings": {
-            "column_title": "Honeypot Classics",
+            "column_title": "Honeypot <br> Classics",
             "column_color": "#fff9c4"
           }
         },
         "column_7KWaFJ": {
           "type": "column",
           "settings": {
-            "column_title": "Honeypot Signatures",
+            "column_title": "Honeypot <br>  Signatures",
             "column_color": "#d9d9d9"
           }
         },
         "column_drQNpQ": {
           "type": "column",
           "settings": {
-            "column_title": "Honeypot Performance",
+            "column_title": "Honeypot <br> Performance",
             "column_color": "#9cc1fa"
           }
         },
@@ -504,7 +504,7 @@
         "text_max_width": 800,
         "option_header": "OPTIONS",
         "table_margin_top": 30,
-        "table_font_size": 15,
+        "table_font_size": 18,
         "table_header_font_size": 15,
         "table_header_font_weight": "700",
         "table_row_header_font_weight": "600",
