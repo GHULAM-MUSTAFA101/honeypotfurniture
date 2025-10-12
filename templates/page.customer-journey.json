@@ -528,7 +528,7 @@
         "background_color": "#ffffff",
         "grid_gap": 40,
         "grid_margin_top": 40,
-        "number": "STEP 04",
+        "number": "STEP 4",
         "number_color": "#000000",
         "number_font_size": 35,
         "number_font_weight": "600",
@@ -751,7 +751,7 @@
       ],
       "name": "Pick Your Fabric & Colour",
       "settings": {
-        "heading_number": "STEP 05",
+        "heading_number": "STEP 5",
         "heading": "Pick Your Fabric & Colour",
         "subheading_1": "Explore over 30 fabric types, each with more than 30 colours.",
         "subheading_2": "Our ten curated looks make it easy to find the perfect texture and tone for your home.",
