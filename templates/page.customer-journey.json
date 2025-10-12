@@ -710,38 +710,6 @@
             "color_swatch_9": "",
             "color_swatch_10": ""
           }
-        },
-        "fabric_HgPkBw": {
-          "type": "fabric",
-          "settings": {
-            "title": "Leather look",
-            "color_swatch_1": "",
-            "color_swatch_2": "",
-            "color_swatch_3": "",
-            "color_swatch_4": "",
-            "color_swatch_5": "",
-            "color_swatch_6": "",
-            "color_swatch_7": "",
-            "color_swatch_8": "",
-            "color_swatch_9": "",
-            "color_swatch_10": ""
-          }
-        },
-        "fabric_W6dgpn": {
-          "type": "fabric",
-          "settings": {
-            "title": "Jumbo",
-            "color_swatch_1": "",
-            "color_swatch_2": "",
-            "color_swatch_3": "",
-            "color_swatch_4": "",
-            "color_swatch_5": "",
-            "color_swatch_6": "",
-            "color_swatch_7": "",
-            "color_swatch_8": "",
-            "color_swatch_9": "",
-            "color_swatch_10": ""
-          }
         }
       },
       "block_order": [
@@ -752,9 +720,7 @@
         "fabric_Kgt4kn",
         "fabric_Y99Pyb",
         "fabric_xqALjy",
-        "fabric_8jkn4B",
-        "fabric_HgPkBw",
-        "fabric_W6dgpn"
+        "fabric_8jkn4B"
       ],
       "name": "Pick Your Fabric & Colour",
       "settings": {
