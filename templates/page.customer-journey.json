@@ -545,19 +545,18 @@
         "subheading_max_width": 600,
         "feather_image": "shopify://shop_images/Rectangle_34624276_11zon.webp",
         "foam_image": "shopify://shop_images/Rectangle_34624273_11zon.webp",
-        "image_border_radius": 0,
         "feather_label": "Feather-Filled Options",
         "feather_label_bg": "#f0e9e3",
         "feather_label_text": "#000000",
         "foam_label": "Foam-Filled Options",
         "foam_label_bg": "#f0e9e3",
         "foam_label_text": "#000000",
-        "label_font_size": 16,
+        "label_font_size": 18,
         "label_font_weight": "600",
-        "label_padding": 10,
+        "label_padding": 14,
         "label_border_radius": 0,
-        "feather_content": "<ul><li><strong>Feather Cloud:</strong> softest, most plush (less biscuit foam)</li><li><strong>Feather Balanced:</strong> medium mix (a good balance of feather and biscuit foam)</li><li><strong>Feather Support:</strong> firmer with extra spring-back (more biscuit foam)          </li></ul>",
-        "foam_content": "<ul><li><strong>Soft:</strong> The softest, most sink-in comfort (lower density foam)</li><li><strong>Medium:</strong>  Medium comfort feel (a blended mix of soft and supportive foams)</li><li><strong>Firm:</strong> Firmer comfort with extra resilience (higher density foam)!</li></ul>",
+        "feather_content": "<ul><li><strong>Feather Cloud: </strong>Cloud-like, soft, and full of feathers.</li><li><strong>Feather Balanced:</strong> A perfect blend of feather and biscuit foam</li><li><strong>Feather Support: </strong>Firmer, with more biscuit foam and extra spring-back<br/><br/>     </li></ul>",
+        "foam_content": "<ul><li><strong>Foam Cloud:</strong> The most cushioned, sink in feel</li><li><strong>Foam Balanced:</strong> Balanced comfort with soft yet supportive foams</li><li><strong>Foam Support:</strong> Higher density foam for extra resilience and support<br/><br/></li></ul>",
         "content_text_color": "#000000",
         "content_font_size": 16,
         "content_line_height": 2,
@@ -571,8 +570,8 @@
         "fabric_jTzBkb": {
           "type": "fabric",
           "settings": {
-            "main_image": "shopify://shop_images/Rectangle_34624293_11zon.webp",
             "title": "Natural Linen",
+            "main_image": "shopify://shop_images/Rectangle_34624293_11zon.webp",
             "color_swatch_1": "rgba(0,0,0,0)",
             "color_image_1": "shopify://shop_images/JUMBO.png",
             "color_swatch_2": "rgba(0,0,0,0)",
@@ -588,7 +587,9 @@
             "color_swatch_7": "",
             "color_image_7": "shopify://shop_images/Leather_look.png",
             "color_swatch_8": "",
-            "color_image_8": "shopify://shop_images/Cotton_-_look.png"
+            "color_image_8": "shopify://shop_images/Cotton_-_look.png",
+            "color_swatch_9": "",
+            "color_swatch_10": ""
           }
         },
         "fabric_baLGdH": {
@@ -602,7 +603,9 @@
             "color_swatch_5": "",
             "color_swatch_6": "",
             "color_swatch_7": "",
-            "color_swatch_8": ""
+            "color_swatch_8": "",
+            "color_swatch_9": "",
+            "color_swatch_10": ""
           }
         },
         "fabric_CgdwhX": {
@@ -616,7 +619,9 @@
             "color_swatch_5": "",
             "color_swatch_6": "",
             "color_swatch_7": "",
-            "color_swatch_8": ""
+            "color_swatch_8": "",
+            "color_swatch_9": "",
+            "color_swatch_10": ""
           }
         },
         "fabric_B6w8xQ": {
@@ -630,7 +635,9 @@
             "color_swatch_5": "",
             "color_swatch_6": "",
             "color_swatch_7": "",
-            "color_swatch_8": ""
+            "color_swatch_8": "",
+            "color_swatch_9": "",
+            "color_swatch_10": ""
           }
         },
         "fabric_Kgt4kn": {
@@ -644,7 +651,9 @@
             "color_swatch_5": "",
             "color_swatch_6": "",
             "color_swatch_7": "",
-            "color_swatch_8": ""
+            "color_swatch_8": "",
+            "color_swatch_9": "",
+            "color_swatch_10": ""
           }
         },
         "fabric_Y99Pyb": {
@@ -658,7 +667,9 @@
             "color_swatch_5": "",
             "color_swatch_6": "",
             "color_swatch_7": "",
-            "color_swatch_8": ""
+            "color_swatch_8": "",
+            "color_swatch_9": "",
+            "color_swatch_10": ""
           }
         },
         "fabric_xqALjy": {
@@ -672,7 +683,9 @@
             "color_swatch_5": "",
             "color_swatch_6": "",
             "color_swatch_7": "",
-            "color_swatch_8": ""
+            "color_swatch_8": "",
+            "color_swatch_9": "",
+            "color_swatch_10": ""
           }
         },
         "fabric_8jkn4B": {
@@ -686,7 +699,9 @@
             "color_swatch_5": "",
             "color_swatch_6": "",
             "color_swatch_7": "",
-            "color_swatch_8": ""
+            "color_swatch_8": "",
+            "color_swatch_9": "",
+            "color_swatch_10": ""
           }
         },
         "fabric_HgPkBw": {
@@ -700,7 +715,9 @@
             "color_swatch_5": "",
             "color_swatch_6": "",
             "color_swatch_7": "",
-            "color_swatch_8": ""
+            "color_swatch_8": "",
+            "color_swatch_9": "",
+            "color_swatch_10": ""
           }
         },
         "fabric_W6dgpn": {
@@ -714,7 +731,9 @@
             "color_swatch_5": "",
             "color_swatch_6": "",
             "color_swatch_7": "",
-            "color_swatch_8": ""
+            "color_swatch_8": "",
+            "color_swatch_9": "",
+            "color_swatch_10": ""
           }
         }
       },
@@ -734,12 +753,13 @@
       "settings": {
         "heading_number": "05",
         "heading": "Pick Your Fabric & Colour",
-        "point_1": "Over 30 fabric types, each with more than 30 colours",
-        "point_2": "Ten curated looks make it easy to find the texture and style that fit your home",
+        "subheading_1": "Explore over 30 fabric types, each with more than 30 colours.",
+        "subheading_2": "Our ten curated looks make it easy to find the perfect texture and tone for your home.",
         "footer_title": "Our Price Ranges are clearly grouped into five categories:",
         "list_item_1": "Honeypot Classics",
         "list_item_2": "Honeypot Signatures",
-        "list_item_3": "Performance Select / Luxe / Elite (all with FibreGuard for stain and pet protection)"
+        "list_item_3": "Performance Select / Luxe / Elite (all with FibreGuard for stain and pet protection)",
+        "footer_note": "All performance fabrics feature FibreGuard – stain-resistant, pet-friendly, and built to last!"
       }
     }
   },
