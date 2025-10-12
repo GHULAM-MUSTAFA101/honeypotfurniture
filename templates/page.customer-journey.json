@@ -440,14 +440,14 @@
           "type": "column",
           "settings": {
             "column_title": "Honeypot Signatures",
-            "column_color": "#fff9c4"
+            "column_color": "#d9d9d9"
           }
         },
         "column_drQNpQ": {
           "type": "column",
           "settings": {
             "column_title": "Honeypot Performance",
-            "column_color": "#fff9c4"
+            "column_color": "#9cc1fa"
           }
         },
         "row_E3J9zf": {
@@ -478,7 +478,6 @@
         "row_E3J9zf",
         "row_EfedbN"
       ],
-      "disabled": true,
       "name": "Customer Journey 3 ",
       "settings": {
         "container_max_width": 1200,
