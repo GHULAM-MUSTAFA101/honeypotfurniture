@@ -734,6 +734,19 @@
         "list_item_3": "Honeypot Performance",
         "footer_note": "All performance fabrics feature FibreGuard – stain-resistant, pet-friendly, and built to last!"
       }
+    },
+    "custom_journey_6_4LC8H7": {
+      "type": "custom_journey_6",
+      "name": "Sofa Step Section 6",
+      "settings": {
+        "step_title": "STEP 6",
+        "subtitle": "Creation & Delivery",
+        "description": "Once you've finalised your design and fabric choice, we handcraft your sofa to order and deliver it within 7–14 days.",
+        "image": "shopify://shop_images/Mask_group_4__11zon.webp",
+        "image_alt": "Custom Sofa Creation & Delivery",
+        "button_label": "CUSTOMISE YOUR SOFA",
+        "button_link": ""
+      }
     }
   },
   "order": [
@@ -747,6 +760,7 @@
     "customer_journey_1_MPXCwG",
     "customer_journey_3_6ew86H",
     "grid_image_text_qChzVn",
-    "customer_journey_5_xEHcez"
+    "customer_journey_5_xEHcez",
+    "custom_journey_6_4LC8H7"
   ]
 }
