@@ -45,10 +45,8 @@
         <div class="image-with-label">
           {% if section.settings.feather_image %}
             <div class="image-container">
-              {{ section.settings.feather_image | image_url: width: 600 | image_tag: 
-                class: 'filling-image', 
-                style: 'border-radius: ' | append: section.settings.image_border_radius
-              }}
+          {{ section.settings.feather_image | image_url: width: 600 | image_tag: class: 'filling-image' }}
+
               <div class="image-label" style="
                 background-color: {{ section.settings.feather_label_bg }};
                 color: {{ section.settings.feather_label_text }};
@@ -396,16 +394,6 @@ padding-right:20px;
       "type": "image_picker",
       "id": "foam_image",
       "label": "Foam Filling Image"
-    },
-    {
-      "type": "range",
-      "id": "image_border_radius",
-      "label": "Image Border Radius",
-      "min": 0,
-      "max": 20,
-      "step": 1,
-      "default": 8,
-      "unit": "px"
     },
     {
       "type": "header",
