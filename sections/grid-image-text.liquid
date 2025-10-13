@@ -1,225 +1,555 @@
-{% comment %}
-✅ Section: Pick Your Fabric & Colour (Multiple Swatches)
-- Add unlimited swatches
-- Link swatches to fabric via fabric_id
-- Responsive: 2 per row on mobile
-{% endcomment %}
-
-<section class="fabric-section_main">
-  <div class="fabric-section">
-    <div class="fabric-header">
-      <h2 class="fabric-step">{{ section.settings.heading_number }}</h2>
-      <h3 class="fabric-title">{{ section.settings.heading }}</h3>
-      <p class="fabric-desc">{{ section.settings.subheading_1 }}</p>
-      <p class="fabric-desc">{{ section.settings.subheading_2 }}</p>
+<!-- sections/select-filling.liquid -->
+<section class="select-filling" style="
+  background-color: {{ section.settings.background_color }};
+  padding: {{ section.settings.section_padding_top }}px {{ section.settings.section_padding_sides }}px {{ section.settings.section_padding_bottom }}px {{ section.settings.section_padding_sides }}px;
+">
+  <div class="container">
+    
+    <!-- Header Section - Centered -->
+    <div class="section-header" style="text-align: center;">
+      <div class="section-number" style="margin-bottom: {{ section.settings.number_margin_bottom }}px;">
+        <h2 style="
+          color: {{ section.settings.number_color }};
+          font-size: {{ section.settings.number_font_size }}px;
+          font-weight: {{ section.settings.number_font_weight }};
+          margin: 0;
+        ">{{ section.settings.number }}</h2>
+      </div>
+      
+      <div class="section-heading" style="margin-bottom: {{ section.settings.heading_margin_bottom }}px;">
+        <h3 style="
+          color: {{ section.settings.heading_color }};
+          font-size: {{ section.settings.heading_font_size }}px;
+          font-weight: {{ section.settings.heading_font_weight }};
+          margin: 0;
+        ">{{ section.settings.heading }}</h3>
+      </div>
+      
+      <div class="section-subheading" style="
+        max-width: {{ section.settings.subheading_max_width }}px;
+        margin: 0 auto;
+      ">
+        <p style="
+          color: {{ section.settings.subheading_color }};
+          font-size: {{ section.settings.subheading_font_size }}px;
+          line-height: {{ section.settings.subheading_line_height }};
+          margin: 0;
+          text-align: center;
+        ">{{ section.settings.subheading }}</p>
+      </div>
     </div>
 
-    <div class="fabric-grid">
-      {% assign swatches = section.blocks | where: 'type', 'swatch' %}
-      {% assign fabrics = section.blocks | where: 'type', 'fabric' %}
-      {% for fabric in fabrics %}
-        <div class="fabric-item" data-fabric-item>
-          <div class="fabric-image">
-            {% if fabric.settings.main_image != blank %}
-              <img src="{{ fabric.settings.main_image | image_url: width: 500 }}" alt="{{ fabric.settings.title }}" data-fabric-main-image>
-            {% else %}
-              <div class="placeholder-image">No image</div>
-            {% endif %}
-          </div>
-          <p class="fabric-name">{{ fabric.settings.title }}</p>
+    <div class="filling-grid" style="gap: {{ section.settings.grid_gap }}px; margin-top: {{ section.settings.grid_margin_top }}px;">
+      
+      <div class="filling-column">
+        <div class="image-with-label">
+          {% if section.settings.feather_image %}
+            <div class="image-container">
+          {{ section.settings.feather_image | image_url: width: 600 | image_tag: class: 'filling-image' }}
 
-          <div class="fabric-swatches">
-            {% for swatch in swatches %}
-              {% if swatch.settings.fabric_id == fabric.id %}
-                <span
-                  class="fabric-swatch {% if swatch.settings.swatch_image != blank %}has-image{% endif %}"
-                  style="{% if swatch.settings.swatch_color != blank %}background-color: {{ swatch.settings.swatch_color }};{% endif %}"
-                  data-swatch-image="{% if swatch.settings.swatch_image != blank %}{{ swatch.settings.swatch_image | image_url: width: 500 }}{% endif %}">
-                  {% if swatch.settings.swatch_image != blank %}
-                    <img src="{{ swatch.settings.swatch_image | image_url: width: 40 }}" alt="Swatch" class="swatch-thumb">
-                  {% endif %}
-                </span>
-              {% endif %}
-            {% endfor %}
-          </div>
+              <div class="image-label" style="
+                background-color: {{ section.settings.feather_label_bg }};
+                color: {{ section.settings.feather_label_text }};
+                font-size: {{ section.settings.label_font_size }}px;
+                font-weight: {{ section.settings.label_font_weight }};
+                padding: {{ section.settings.label_padding }}px;
+                border-radius: 0 {{ section.settings.label_border_radius }}px 0 0;
+              ">
+                {{ section.settings.feather_label }}
+              </div>
+            </div>
+          {% endif %}
         </div>
-      {% endfor %}
-    </div>
-
-    <div class="fabric-footer">
-      <h4>{{ section.settings.footer_title }}</h4>
-      <div class="fabric-footer-boxes">
-        <div class="fabric-box">
-          <span>01</span>
-          <p>{{ section.settings.list_item_1 }}</p>
-        </div>
-        <div class="fabric-box">
-          <span>02</span>
-          <p>{{ section.settings.list_item_2 }}</p>
-        </div>
-        <div class="fabric-box">
-          <span>03</span>
-          <p>{{ section.settings.list_item_3 }}</p>
+        
+        <div class="filling-content" style="margin-top: {{ section.settings.content_margin_top }}px;">
+          <div style="
+            color: {{ section.settings.content_text_color }};
+            font-size: {{ section.settings.content_font_size }}px;
+            line-height: {{ section.settings.content_line_height }};
+            text-align: {{ section.settings.content_text_align }};
+          ">{{ section.settings.feather_content }}</div>
         </div>
       </div>
-      <p class="fabric-note">{{ section.settings.footer_note }}</p>
+
+      <!-- Right Column - Foam Filled -->
+      <div class="filling-column">
+        <div class="image-with-label">
+          <!-- Foam Filling Image -->
+{% if section.settings.foam_image %}
+  <div class="image-container">
+    {{ section.settings.foam_image | image_url: width: 600 | image_tag: class: 'filling-image' }}
+    <div class="image-label" style="
+      background-color: {{ section.settings.foam_label_bg }};
+      color: {{ section.settings.foam_label_text }};
+      font-size: {{ section.settings.label_font_size }}px;
+      font-weight: {{ section.settings.label_font_weight }};
+      padding: {{ section.settings.label_padding }}px;
+      border-radius: 0 {{ section.settings.label_border_radius }}px 0 0;
+    ">
+      {{ section.settings.foam_label }}
+    </div>
+  </div>
+{% endif %}
+
+        </div>
+        
+        <div class="filling-content" style="margin-top: {{ section.settings.content_margin_top }}px;">
+          <div style="
+            color: {{ section.settings.content_text_color }};
+            font-size: {{ section.settings.content_font_size }}px;
+            line-height: {{ section.settings.content_line_height }};
+            text-align: {{ section.settings.content_text_align }};
+          ">{{ section.settings.foam_content }}</div>
+        </div>
+      </div>
+      
     </div>
   </div>
 </section>
 
 <style>
-  .fabric-section_main{ background:#EDEDED }
-  .fabric-section {
-    padding: 60px 20px;
-    text-align: left;
-    max-width:1440px;
-    margin:auto;
-    color: #000;
+.select-filling {
+  border-bottom: 2px solid #f5eee8;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.select-filling .container {
+  max-width: {{ section.settings.container_max_width }}px;
+  margin: 0 auto;
+}
+.filling-content{
+padding-right:20px;
+  font-family: 'Albert Sans', sans-serif;
+
+}
+.filling-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.filling-column {
+  display: flex;
+  flex-direction: column;
+  background: #f0e9e3;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.image-label {
+  position: absolute;
+    font-family: 'Albert Sans', sans-serif;
+
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.filling-image {
+  display: block;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .filling-grid {
+    grid-template-columns: 1fr;
+    gap: 30px !important;
   }
-  .fabric-header {
-    max-width: 700px;
-    margin: 0 auto 50px;
-    text-align:center;
+  
+  .image-label {
+    font-size: 14px !important;
+    padding: 8px 12px !important;
   }
-  .fabric-step { font-size: 35px; font-weight: 700; }
-  .fabric-title { font-size: 28px; font-weight: 500; margin: 10px 0 15px; }
-  .fabric-desc { font-size: 15px; color: #171717; margin: 4px 0; }
-  .fabric-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 25px;
-    margin-bottom: 60px;
-  }
-  .fabric-item { text-align: center; }
-  .fabric-image img {
-    width: 100%;
-    border-radius: 4px;
-    object-fit: cover;
-    transition: opacity 0.3s ease;
-  }
-  .fabric-name {
-    font-weight: 500;
-    font-size: 16px;
-    margin-top: 10px;
-    text-align:start;
-  }
-  .fabric-swatches {
-    display: flex;
-    justify-content: start;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 8px;
-  }
-  .fabric-swatch {
-    width: 28px;
-    border-radius: 50%;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    transition: transform 0.2s ease, border 0.2s ease;
-    overflow: hidden;
-  }
-  .fabric-swatch img.swatch-thumb {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  .fabric-swatch:hover {
-    transform: scale(1.2);
-    border-color: #000;
-  }
-  .fabric-swatch.active { border: 2px solid #000; }
-  .fabric-footer { text-align: center; margin-top: 40px; }
-  .fabric-footer h4 { font-size: 20px; font-weight: 600; margin-bottom: 30px; }
-  .fabric-footer-boxes { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 25px; }
-  .fabric-box {
-    border: 1px solid #565656;
-    border-radius: 10px;
-    padding: 20px 30px;
-    width: 267px;
-    text-align: center;
-    transition: all 0.3s ease;
-  }
-  .fabric-box:hover { border-color: #000; transform: translateY(-3px); }
-  .fabric-box span { font-size: 20px; font-weight: 700; margin-bottom: 6px; display: block; }
-  .fabric-box p { margin: 0; font-size: 15px; }
-  .fabric-note { font-size: 13px; color: #171717; }
-  @media (max-width: 992px) {
-    .fabric-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  @media (max-width: 768px) {
-    .fabric-grid { grid-template-columns: repeat(2, 1fr); } /* ✅ mobile 2 per row */
-  }
-  @media (max-width: 480px) {
-    .fabric-grid { grid-template-columns: 1fr; }
-  }
+}
 </style>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('[data-fabric-item]').forEach(function(item) {
-    const mainImg = item.querySelector('[data-fabric-main-image]');
-    const swatches = item.querySelectorAll('.fabric-swatch');
-    if (!swatches.length || !mainImg) return;
-
-    const first = Array.from(swatches).find(s => s.dataset.swatchImage);
-    if (first) {
-      first.classList.add('active');
-      mainImg.src = first.dataset.swatchImage;
-    }
-
-    swatches.forEach(function(swatch) {
-      swatch.addEventListener('click', function() {
-        const newImg = swatch.getAttribute('data-swatch-image');
-        if (!newImg) return;
-        swatches.forEach(s => s.classList.remove('active'));
-        swatch.classList.add('active');
-        mainImg.style.opacity = 0;
-        setTimeout(() => {
-          mainImg.src = newImg;
-          mainImg.style.opacity = 1;
-        }, 200);
-      });
-    });
-  });
-});
-</script>
 
 {% schema %}
 {
-  "name": "Pick Your Fabric & Colour",
+  "name": "Select Your Filling",
   "settings": [
-    { "type": "text", "id": "heading_number", "label": "Step Number", "default": "STEP 5" },
-    { "type": "text", "id": "heading", "label": "Main Heading", "default": "Pick Your Fabric & Colour" },
-    { "type": "text", "id": "subheading_1", "label": "Line 1", "default": "Explore over 30 fabric types, each with more than 30 colours." },
-    { "type": "text", "id": "subheading_2", "label": "Line 2", "default": "Our ten curated looks make it easy to find the perfect texture and tone for your home." },
-    { "type": "text", "id": "footer_title", "label": "Footer Heading", "default": "Choose From Three Clear Price Categories" },
-    { "type": "text", "id": "list_item_1", "label": "Box 1", "default": "Honeypot Classics" },
-    { "type": "text", "id": "list_item_2", "label": "Box 2", "default": "Honeypot Signatures" },
-    { "type": "text", "id": "list_item_3", "label": "Box 3", "default": "Honeypot Performance" },
-    { "type": "text", "id": "footer_note", "label": "Bottom Note", "default": "All performance fabrics feature FibreGuard – stain-resistant, pet-friendly, and built to last!" }
-  ],
-  "blocks": [
     {
-      "type": "fabric",
-      "name": "Fabric Item",
-      "settings": [
-        { "type": "text", "id": "title", "label": "Fabric Name" },
-        { "type": "image_picker", "id": "main_image", "label": "Main Fabric Image" }
-      ]
+      "type": "header",
+      "content": "Section Layout"
     },
     {
-      "type": "swatch",
-      "name": "Swatch",
-      "settings": [
-        { "type": "color", "id": "swatch_color", "label": "Swatch Color" },
-        { "type": "image_picker", "id": "swatch_image", "label": "Swatch Image" },
-        { "type": "text", "id": "fabric_id", "label": "Fabric ID (Copy from Fabric Block)" }
-      ]
+      "type": "range",
+      "id": "container_max_width",
+      "label": "Container Max Width",
+      "min": 800,
+      "max": 1400,
+      "step": 10,
+      "default": 1200,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_sides",
+      "label": "Section Padding Sides",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Grid Gap Between Columns",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "grid_margin_top",
+      "label": "Grid Margin Top",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Step Number"
+    },
+    {
+      "type": "text",
+      "id": "number",
+      "label": "Step Number",
+      "default": "04"
+    },
+    {
+      "type": "color",
+      "id": "number_color",
+      "label": "Number Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "number_font_size",
+      "label": "Number Font Size",
+      "min": 16,
+      "max": 60,
+      "step": 1,
+      "default": 28,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "number_font_weight",
+      "label": "Number Font Weight",
+      "options": [
+        {"value": "300", "label": "Light"},
+        {"value": "400", "label": "Normal"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi Bold"},
+        {"value": "700", "label": "Bold"}
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "number_margin_bottom",
+      "label": "Number Margin Bottom",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "default": 8,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Main Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading Text",
+      "default": "Select Your Filling"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "label": "Heading Font Size",
+      "min": 16,
+      "max": 48,
+      "step": 1,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "heading_font_weight",
+      "label": "Heading Font Weight",
+      "options": [
+        {"value": "300", "label": "Light"},
+        {"value": "400", "label": "Normal"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi Bold"},
+        {"value": "700", "label": "Bold"}
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "heading_margin_bottom",
+      "label": "Heading Margin Bottom",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "default": 15,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Subheading"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading Text",
+      "default": "Find the comfort that fits how you love to sit."
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#555555"
+    },
+    {
+      "type": "range",
+      "id": "subheading_font_size",
+      "label": "Subheading Font Size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "subheading_line_height",
+      "label": "Subheading Line Height",
+      "min": 1.0,
+      "max": 2.0,
+      "step": 0.1,
+      "default": 1.5,
+      "unit": "em"
+    },
+    {
+      "type": "range",
+      "id": "subheading_max_width",
+      "label": "Subheading Max Width",
+      "min": 300,
+      "max": 800,
+      "step": 10,
+      "default": 600,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Image Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "feather_image",
+      "label": "Feather Filling Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "foam_image",
+      "label": "Foam Filling Image"
+    },
+    {
+      "type": "header",
+      "content": "Image Labels"
+    },
+    {
+      "type": "text",
+      "id": "feather_label",
+      "label": "Feather Image Label",
+      "default": "Feather-Filled Options"
+    },
+    {
+      "type": "color",
+      "id": "feather_label_bg",
+      "label": "Feather Label Background",
+      "default": "#fff9c4"
+    },
+    {
+      "type": "color",
+      "id": "feather_label_text",
+      "label": "Feather Label Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "text",
+      "id": "foam_label",
+      "label": "Foam Image Label",
+      "default": "Foam-Filled Options"
+    },
+    {
+      "type": "color",
+      "id": "foam_label_bg",
+      "label": "Foam Label Background",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "foam_label_text",
+      "label": "Foam Label Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "label_font_size",
+      "label": "Label Font Size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "label_font_weight",
+      "label": "Label Font Weight",
+      "options": [
+        {"value": "400", "label": "Normal"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi Bold"},
+        {"value": "700", "label": "Bold"}
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "label_padding",
+      "label": "Label Padding",
+      "min": 5,
+      "max": 20,
+      "step": 1,
+      "default": 10,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "label_border_radius",
+      "label": "Label Border Radius",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "default": 8,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "richtext",
+      "id": "feather_content",
+      "label": "Feather Content",
+      "default": "<p>Feather Cloud: Cloud-like, soft and full of comfort</p><p>Feather Balanced: A perfect blend of feather and biscuit foam</p><p>Foam Support: Firmer, with more biscuit foam and extra spring-back</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "foam_content",
+      "label": "Foam Content",
+      "default": "<p>Foam Support: Higher density foam for maximum support</p><p>Memory Foam: Contours to your body for perfect comfort</p><p>Hybrid Foam: Combination of different foam types</p>"
+    },
+    {
+      "type": "color",
+      "id": "content_text_color",
+      "label": "Content Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "content_font_size",
+      "label": "Content Font Size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "content_line_height",
+      "label": "Content Line Height",
+      "min": 1.2,
+      "max": 2.0,
+      "step": 0.1,
+      "default": 1.6,
+      "unit": "em"
+    },
+    {
+      "type": "select",
+      "id": "content_text_align",
+      "label": "Content Text Align",
+      "options": [
+        {"value": "left", "label": "Left"},
+        {"value": "center", "label": "Center"},
+        {"value": "right", "label": "Right"}
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "content_margin_top",
+      "label": "Content Margin Top",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
     }
   ],
   "presets": [
-    { "name": "Pick Your Fabric & Colour", "category": "Custom" }
+    {
+      "name": "Select Your Filling",
+      "category": "Custom Sections"
+    }
   ]
 }
 {% endschema %}
