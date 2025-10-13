@@ -28,7 +28,7 @@
         <p class="fabric-name">{{ block.settings.title }}</p>
 
         <div class="fabric-swatches">
-          {% for i in (1..15) %}
+          {% for i in (1..30) %}
             {% assign color_key = 'color_swatch_' | append: i %}
             {% assign image_key = 'color_image_' | append: i %}
             {% assign swatch_color = block.settings[color_key] %}
