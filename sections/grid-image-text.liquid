@@ -1,9 +1,8 @@
 {% comment %}
-✅ Final Section: Pick Your Fabric & Colour
-- 20 swatches supported (schema uses explicit fields, no Liquid inside JSON)
-- Mobile: 1 row mein 2 products
-- Swatch click → main image updates
-- Responsive layout
+✅ Section: Pick Your Fabric & Colour (Multiple Swatches)
+- Add unlimited swatches
+- Link swatches to fabric via fabric_id
+- Responsive: 2 per row on mobile
 {% endcomment %}
 
 <section class="fabric-section_main">
@@ -16,31 +15,28 @@
     </div>
 
     <div class="fabric-grid">
-      {% for block in section.blocks %}
+      {% assign swatches = section.blocks | where: 'type', 'swatch' %}
+      {% assign fabrics = section.blocks | where: 'type', 'fabric' %}
+      {% for fabric in fabrics %}
         <div class="fabric-item" data-fabric-item>
           <div class="fabric-image">
-            {% if block.settings.main_image != blank %}
-              <img src="{{ block.settings.main_image | image_url: width: 500 }}" alt="{{ block.settings.title }}" data-fabric-main-image>
+            {% if fabric.settings.main_image != blank %}
+              <img src="{{ fabric.settings.main_image | image_url: width: 500 }}" alt="{{ fabric.settings.title }}" data-fabric-main-image>
             {% else %}
               <div class="placeholder-image">No image</div>
             {% endif %}
           </div>
-          <p class="fabric-name">{{ block.settings.title }}</p>
+          <p class="fabric-name">{{ fabric.settings.title }}</p>
 
           <div class="fabric-swatches">
-            {% comment %} Explicit swatch fields (1..20) read from block.settings {% endcomment %}
-            {% for i in (1..20) %}
-              {% assign color_key = 'color_swatch_' | append: i %}
-              {% assign image_key = 'color_image_' | append: i %}
-              {% assign swatch_color = block.settings[color_key] %}
-              {% assign swatch_image = block.settings[image_key] %}
-              {% if swatch_color != blank or swatch_image != blank %}
+            {% for swatch in swatches %}
+              {% if swatch.settings.fabric_id == fabric.id %}
                 <span
-                  class="fabric-swatch {% if swatch_image != blank %}has-image{% endif %}"
-                  style="{% if swatch_color != blank %}background-color: {{ swatch_color }};{% endif %}"
-                  data-swatch-image="{% if swatch_image != blank %}{{ swatch_image | image_url: width: 500 }}{% endif %}">
-                  {% if swatch_image != blank %}
-                    <img src="{{ swatch_image | image_url: width: 40 }}" alt="Swatch {{ i }}" class="swatch-thumb">
+                  class="fabric-swatch {% if swatch.settings.swatch_image != blank %}has-image{% endif %}"
+                  style="{% if swatch.settings.swatch_color != blank %}background-color: {{ swatch.settings.swatch_color }};{% endif %}"
+                  data-swatch-image="{% if swatch.settings.swatch_image != blank %}{{ swatch.settings.swatch_image | image_url: width: 500 }}{% endif %}">
+                  {% if swatch.settings.swatch_image != blank %}
+                    <img src="{{ swatch.settings.swatch_image | image_url: width: 40 }}" alt="Swatch" class="swatch-thumb">
                   {% endif %}
                 </span>
               {% endif %}
@@ -72,39 +68,91 @@
 </section>
 
 <style>
-.fabric-section_main { background:#EDEDED; }
-.fabric-section {
-  padding: 60px 20px;
-  text-align: left;
-  max-width:1440px;
-  margin:auto;
-  color: #000;
-}
-.fabric-header { max-width: 700px; margin: 0 auto 50px; text-align:center; }
-.fabric-step { text-transform: uppercase; font-weight: 700; font-size: 35px; letter-spacing: 1px; }
-.fabric-title { font-size: 28px; font-weight: 500; margin: 10px 0 15px; }
-.fabric-desc { font-size: 15px; color: #171717; margin: 4px 0; }
-.fabric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; margin-bottom: 60px; }
-.fabric-item { text-align: center; }
-.fabric-image img { width: 100%; border-radius: 4px; object-fit: cover; transition: opacity 0.3s ease; }
-.fabric-name { font-weight: 500; font-size: 16px; margin-top: 10px; text-align:start; }
-.fabric-swatches { display: flex; justify-content: start; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-.fabric-swatch { width: 28px; height: 28px; border-radius: 50%; border: 1px solid #ccc; cursor: pointer; transition: transform 0.2s ease, border 0.2s ease; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; }
-.fabric-swatch img.swatch-thumb { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
-.fabric-swatch:hover { transform: scale(1.2); border-color: #000; }
-.fabric-swatch.active { border: 2px solid #000; }
-.fabric-footer { text-align: center; margin-top: 40px; }
-.fabric-footer h4 { font-size: 20px; font-weight: 600; margin-bottom: 30px; text-transform: capitalize; }
-.fabric-footer-boxes { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 25px; }
-.fabric-box { border: 1px solid #565656; border-radius: 10px; padding: 20px 30px; width: 267px; text-align: center; transition: all 0.3s ease; }
-.fabric-box:hover { border-color: #000; transform: translateY(-3px); }
-.fabric-box span { display: block; font-size: 20px; font-weight: 700; margin-bottom: 6px; }
-.fabric-box p { margin: 0; font-size: 15px; }
-.fabric-note { font-size: 13px; color: #171717; }
-
-@media (max-width: 992px) { .fabric-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 768px) { .fabric-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 480px) { .fabric-grid { grid-template-columns: repeat(2, 1fr); } } /* mobile: 2 per row */
+  .fabric-section_main{ background:#EDEDED }
+  .fabric-section {
+    padding: 60px 20px;
+    text-align: left;
+    max-width:1440px;
+    margin:auto;
+    color: #000;
+  }
+  .fabric-header {
+    max-width: 700px;
+    margin: 0 auto 50px;
+    text-align:center;
+  }
+  .fabric-step { font-size: 35px; font-weight: 700; }
+  .fabric-title { font-size: 28px; font-weight: 500; margin: 10px 0 15px; }
+  .fabric-desc { font-size: 15px; color: #171717; margin: 4px 0; }
+  .fabric-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    margin-bottom: 60px;
+  }
+  .fabric-item { text-align: center; }
+  .fabric-image img {
+    width: 100%;
+    border-radius: 4px;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+  }
+  .fabric-name {
+    font-weight: 500;
+    font-size: 16px;
+    margin-top: 10px;
+    text-align:start;
+  }
+  .fabric-swatches {
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .fabric-swatch {
+    width: 28px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: transform 0.2s ease, border 0.2s ease;
+    overflow: hidden;
+  }
+  .fabric-swatch img.swatch-thumb {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .fabric-swatch:hover {
+    transform: scale(1.2);
+    border-color: #000;
+  }
+  .fabric-swatch.active { border: 2px solid #000; }
+  .fabric-footer { text-align: center; margin-top: 40px; }
+  .fabric-footer h4 { font-size: 20px; font-weight: 600; margin-bottom: 30px; }
+  .fabric-footer-boxes { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 25px; }
+  .fabric-box {
+    border: 1px solid #565656;
+    border-radius: 10px;
+    padding: 20px 30px;
+    width: 267px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  .fabric-box:hover { border-color: #000; transform: translateY(-3px); }
+  .fabric-box span { font-size: 20px; font-weight: 700; margin-bottom: 6px; display: block; }
+  .fabric-box p { margin: 0; font-size: 15px; }
+  .fabric-note { font-size: 13px; color: #171717; }
+  @media (max-width: 992px) {
+    .fabric-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .fabric-grid { grid-template-columns: repeat(2, 1fr); } /* ✅ mobile 2 per row */
+  }
+  @media (max-width: 480px) {
+    .fabric-grid { grid-template-columns: 1fr; }
+  }
 </style>
 
 <script>
@@ -112,10 +160,8 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('[data-fabric-item]').forEach(function(item) {
     const mainImg = item.querySelector('[data-fabric-main-image]');
     const swatches = item.querySelectorAll('.fabric-swatch');
-
     if (!swatches.length || !mainImg) return;
 
-    // Auto select first swatch with image
     const first = Array.from(swatches).find(s => s.dataset.swatchImage);
     if (first) {
       first.classList.add('active');
@@ -126,10 +172,8 @@ document.addEventListener('DOMContentLoaded', function() {
       swatch.addEventListener('click', function() {
         const newImg = swatch.getAttribute('data-swatch-image');
         if (!newImg) return;
-
         swatches.forEach(s => s.classList.remove('active'));
         swatch.classList.add('active');
-
         mainImg.style.opacity = 0;
         setTimeout(() => {
           mainImg.src = newImg;
@@ -161,67 +205,16 @@ document.addEventListener('DOMContentLoaded', function() {
       "name": "Fabric Item",
       "settings": [
         { "type": "text", "id": "title", "label": "Fabric Name" },
-        { "type": "image_picker", "id": "main_image", "label": "Main Fabric Image" },
-
-        { "type": "color", "id": "color_swatch_1", "label": "Swatch 1 Color" },
-        { "type": "image_picker", "id": "color_image_1", "label": "Swatch 1 Image" },
-
-        { "type": "color", "id": "color_swatch_2", "label": "Swatch 2 Color" },
-        { "type": "image_picker", "id": "color_image_2", "label": "Swatch 2 Image" },
-
-        { "type": "color", "id": "color_swatch_3", "label": "Swatch 3 Color" },
-        { "type": "image_picker", "id": "color_image_3", "label": "Swatch 3 Image" },
-
-        { "type": "color", "id": "color_swatch_4", "label": "Swatch 4 Color" },
-        { "type": "image_picker", "id": "color_image_4", "label": "Swatch 4 Image" },
-
-        { "type": "color", "id": "color_swatch_5", "label": "Swatch 5 Color" },
-        { "type": "image_picker", "id": "color_image_5", "label": "Swatch 5 Image" },
-
-        { "type": "color", "id": "color_swatch_6", "label": "Swatch 6 Color" },
-        { "type": "image_picker", "id": "color_image_6", "label": "Swatch 6 Image" },
-
-        { "type": "color", "id": "color_swatch_7", "label": "Swatch 7 Color" },
-        { "type": "image_picker", "id": "color_image_7", "label": "Swatch 7 Image" },
-
-        { "type": "color", "id": "color_swatch_8", "label": "Swatch 8 Color" },
-        { "type": "image_picker", "id": "color_image_8", "label": "Swatch 8 Image" },
-
-        { "type": "color", "id": "color_swatch_9", "label": "Swatch 9 Color" },
-        { "type": "image_picker", "id": "color_image_9", "label": "Swatch 9 Image" },
-
-        { "type": "color", "id": "color_swatch_10", "label": "Swatch 10 Color" },
-        { "type": "image_picker", "id": "color_image_10", "label": "Swatch 10 Image" },
-
-        { "type": "color", "id": "color_swatch_11", "label": "Swatch 11 Color" },
-        { "type": "image_picker", "id": "color_image_11", "label": "Swatch 11 Image" },
-
-        { "type": "color", "id": "color_swatch_12", "label": "Swatch 12 Color" },
-        { "type": "image_picker", "id": "color_image_12", "label": "Swatch 12 Image" },
-
-        { "type": "color", "id": "color_swatch_13", "label": "Swatch 13 Color" },
-        { "type": "image_picker", "id": "color_image_13", "label": "Swatch 13 Image" },
-
-        { "type": "color", "id": "color_swatch_14", "label": "Swatch 14 Color" },
-        { "type": "image_picker", "id": "color_image_14", "label": "Swatch 14 Image" },
-
-        { "type": "color", "id": "color_swatch_15", "label": "Swatch 15 Color" },
-        { "type": "image_picker", "id": "color_image_15", "label": "Swatch 15 Image" },
-
-        { "type": "color", "id": "color_swatch_16", "label": "Swatch 16 Color" },
-        { "type": "image_picker", "id": "color_image_16", "label": "Swatch 16 Image" },
-
-        { "type": "color", "id": "color_swatch_17", "label": "Swatch 17 Color" },
-        { "type": "image_picker", "id": "color_image_17", "label": "Swatch 17 Image" },
-
-        { "type": "color", "id": "color_swatch_18", "label": "Swatch 18 Color" },
-        { "type": "image_picker", "id": "color_image_18", "label": "Swatch 18 Image" },
-
-        { "type": "color", "id": "color_swatch_19", "label": "Swatch 19 Color" },
-        { "type": "image_picker", "id": "color_image_19", "label": "Swatch 19 Image" },
-
-        { "type": "color", "id": "color_swatch_20", "label": "Swatch 20 Color" },
-        { "type": "image_picker", "id": "color_image_20", "label": "Swatch 20 Image" }
+        { "type": "image_picker", "id": "main_image", "label": "Main Fabric Image" }
+      ]
+    },
+    {
+      "type": "swatch",
+      "name": "Swatch",
+      "settings": [
+        { "type": "color", "id": "swatch_color", "label": "Swatch Color" },
+        { "type": "image_picker", "id": "swatch_image", "label": "Swatch Image" },
+        { "type": "text", "id": "fabric_id", "label": "Fabric ID (Copy from Fabric Block)" }
       ]
     }
   ],
