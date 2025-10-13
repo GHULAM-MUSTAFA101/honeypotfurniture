@@ -1,868 +1,537 @@
-<!-- In your Shopify theme, add this as a new section file: fabric-customizer.liquid -->
-
 {% comment %}
-✅ Section: Fabric Customizer with Swatch Management
-- Add/Remove fabric swatches functionality
-- Fully responsive design
-- Color and image swatch support
+✅ Section: Pick Your Fabric & Colour (Exact Layout)
+- 60+ fabric types with 30 color swatches each
+- Click swatch → main image updates
+- Fully responsive with pagination
+- Includes footer with three boxes
 {% endcomment %}
 
-<section class="fabric-customizer-section" id="fabric-customizer-{{ section.id }}">
-  <div class="container">
-    <div class="header">
-      <div class="step">{{ section.settings.heading_number }}</div>
-      <h1 class="title">{{ section.settings.heading }}</h1>
-      <p class="description">{{ section.settings.subheading_1 }}</p>
-      <p class="description">{{ section.settings.subheading_2 }}</p>
-    </div>
-    
-    <div class="customizer-container">
-      <div class="customizer-header">
-        <h2 class="customizer-title">Customize Your Fabric</h2>
-        <button class="btn" id="addFabricBtn-{{ section.id }}">
-          <span>+</span> Add New Fabric
-        </button>
-      </div>
-      
-      <div class="fabrics-grid">
-        {% for block in section.blocks %}
-          <div class="fabric-card" data-fabric-id="{{ block.id }}">
-            <div class="fabric-card-image-container">
-              {% if block.settings.main_image != blank %}
-                <img src="{{ block.settings.main_image | img_url: '400x' }}" alt="{{ block.settings.title }}" class="fabric-card-image">
-              {% else %}
-                <div class="placeholder-image">No image</div>
-              {% endif %}
-              <button class="remove-fabric" data-fabric-id="{{ block.id }}">×</button>
-            </div>
-            <div class="fabric-card-content">
-              <h3 class="fabric-card-name">{{ block.settings.title }}</h3>
-              <div class="fabric-card-swatches">
-                {% for i in (1..30) %}
-                  {% assign color_key = 'color_swatch_' | append: i %}
-                  {% assign image_key = 'color_image_' | append: i %}
-                  {% assign swatch_color = block.settings[color_key] %}
-                  {% assign swatch_image = block.settings[image_key] %}
-                  
-                  {% if swatch_color != blank or swatch_image != blank %}
-                    <div class="fabric-card-swatch" style="{% if swatch_color != blank %}background-color: {{ swatch_color }};{% endif %}">
-                      {% if swatch_image != blank %}
-                        <img src="{{ swatch_image | img_url: '50x' }}" alt="Swatch {{ i }}" class="swatch-thumb">
-                      {% endif %}
-                    </div>
-                  {% endif %}
-                {% endfor %}
-              </div>
-              <button class="btn btn-outline edit-fabric-btn" data-fabric-id="{{ block.id }}">Edit Swatches</button>
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-    
-    <div class="footer">
-      <h4 class="footer-title">{{ section.settings.footer_title }}</h4>
-      <div class="footer-boxes">
-        <div class="footer-box">
-          <span>01</span>
-          <p>{{ section.settings.list_item_1 }}</p>
-        </div>
-        <div class="footer-box">
-          <span>02</span>
-          <p>{{ section.settings.list_item_2 }}</p>
-        </div>
-        <div class="footer-box">
-          <span>03</span>
-          <p>{{ section.settings.list_item_3 }}</p>
-        </div>
-      </div>
-      <p class="footer-note">{{ section.settings.footer_note }}</p>
-    </div>
+<section class="fabric-section_main">
+<div class="fabric-section">
+  <div class="fabric-header">
+    <h2 class="fabric-step">{{ section.settings.heading_number }}</h2>
+    <h3 class="fabric-title">{{ section.settings.heading }}</h3>
+    <p class="fabric-desc">{{ section.settings.subheading_1 }}</p>
+    <p class="fabric-desc">{{ section.settings.subheading_2 }}</p>
   </div>
-  
-  <!-- Add Fabric Modal -->
-  <div class="modal" id="addFabricModal-{{ section.id }}">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title">Add New Fabric</h3>
-        <button class="close-modal">&times;</button>
+
+  <div class="fabric-grid">
+    {% for block in section.blocks %}
+      <div class="fabric-item" data-fabric-item>
+        <div class="fabric-image">
+          {% if block.settings.main_image != blank %}
+            <img src="{{ block.settings.main_image | image_url: width: 500 }}" alt="{{ block.settings.title }}" data-fabric-main-image>
+          {% else %}
+            <div class="placeholder-image">No image</div>
+          {% endif %}
+        </div>
+        <p class="fabric-name">{{ block.settings.title }}</p>
+
+        <div class="fabric-swatches">
+          {% for i in (1..30) %}
+            {% assign color_key = 'color_swatch_' | append: i %}
+            {% assign image_key = 'color_image_' | append: i %}
+            {% assign swatch_color = block.settings[color_key] %}
+            {% assign swatch_image = block.settings[image_key] %}
+            {% if swatch_color != blank or swatch_image != blank %}
+              <span
+                class="fabric-swatch {% if swatch_image != blank %}has-image{% endif %}"
+                style="{% if swatch_color != blank %}background-color: {{ swatch_color }};{% endif %}"
+                data-swatch-image="{% if swatch_image != blank %}{{ swatch_image | image_url: width: 500 }}{% endif %}">
+                {% if swatch_image != blank %}
+                  <img src="{{ swatch_image | image_url: width: 40 }}" alt="Swatch {{ i }}" class="swatch-thumb">
+                {% endif %}
+              </span>
+            {% endif %}
+          {% endfor %}
+        </div>
       </div>
-      <form id="addFabricForm-{{ section.id }}">
-        <div class="form-group">
-          <label class="form-label" for="fabricName-{{ section.id }}">Fabric Name</label>
-          <input type="text" id="fabricName-{{ section.id }}" class="form-control" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="fabricImage-{{ section.id }}">Fabric Image</label>
-          <input type="file" id="fabricImage-{{ section.id }}" class="form-control" accept="image/*">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline close-modal">Cancel</button>
-          <button type="submit" class="btn">Add Fabric</button>
-        </div>
-      </form>
-    </div>
+    {% endfor %}
   </div>
-  
-  <!-- Edit Swatches Modal -->
-  <div class="modal" id="editSwatchesModal-{{ section.id }}">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title">Edit Swatches</h3>
-        <button class="close-modal">&times;</button>
+
+  <!-- Pagination Controls -->
+  <div class="fabric-pagination">
+    <button class="pagination-btn prev-btn" disabled>Previous</button>
+    <span class="pagination-info">Page <span class="current-page">1</span> of <span class="total-pages">1</span></span>
+    <button class="pagination-btn next-btn">Next</button>
+  </div>
+
+  <div class="fabric-footer">
+    <h4>{{ section.settings.footer_title }}</h4>
+    <div class="fabric-footer-boxes">
+      <div class="fabric-box">
+        <span>01</span>
+        <p>{{ section.settings.list_item_1 }}</p>
       </div>
-      <div class="swatches-container" id="swatchesContainer-{{ section.id }}">
-        <!-- Swatches will be dynamically added here -->
+      <div class="fabric-box">
+        <span>02</span>
+        <p>{{ section.settings.list_item_2 }}</p>
       </div>
-      <div class="add-swatch-section">
-        <h4 class="section-title">Add New Swatch</h4>
-        <div class="swatch-options">
-          <div class="form-group">
-            <label class="form-label">Swatch Type</label>
-            <div class="swatch-type-selector">
-              <input type="radio" id="colorType-{{ section.id }}" name="swatchType-{{ section.id }}" value="color" checked>
-              <label for="colorType-{{ section.id }}">Color</label>
-              <input type="radio" id="imageType-{{ section.id }}" name="swatchType-{{ section.id }}" value="image">
-              <label for="imageType-{{ section.id }}">Image</label>
-            </div>
-          </div>
-          <div class="form-group" id="colorInput-{{ section.id }}">
-            <label class="form-label" for="swatchColor-{{ section.id }}">Color</label>
-            <input type="color" id="swatchColor-{{ section.id }}" class="form-control color-picker" value="#8B4513">
-          </div>
-          <div class="form-group" id="imageInput-{{ section.id }}" style="display: none;">
-            <label class="form-label" for="swatchImage-{{ section.id }}">Image</label>
-            <input type="file" id="swatchImage-{{ section.id }}" class="form-control" accept="image/*">
-          </div>
-          <button class="btn" id="addSwatchBtn-{{ section.id }}">Add Swatch</button>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline close-modal">Done</button>
+      <div class="fabric-box">
+        <span>03</span>
+        <p>{{ section.settings.list_item_3 }}</p>
       </div>
     </div>
+    <p class="fabric-note">{{ section.settings.footer_note }}</p>
+  </div>
   </div>
 </section>
 
 <style>
-  .fabric-customizer-section {
-    background: #EDEDED;
-    padding: 60px 0;
-  }
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-  
-  .header {
-    text-align: center;
-    margin-bottom: 40px;
-  }
-  
-  .step {
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 35px;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
-  }
-  
-  .title {
-    font-size: 28px;
-    font-weight: 500;
-    margin-bottom: 15px;
-  }
-  
-  .description {
-    font-size: 15px;
-    color: #171717;
-    margin-bottom: 5px;
-  }
-  
-  .customizer-container {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    padding: 30px;
-    margin-bottom: 40px;
-  }
-  
-  .customizer-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #f5f5f5;
-  }
-  
-  .customizer-title {
-    font-size: 22px;
-    font-weight: 600;
-  }
-  
-  .btn {
-    background: #000;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  .btn:hover {
-    background: #333;
-  }
-  
-  .btn-outline {
-    background: transparent;
-    border: 1px solid #ccc;
-    color: #666;
-  }
-  
-  .btn-outline:hover {
-    border-color: #000;
-    color: #000;
-  }
-  
-  .fabrics-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 25px;
-  }
-  
-  .fabric-card {
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-    position: relative;
-  }
-  
-  .fabric-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  }
-  
-  .fabric-card-image-container {
-    position: relative;
-  }
-  
-  .fabric-card-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-  }
-  
-  .placeholder-image {
-    width: 100%;
-    height: 200px;
-    background: #f5f5f5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #999;
-  }
-  
-  .remove-fabric {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: #ff4444;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: all 0.3s ease;
-  }
-  
-  .fabric-card:hover .remove-fabric {
-    opacity: 1;
-  }
-  
-  .fabric-card-content {
-    padding: 15px;
-  }
-  
-  .fabric-card-name {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 10px;
-  }
-  
-  .fabric-card-swatches {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin-bottom: 15px;
-    max-height: 60px;
-    overflow-y: auto;
-  }
-  
-  .fabric-card-swatch {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    border: 1px solid #ccc;
-    overflow: hidden;
-  }
-  
-  .swatch-thumb {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .modal.active {
-    display: flex;
-  }
-  
-  .modal-content {
-    background: white;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 500px;
-    max-height: 90vh;
-    overflow-y: auto;
-    padding: 30px;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.2);
-  }
-  
-  .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #f5f5f5;
-  }
-  
-  .modal-title {
-    font-size: 20px;
-    font-weight: 600;
-  }
-  
-  .close-modal {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: #666;
-  }
-  
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  .form-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-  }
-  
-  .form-control {
-    width: 100%;
-    padding: 10px 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 15px;
-  }
-  
-  .color-picker {
-    width: 60px;
-    height: 40px;
-    padding: 0;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .modal-footer {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 25px;
-  }
-  
-  .swatches-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    max-height: 200px;
-    overflow-y: auto;
-    padding: 10px;
-    border: 1px solid #f5f5f5;
-    border-radius: 5px;
-    margin-bottom: 20px;
-  }
-  
-  .swatch-item {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    position: relative;
-    border: 2px solid transparent;
-  }
-  
-  .swatch-item.active {
-    border-color: #000;
-  }
-  
-  .swatch-preview {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-  }
-  
-  .remove-swatch {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background: #ff4444;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 18px;
-    height: 18px;
-    font-size: 12px;
-    cursor: pointer;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-  }
-  
-  .swatch-item:hover .remove-swatch {
-    display: flex;
-  }
-  
-  .add-swatch-section {
-    border-top: 1px solid #f5f5f5;
-    padding-top: 20px;
-  }
-  
-  .section-title {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 15px;
-  }
-  
-  .swatch-type-selector {
-    display: flex;
-    gap: 15px;
-  }
-  
-  .swatch-type-selector input[type="radio"] {
-    margin-right: 5px;
-  }
-  
-  .footer {
-    text-align: center;
-    margin-top: 60px;
-  }
-  
-  .footer-title {
-    font-size: 20px;
+  .fabric-section_main{
+  background:#EDEDED
+}
+.fabric-section {
+  padding: 60px 20px;
+  text-align: left;
+  max-width:1440px;
+  margin:auto;
+  color: #000;
+}
+.fabric-header {
+  max-width: 700px;
+  margin: 0 auto 50px;
+  text-align:center;
+}
+.fabric-step {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 35px;
+  letter-spacing: 1px;
+}
+.fabric-title {
+  font-size: 28px;
+  font-weight: 500;
+  margin: 10px 0 15px;
+}
+.fabric-desc {
+  font-size: 15px;
+  color: #171717;
+  margin: 4px 0;
+}
+.fabric-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  margin-bottom: 60px;
+}
+.fabric-item {
+  text-align: center;
+}
+.fabric-image img {
+  width: 100%;
+  border-radius: 4px;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+.fabric-name {
+  font-weight: 500;
+  font-size: 16px;
+  margin-top: 10px;
+  text-align:start;
+}
+.fabric-swatches {
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+  max-height: 120px;
+  overflow-y: auto;
+  padding: 5px;
+}
+.fabric-swatch {
+    width: 28px;
+    height: 28px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: transform 0.2s ease, border 0.2s ease;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.fabric-swatch img.swatch-thumb {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.fabric-swatch:hover {
+  transform: scale(1.2);
+  border-color: #000;
+}
+.fabric-swatch.active {
+  border: 2px solid #000;
+}
+.fabric-footer {
+  text-align: center;
+  margin-top: 40px;
+}
+.fabric-footer h4 {
+     font-size: 20px;
     font-weight: 600;
     margin-bottom: 30px;
-  }
-  
-  .footer-boxes {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-bottom: 25px;
-  }
-  
-  .footer-box {
-    border: 1px solid #565656;
+    text-transform: capitalize;
+}
+.fabric-footer-boxes {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+.fabric-box {
+border: 1px solid #565656;
     border-radius: 10px;
     padding: 20px 30px;
     width: 267px;
     text-align: center;
     transition: all 0.3s ease;
+}
+.fabric-box:hover {
+  border-color: #000;
+  transform: translateY(-3px);
+}
+.fabric-box span {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.fabric-box p {
+  margin: 0;
+  font-size: 15px;
+}
+.fabric-note {
+  font-size: 13px;
+  color: #171717;
+}
+
+/* Pagination for large number of fabric items */
+.fabric-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 0 20px;
+  gap: 15px;
+}
+
+.pagination-btn {
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background: #f5f5f5;
+  border-color: #000;
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-info {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Scrollbar styling for swatches */
+.fabric-swatches::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.fabric-swatches::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.fabric-swatches::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+}
+
+.fabric-swatches::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+@media (max-width: 1200px) {
+  .fabric-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 992px) {
+  .fabric-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .fabric-grid { grid-template-columns: repeat(2, 1fr); }
+  .fabric-pagination { flex-wrap: wrap; }
+  .fabric-swatches {
+    max-height: 100px;
+    gap: 4px;
   }
-  
-  .footer-box:hover {
-    border-color: #000;
-    transform: translateY(-3px);
+  .fabric-swatch {
+    width: 24px;
+    height: 24px;
   }
-  
-  .footer-box span {
-    display: block;
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 6px;
+}
+@media (max-width: 480px) {
+  .fabric-grid { grid-template-columns: repeat(2, 1fr); }
+  .fabric-footer-boxes { flex-direction: column; align-items: center; }
+  .fabric-box { width: 100%; max-width: 300px; }
+  .fabric-pagination { flex-direction: column; gap: 10px; }
+  .fabric-swatches {
+    max-height: 80px;
   }
-  
-  .footer-box p {
-    margin: 0;
-    font-size: 15px;
-  }
-  
-  .footer-note {
-    font-size: 13px;
-    color: #171717;
-  }
-  
-  @media (max-width: 768px) {
-    .fabrics-grid {
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    }
-    
-    .customizer-header {
-      flex-direction: column;
-      gap: 15px;
-      align-items: flex-start;
-    }
-    
-    .footer-boxes {
-      flex-direction: column;
-      align-items: center;
-    }
-    
-    .footer-box {
-      width: 100%;
-      max-width: 300px;
-    }
-  }
+}
 </style>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  const sectionId = "{{ section.id }}";
-  
-  // Modal elements
-  const addFabricModal = document.getElementById(`addFabricModal-${sectionId}`);
-  const editSwatchesModal = document.getElementById(`editSwatchesModal-${sectionId}`);
-  const addFabricBtn = document.getElementById(`addFabricBtn-${sectionId}`);
-  const closeModalBtns = document.querySelectorAll(`#fabric-customizer-${sectionId} .close-modal`);
-  const addFabricForm = document.getElementById(`addFabricForm-${sectionId}`);
-  const editFabricBtns = document.querySelectorAll(`#fabric-customizer-${sectionId} .edit-fabric-btn`);
-  const removeFabricBtns = document.querySelectorAll(`#fabric-customizer-${sectionId} .remove-fabric`);
-  const swatchTypeRadios = document.querySelectorAll(`input[name="swatchType-${sectionId}"]`);
-  const colorInput = document.getElementById(`colorInput-${sectionId}`);
-  const imageInput = document.getElementById(`imageInput-${sectionId}`);
-  const addSwatchBtn = document.getElementById(`addSwatchBtn-${sectionId}`);
-  const swatchesContainer = document.getElementById(`swatchesContainer-${sectionId}`);
-  
-  let currentEditingFabricId = null;
-  
-  // Open Add Fabric Modal
-  addFabricBtn.addEventListener('click', function() {
-    addFabricModal.classList.add('active');
-  });
-  
-  // Close Modals
-  closeModalBtns.forEach(btn => {
-    btn.addEventListener('click', function() {
-      addFabricModal.classList.remove('active');
-      editSwatchesModal.classList.remove('active');
-    });
-  });
-  
-  // Close modals when clicking outside
-  window.addEventListener('click', function(event) {
-    if (event.target === addFabricModal) {
-      addFabricModal.classList.remove('active');
-    }
-    if (event.target === editSwatchesModal) {
-      editSwatchesModal.classList.remove('active');
-    }
-  });
-  
-  // Handle swatch type selection
-  swatchTypeRadios.forEach(radio => {
-    radio.addEventListener('change', function() {
-      if (this.value === 'color') {
-        colorInput.style.display = 'block';
-        imageInput.style.display = 'none';
-      } else {
-        colorInput.style.display = 'none';
-        imageInput.style.display = 'block';
-      }
-    });
-  });
-  
-  // Edit Fabric Swatches
-  editFabricBtns.forEach(btn => {
-    btn.addEventListener('click', function() {
-      currentEditingFabricId = this.getAttribute('data-fabric-id');
-      loadSwatchesForFabric(currentEditingFabricId);
-      editSwatchesModal.classList.add('active');
-    });
-  });
-  
-  // Remove Fabric
-  removeFabricBtns.forEach(btn => {
-    btn.addEventListener('click', function() {
-      const fabricId = this.getAttribute('data-fabric-id');
-      if (confirm('Are you sure you want to remove this fabric?')) {
-        const fabricCard = document.querySelector(`[data-fabric-id="${fabricId}"]`);
-        fabricCard.style.opacity = '0';
-        fabricCard.style.transform = 'scale(0.8)';
-        setTimeout(() => {
-          fabricCard.remove();
-        }, 300);
-      }
-    });
-  });
-  
-  // Add New Swatch
-  addSwatchBtn.addEventListener('click', function() {
-    const swatchType = document.querySelector(`input[name="swatchType-${sectionId}"]:checked`).value;
-    
-    if (swatchType === 'color') {
-      const colorValue = document.getElementById(`swatchColor-${sectionId}`).value;
-      addSwatchToContainer('color', colorValue);
-    } else {
-      const imageFile = document.getElementById(`swatchImage-${sectionId}`).files[0];
-      if (imageFile) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          addSwatchToContainer('image', e.target.result);
-        };
-        reader.readAsDataURL(imageFile);
-      } else {
-        alert('Please select an image file');
-      }
-    }
-  });
-  
-  // Function to load swatches for a fabric
-  function loadSwatchesForFabric(fabricId) {
-    swatchesContainer.innerHTML = '';
-    
-    // In a real implementation, this would fetch the swatches from Shopify
-    // For now, we'll simulate with some placeholder swatches
-    const fabricCard = document.querySelector(`[data-fabric-id="${fabricId}"]`);
-    const swatches = fabricCard.querySelectorAll('.fabric-card-swatch');
-    
-    swatches.forEach((swatch, index) => {
-      const isColor = !swatch.querySelector('img');
-      const value = isColor ? swatch.style.backgroundColor : swatch.querySelector('img').src;
-      
-      addSwatchToContainer(isColor ? 'color' : 'image', value, true);
-    });
-  }
-  
-  // Function to add a swatch to the container
-  function addSwatchToContainer(type, value, isExisting = false) {
-    const swatchId = 'swatch-' + Date.now();
-    const swatchItem = document.createElement('div');
-    swatchItem.className = 'swatch-item';
-    swatchItem.setAttribute('data-swatch-id', swatchId);
-    
-    if (type === 'color') {
-      swatchItem.innerHTML = `
-        <div class="swatch-preview" style="background-color: ${value}"></div>
-        <button class="remove-swatch">×</button>
-      `;
-    } else {
-      swatchItem.innerHTML = `
-        <img src="${value}" alt="Swatch" class="swatch-preview">
-        <button class="remove-swatch">×</button>
-      `;
-    }
-    
-    swatchesContainer.appendChild(swatchItem);
-    
-    // Add remove functionality
-    const removeBtn = swatchItem.querySelector('.remove-swatch');
-    removeBtn.addEventListener('click', function() {
-      swatchItem.style.transform = 'scale(0)';
-      swatchItem.style.opacity = '0';
-      setTimeout(() => {
-        swatchItem.remove();
-      }, 300);
-    });
-    
-    // Add click functionality to select swatch
-    swatchItem.addEventListener('click', function(e) {
-      if (e.target !== removeBtn) {
-        document.querySelectorAll('#swatchesContainer-{{ section.id }} .swatch-item').forEach(item => {
-          item.classList.remove('active');
-        });
-        this.classList.add('active');
-      }
-    });
-    
-    // If it's a new swatch, reset the form
-    if (!isExisting) {
-      if (type === 'color') {
-        document.getElementById(`swatchColor-${sectionId}`).value = '#8B4513';
-      } else {
-        document.getElementById(`swatchImage-${sectionId}`).value = '';
-      }
-    }
-  }
-  
-  // Add Fabric Form Submission
-  addFabricForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const fabricName = document.getElementById(`fabricName-${sectionId}`).value;
-    const fabricImage = document.getElementById(`fabricImage-${sectionId}`).files[0];
-    
-    // In a real implementation, this would send data to Shopify
-    // For now, we'll just show an alert
-    alert(`New fabric "${fabricName}" would be added to the system.`);
-    
-    // Reset form and close modal
-    addFabricForm.reset();
-    addFabricModal.classList.remove('active');
-  });
-});
+  // Swatch click functionality
+  document.querySelectorAll('[data-fabric-item]').forEach(function(item) {
+    const mainImg = item.querySelector('[data-fabric-main-image]');
+    const swatches = item.querySelectorAll('.fabric-swatch');
 
-// Note: In a real Shopify implementation, you would need to handle
-// the actual addition/removal of fabrics and swatches through
-// Shopify's AJAX API or form submissions
+    if (!swatches.length || !mainImg) return;
+
+    // Auto-activate first swatch with image
+    const first = Array.from(swatches).find(s => s.dataset.swatchImage);
+    if (first) {
+      first.classList.add('active');
+      mainImg.src = first.dataset.swatchImage;
+    }
+
+    swatches.forEach(function(swatch) {
+      swatch.addEventListener('click', function() {
+        const newImg = swatch.getAttribute('data-swatch-image');
+        if (!newImg) return;
+
+        swatches.forEach(s => s.classList.remove('active'));
+        swatch.classList.add('active');
+
+        // Fade transition
+        mainImg.style.opacity = 0;
+        setTimeout(() => {
+          mainImg.src = newImg;
+          mainImg.style.opacity = 1;
+        }, 200);
+      });
+    });
+  });
+
+  // Pagination functionality for large fabric collections
+  function initializePagination() {
+    const fabricGrid = document.querySelector('.fabric-grid');
+    const fabricItems = document.querySelectorAll('.fabric-item');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const currentPageSpan = document.querySelector('.current-page');
+    const totalPagesSpan = document.querySelector('.total-pages');
+    
+    if (!fabricGrid || fabricItems.length === 0) return;
+    
+    const itemsPerPage = 12;
+    let currentPage = 1;
+    const totalPages = Math.ceil(fabricItems.length / itemsPerPage);
+    
+    totalPagesSpan.textContent = totalPages;
+    
+    function showPage(page) {
+      const start = (page - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      
+      fabricItems.forEach((item, index) => {
+        item.style.display = (index >= start && index < end) ? 'block' : 'none';
+      });
+      
+      currentPageSpan.textContent = page;
+      prevBtn.disabled = page === 1;
+      nextBtn.disabled = page === totalPages;
+      
+      // Scroll to top of section when changing pages
+      fabricGrid.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    
+    prevBtn.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        showPage(currentPage);
+      }
+    });
+    
+    nextBtn.addEventListener('click', () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        showPage(currentPage);
+      }
+    });
+    
+    // Show first page initially
+    showPage(1);
+  }
+  
+  initializePagination();
+});
 </script>
 
 {% schema %}
 {
-  "name": "Fabric Customizer",
+  "name": "Pick Your Fabric & Colour",
   "settings": [
-    {
-      "type": "text",
-      "id": "heading_number",
-      "label": "Step Number",
-      "default": "STEP 5"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Main Heading",
-      "default": "Pick Your Fabric & Colour"
-    },
-    {
-      "type": "text",
-      "id": "subheading_1",
-      "label": "Subheading Line 1",
-      "default": "Explore over 60 fabric types, each with more than 30 colours."
-    },
-    {
-      "type": "text",
-      "id": "subheading_2",
-      "label": "Subheading Line 2",
-      "default": "Our curated collection makes it easy to find the perfect texture and tone for your home."
-    },
-    {
-      "type": "text",
-      "id": "footer_title",
-      "label": "Footer Title",
-      "default": "Choose From Three Clear Price Categories"
-    },
-    {
-      "type": "text",
-      "id": "list_item_1",
-      "label": "List Item 1",
-      "default": "Honeypot Classics"
-    },
-    {
-      "type": "text",
-      "id": "list_item_2",
-      "label": "List Item 2",
-      "default": "Honeypot Signatures"
-    },
-    {
-      "type": "text",
-      "id": "list_item_3",
-      "label": "List Item 3",
-      "default": "Honeypot Performance"
-    },
-    {
-      "type": "text",
-      "id": "footer_note",
-      "label": "Footer Note",
-      "default": "All performance fabrics feature FibreGuard – stain-resistant, pet-friendly, and built to last!"
-    }
+    { "type": "text", "id": "heading_number", "label": "Step Number", "default": "STEP 5" },
+    { "type": "text", "id": "heading", "label": "Main Heading", "default": "Pick Your Fabric & Colour" },
+    { "type": "text", "id": "subheading_1", "label": "Line 1", "default": "Explore over 60 fabric types, each with more than 30 colours." },
+    { "type": "text", "id": "subheading_2", "label": "Line 2", "default": "Our curated collection makes it easy to find the perfect texture and tone for your home." },
+    { "type": "text", "id": "footer_title", "label": "Footer Heading", "default": "Choose From Three Clear Price Categories" },
+    { "type": "text", "id": "list_item_1", "label": "Box 1", "default": "Honeypot Classics" },
+    { "type": "text", "id": "list_item_2", "label": "Box 2", "default": "Honeypot Signatures" },
+    { "type": "text", "id": "list_item_3", "label": "Box 3", "default": "Honeypot Performance" },
+    { "type": "text", "id": "footer_note", "label": "Bottom Note", "default": "All performance fabrics feature FibreGuard – stain-resistant, pet-friendly, and built to last!" }
   ],
   "blocks": [
     {
       "type": "fabric",
-      "name": "Fabric",
+      "name": "Fabric Item",
       "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Fabric Name",
-          "default": "Cotton Canvas"
-        },
-        {
-          "type": "image_picker",
-          "id": "main_image",
-          "label": "Main Fabric Image"
-        },
-        {
-          "type": "header",
-          "content": "Color Swatches"
-        },
-        {
-          "type": "color",
-          "id": "color_swatch_1",
-          "label": "Swatch 1 Color",
-          "default": "#8B4513"
-        },
-        {
-          "type": "color",
-          "id": "color_swatch_2",
-          "label": "Swatch 2 Color",
-          "default": "#228B22"
-        },
-        {
-          "type": "color",
-          "id": "color_swatch_3",
-          "label": "Swatch 3 Color",
-          "default": "#1E90FF"
-        },
-        {
-          "type": "color",
-          "id": "color_swatch_4",
-          "label": "Swatch 4 Color",
-          "default": "#FFD700"
-        },
-        {
-          "type": "color",
-          "id": "color_swatch_5",
-          "label": "Swatch 5 Color",
-          "default": "#DC143C"
-        }
+        { "type": "text", "id": "title", "label": "Fabric Name", "default": "Cotton Canvas" },
+        { "type": "image_picker", "id": "main_image", "label": "Main Fabric Image" },
+        
+        { "type": "color", "id": "color_swatch_1", "label": "Swatch 1 Color", "default": "#8B4513" },
+        { "type": "image_picker", "id": "color_image_1", "label": "Swatch 1 Image" },
+        
+        { "type": "color", "id": "color_swatch_2", "label": "Swatch 2 Color", "default": "#228B22" },
+        { "type": "image_picker", "id": "color_image_2", "label": "Swatch 2 Image" },
+        
+        { "type": "color", "id": "color_swatch_3", "label": "Swatch 3 Color", "default": "#1E90FF" },
+        { "type": "image_picker", "id": "color_image_3", "label": "Swatch 3 Image" },
+        
+        { "type": "color", "id": "color_swatch_4", "label": "Swatch 4 Color", "default": "#FFD700" },
+        { "type": "image_picker", "id": "color_image_4", "label": "Swatch 4 Image" },
+        
+        { "type": "color", "id": "color_swatch_5", "label": "Swatch 5 Color", "default": "#DC143C" },
+        { "type": "image_picker", "id": "color_image_5", "label": "Swatch 5 Image" },
+        
+        { "type": "color", "id": "color_swatch_6", "label": "Swatch 6 Color", "default": "#4B0082" },
+        { "type": "image_picker", "id": "color_image_6", "label": "Swatch 6 Image" },
+        
+        { "type": "color", "id": "color_swatch_7", "label": "Swatch 7 Color", "default": "#FF69B4" },
+        { "type": "image_picker", "id": "color_image_7", "label": "Swatch 7 Image" },
+        
+        { "type": "color", "id": "color_swatch_8", "label": "Swatch 8 Color", "default": "#00CED1" },
+        { "type": "image_picker", "id": "color_image_8", "label": "Swatch 8 Image" },
+        
+        { "type": "color", "id": "color_swatch_9", "label": "Swatch 9 Color", "default": "#FF6347" },
+        { "type": "image_picker", "id": "color_image_9", "label": "Swatch 9 Image" },
+        
+        { "type": "color", "id": "color_swatch_10", "label": "Swatch 10 Color", "default": "#32CD32" },
+        { "type": "image_picker", "id": "color_image_10", "label": "Swatch 10 Image" },
+        
+        { "type": "color", "id": "color_swatch_11", "label": "Swatch 11 Color", "default": "#8A2BE2" },
+        { "type": "image_picker", "id": "color_image_11", "label": "Swatch 11 Image" },
+        
+        { "type": "color", "id": "color_swatch_12", "label": "Swatch 12 Color", "default": "#FF4500" },
+        { "type": "image_picker", "id": "color_image_12", "label": "Swatch 12 Image" },
+        
+        { "type": "color", "id": "color_swatch_13", "label": "Swatch 13 Color", "default": "#2E8B57" },
+        { "type": "image_picker", "id": "color_image_13", "label": "Swatch 13 Image" },
+        
+        { "type": "color", "id": "color_swatch_14", "label": "Swatch 14 Color", "default": "#DA70D6" },
+        { "type": "image_picker", "id": "color_image_14", "label": "Swatch 14 Image" },
+        
+        { "type": "color", "id": "color_swatch_15", "label": "Swatch 15 Color", "default": "#F0E68C" },
+        { "type": "image_picker", "id": "color_image_15", "label": "Swatch 15 Image" },
+        
+        { "type": "color", "id": "color_swatch_16", "label": "Swatch 16 Color", "default": "#FFA07A" },
+        { "type": "image_picker", "id": "color_image_16", "label": "Swatch 16 Image" },
+        
+        { "type": "color", "id": "color_swatch_17", "label": "Swatch 17 Color", "default": "#20B2AA" },
+        { "type": "image_picker", "id": "color_image_17", "label": "Swatch 17 Image" },
+        
+        { "type": "color", "id": "color_swatch_18", "label": "Swatch 18 Color", "default": "#778899" },
+        { "type": "image_picker", "id": "color_image_18", "label": "Swatch 18 Image" },
+        
+        { "type": "color", "id": "color_swatch_19", "label": "Swatch 19 Color", "default": "#B0C4DE" },
+        { "type": "image_picker", "id": "color_image_19", "label": "Swatch 19 Image" },
+        
+        { "type": "color", "id": "color_swatch_20", "label": "Swatch 20 Color", "default": "#FF6347" },
+        { "type": "image_picker", "id": "color_image_20", "label": "Swatch 20 Image" },
+        
+        { "type": "color", "id": "color_swatch_21", "label": "Swatch 21 Color", "default": "#4682B4" },
+        { "type": "image_picker", "id": "color_image_21", "label": "Swatch 21 Image" },
+        
+        { "type": "color", "id": "color_swatch_22", "label": "Swatch 22 Color", "default": "#D2B48C" },
+        { "type": "image_picker", "id": "color_image_22", "label": "Swatch 22 Image" },
+        
+        { "type": "color", "id": "color_swatch_23", "label": "Swatch 23 Color", "default": "#008080" },
+        { "type": "image_picker", "id": "color_image_23", "label": "Swatch 23 Image" },
+        
+        { "type": "color", "id": "color_swatch_24", "label": "Swatch 24 Color", "default": "#D8BFD8" },
+        { "type": "image_picker", "id": "color_image_24", "label": "Swatch 24 Image" },
+        
+        { "type": "color", "id": "color_swatch_25", "label": "Swatch 25 Color", "default": "#FF69B4" },
+        { "type": "image_picker", "id": "color_image_25", "label": "Swatch 25 Image" },
+        
+        { "type": "color", "id": "color_swatch_26", "label": "Swatch 26 Color", "default": "#CD5C5C" },
+        { "type": "image_picker", "id": "color_image_26", "label": "Swatch 26 Image" },
+        
+        { "type": "color", "id": "color_swatch_27", "label": "Swatch 27 Color", "default": "#F0E68C" },
+        { "type": "image_picker", "id": "color_image_27", "label": "Swatch 27 Image" },
+        
+        { "type": "color", "id": "color_swatch_28", "label": "Swatch 28 Color", "default": "#E6E6FA" },
+        { "type": "image_picker", "id": "color_image_28", "label": "Swatch 28 Image" },
+        
+        { "type": "color", "id": "color_swatch_29", "label": "Swatch 29 Color", "default": "#FFF0F5" },
+        { "type": "image_picker", "id": "color_image_29", "label": "Swatch 29 Image" },
+        
+        { "type": "color", "id": "color_swatch_30", "label": "Swatch 30 Color", "default": "#FFDAB9" },
+        { "type": "image_picker", "id": "color_image_30", "label": "Swatch 30 Image" }
       ]
     }
   ],
   "presets": [
-    {
-      "name": "Fabric Customizer",
-      "category": "Custom"
+    { 
+      "name": "Pick Your Fabric & Colour - 60+ Fabrics", 
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Cotton Canvas",
+            "color_swatch_1": "#8B4513",
+            "color_swatch_2": "#228B22",
+            "color_swatch_3": "#1E90FF",
+            "color_swatch_4": "#FFD700",
+            "color_swatch_5": "#DC143C",
+            "color_swatch_6": "#4B0082",
+            "color_swatch_7": "#FF69B4",
+            "color_swatch_8": "#00CED1",
+            "color_swatch_9": "#FF6347",
+            "color_swatch_10": "#32CD32"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Velvet Luxe",
+            "color_swatch_1": "#4B0082",
+            "color_swatch_2": "#FF69B4",
+            "color_swatch_3": "#00CED1",
+            "color_swatch_4": "#FF6347",
+            "color_swatch_5": "#32CD32",
+            "color_swatch_6": "#8A2BE2",
+            "color_swatch_7": "#FF4500",
+            "color_swatch_8": "#2E8B57",
+            "color_swatch_9": "#DA70D6",
+            "color_swatch_10": "#F0E68C"
+          }
+        }
+      ]
     }
   ]
 }
