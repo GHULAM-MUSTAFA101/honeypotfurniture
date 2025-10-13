@@ -1,6 +1,6 @@
 {% comment %}
 ✅ Section: Pick Your Fabric & Colour (Exact Layout)
-- 60+ fabric types with 30 color swatches each
+- 60+ fabric types with 15 color swatches each
 - Click swatch → main image updates
 - Fully responsive with pagination
 - Includes footer with three boxes
@@ -136,19 +136,15 @@
   flex-wrap: wrap;
   gap: 6px;
   margin-top: 8px;
-  max-height: 120px;
-  overflow-y: auto;
-  padding: 5px;
 }
 .fabric-swatch {
     width: 28px;
-    height: 28px;
+    height: auto;
   border-radius: 50%;
   border: 1px solid #ccc;
   cursor: pointer;
   transition: transform 0.2s ease, border 0.2s ease;
   overflow: hidden;
-  flex-shrink: 0;
 }
 .fabric-swatch img.swatch-thumb {
   width: 100%;
@@ -241,26 +237,6 @@ border: 1px solid #565656;
   color: #666;
 }
 
-/* Scrollbar styling for swatches */
-.fabric-swatches::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-.fabric-swatches::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
-}
-
-.fabric-swatches::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 10px;
-}
-
-.fabric-swatches::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
-}
-
 @media (max-width: 1200px) {
   .fabric-grid { grid-template-columns: repeat(3, 1fr); }
 }
@@ -271,23 +247,12 @@ border: 1px solid #565656;
 @media (max-width: 768px) {
   .fabric-grid { grid-template-columns: repeat(2, 1fr); }
   .fabric-pagination { flex-wrap: wrap; }
-  .fabric-swatches {
-    max-height: 100px;
-    gap: 4px;
-  }
-  .fabric-swatch {
-    width: 24px;
-    height: 24px;
-  }
 }
 @media (max-width: 480px) {
   .fabric-grid { grid-template-columns: repeat(2, 1fr); }
   .fabric-footer-boxes { flex-direction: column; align-items: center; }
   .fabric-box { width: 100%; max-width: 300px; }
   .fabric-pagination { flex-direction: column; gap: 10px; }
-  .fabric-swatches {
-    max-height: 80px;
-  }
 }
 </style>
 
@@ -386,7 +351,7 @@ document.addEventListener('DOMContentLoaded', function() {
   "settings": [
     { "type": "text", "id": "heading_number", "label": "Step Number", "default": "STEP 5" },
     { "type": "text", "id": "heading", "label": "Main Heading", "default": "Pick Your Fabric & Colour" },
-    { "type": "text", "id": "subheading_1", "label": "Line 1", "default": "Explore over 60 fabric types, each with more than 30 colours." },
+    { "type": "text", "id": "subheading_1", "label": "Line 1", "default": "Explore over 60 fabric types, each with more than 15 colours." },
     { "type": "text", "id": "subheading_2", "label": "Line 2", "default": "Our curated collection makes it easy to find the perfect texture and tone for your home." },
     { "type": "text", "id": "footer_title", "label": "Footer Heading", "default": "Choose From Three Clear Price Categories" },
     { "type": "text", "id": "list_item_1", "label": "Box 1", "default": "Honeypot Classics" },
@@ -445,52 +410,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { "type": "image_picker", "id": "color_image_14", "label": "Swatch 14 Image" },
         
         { "type": "color", "id": "color_swatch_15", "label": "Swatch 15 Color", "default": "#F0E68C" },
-        { "type": "image_picker", "id": "color_image_15", "label": "Swatch 15 Image" },
-        
-        { "type": "color", "id": "color_swatch_16", "label": "Swatch 16 Color", "default": "#FFA07A" },
-        { "type": "image_picker", "id": "color_image_16", "label": "Swatch 16 Image" },
-        
-        { "type": "color", "id": "color_swatch_17", "label": "Swatch 17 Color", "default": "#20B2AA" },
-        { "type": "image_picker", "id": "color_image_17", "label": "Swatch 17 Image" },
-        
-        { "type": "color", "id": "color_swatch_18", "label": "Swatch 18 Color", "default": "#778899" },
-        { "type": "image_picker", "id": "color_image_18", "label": "Swatch 18 Image" },
-        
-        { "type": "color", "id": "color_swatch_19", "label": "Swatch 19 Color", "default": "#B0C4DE" },
-        { "type": "image_picker", "id": "color_image_19", "label": "Swatch 19 Image" },
-        
-        { "type": "color", "id": "color_swatch_20", "label": "Swatch 20 Color", "default": "#FF6347" },
-        { "type": "image_picker", "id": "color_image_20", "label": "Swatch 20 Image" },
-        
-        { "type": "color", "id": "color_swatch_21", "label": "Swatch 21 Color", "default": "#4682B4" },
-        { "type": "image_picker", "id": "color_image_21", "label": "Swatch 21 Image" },
-        
-        { "type": "color", "id": "color_swatch_22", "label": "Swatch 22 Color", "default": "#D2B48C" },
-        { "type": "image_picker", "id": "color_image_22", "label": "Swatch 22 Image" },
-        
-        { "type": "color", "id": "color_swatch_23", "label": "Swatch 23 Color", "default": "#008080" },
-        { "type": "image_picker", "id": "color_image_23", "label": "Swatch 23 Image" },
-        
-        { "type": "color", "id": "color_swatch_24", "label": "Swatch 24 Color", "default": "#D8BFD8" },
-        { "type": "image_picker", "id": "color_image_24", "label": "Swatch 24 Image" },
-        
-        { "type": "color", "id": "color_swatch_25", "label": "Swatch 25 Color", "default": "#FF69B4" },
-        { "type": "image_picker", "id": "color_image_25", "label": "Swatch 25 Image" },
-        
-        { "type": "color", "id": "color_swatch_26", "label": "Swatch 26 Color", "default": "#CD5C5C" },
-        { "type": "image_picker", "id": "color_image_26", "label": "Swatch 26 Image" },
-        
-        { "type": "color", "id": "color_swatch_27", "label": "Swatch 27 Color", "default": "#F0E68C" },
-        { "type": "image_picker", "id": "color_image_27", "label": "Swatch 27 Image" },
-        
-        { "type": "color", "id": "color_swatch_28", "label": "Swatch 28 Color", "default": "#E6E6FA" },
-        { "type": "image_picker", "id": "color_image_28", "label": "Swatch 28 Image" },
-        
-        { "type": "color", "id": "color_swatch_29", "label": "Swatch 29 Color", "default": "#FFF0F5" },
-        { "type": "image_picker", "id": "color_image_29", "label": "Swatch 29 Image" },
-        
-        { "type": "color", "id": "color_swatch_30", "label": "Swatch 30 Color", "default": "#FFDAB9" },
-        { "type": "image_picker", "id": "color_image_30", "label": "Swatch 30 Image" }
+        { "type": "image_picker", "id": "color_image_15", "label": "Swatch 15 Image" }
       ]
     }
   ],
@@ -507,12 +427,7 @@ document.addEventListener('DOMContentLoaded', function() {
             "color_swatch_2": "#228B22",
             "color_swatch_3": "#1E90FF",
             "color_swatch_4": "#FFD700",
-            "color_swatch_5": "#DC143C",
-            "color_swatch_6": "#4B0082",
-            "color_swatch_7": "#FF69B4",
-            "color_swatch_8": "#00CED1",
-            "color_swatch_9": "#FF6347",
-            "color_swatch_10": "#32CD32"
+            "color_swatch_5": "#DC143C"
           }
         },
         {
@@ -523,12 +438,865 @@ document.addEventListener('DOMContentLoaded', function() {
             "color_swatch_2": "#FF69B4",
             "color_swatch_3": "#00CED1",
             "color_swatch_4": "#FF6347",
-            "color_swatch_5": "#32CD32",
-            "color_swatch_6": "#8A2BE2",
-            "color_swatch_7": "#FF4500",
-            "color_swatch_8": "#2E8B57",
-            "color_swatch_9": "#DA70D6",
-            "color_swatch_10": "#F0E68C"
+            "color_swatch_5": "#32CD32"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Linen Blend",
+            "color_swatch_1": "#8A2BE2",
+            "color_swatch_2": "#FF4500",
+            "color_swatch_3": "#2E8B57",
+            "color_swatch_4": "#DA70D6",
+            "color_swatch_5": "#F0E68C"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Chenille Soft",
+            "color_swatch_1": "#800000",
+            "color_swatch_2": "#808000",
+            "color_swatch_3": "#008080",
+            "color_swatch_4": "#000080",
+            "color_swatch_5": "#800080"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Silk Elegance",
+            "color_swatch_1": "#FF0000",
+            "color_swatch_2": "#00FF00",
+            "color_swatch_3": "#0000FF",
+            "color_swatch_4": "#FFFF00",
+            "color_swatch_5": "#00FFFF"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Wool Comfort",
+            "color_swatch_1": "#FFA500",
+            "color_swatch_2": "#FFC0CB",
+            "color_swatch_3": "#A52A2A",
+            "color_swatch_4": "#DEB887",
+            "color_swatch_5": "#5F9EA0"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Polyester Durable",
+            "color_swatch_1": "#7FFF00",
+            "color_swatch_2": "#D2691E",
+            "color_swatch_3": "#FF7F50",
+            "color_swatch_4": "#6495ED",
+            "color_swatch_5": "#FFF8DC"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Jacquard Pattern",
+            "color_swatch_1": "#DC143C",
+            "color_swatch_2": "#00FFFF",
+            "color_swatch_3": "#00008B",
+            "color_swatch_4": "#008B8B",
+            "color_swatch_5": "#B8860B"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Twill Weave",
+            "color_swatch_1": "#A9A9A9",
+            "color_swatch_2": "#006400",
+            "color_swatch_3": "#BDB76B",
+            "color_swatch_4": "#8B008B",
+            "color_swatch_5": "#556B2F"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Satin Shine",
+            "color_swatch_1": "#FF8C00",
+            "color_swatch_2": "#9932CC",
+            "color_swatch_3": "#8B0000",
+            "color_swatch_4": "#E9967A",
+            "color_swatch_5": "#8FBC8F"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Denim Classic",
+            "color_swatch_1": "#483D8B",
+            "color_swatch_2": "#2F4F4F",
+            "color_swatch_3": "#00CED1",
+            "color_swatch_4": "#9400D3",
+            "color_swatch_5": "#FF1493"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Corduroy Textured",
+            "color_swatch_1": "#1E90FF",
+            "color_swatch_2": "#B22222",
+            "color_swatch_3": "#FFFAF0",
+            "color_swatch_4": "#228B22",
+            "color_swatch_5": "#FFB6C1"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Faux Leather",
+            "color_swatch_1": "#000000",
+            "color_swatch_2": "#696969",
+            "color_swatch_3": "#C0C0C0",
+            "color_swatch_4": "#FFFFFF",
+            "color_swatch_5": "#2F4F4F"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Suede Soft",
+            "color_swatch_1": "#8B4513",
+            "color_swatch_2": "#A0522D",
+            "color_swatch_3": "#CD853F",
+            "color_swatch_4": "#D2691E",
+            "color_swatch_5": "#F4A460"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Canvas Duck",
+            "color_swatch_1": "#FFFACD",
+            "color_swatch_2": "#ADD8E6",
+            "color_swatch_3": "#F08080",
+            "color_swatch_4": "#E0FFFF",
+            "color_swatch_5": "#FAFAD2"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Chiffon Sheer",
+            "color_swatch_1": "#FFE4E1",
+            "color_swatch_2": "#F0FFF0",
+            "color_swatch_3": "#F5FFFA",
+            "color_swatch_4": "#F0F8FF",
+            "color_swatch_5": "#F8F8FF"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Organza Stiff",
+            "color_swatch_1": "#FFE4B5",
+            "color_swatch_2": "#FFDAB9",
+            "color_swatch_3": "#EEE8AA",
+            "color_swatch_4": "#F0E68C",
+            "color_swatch_5": "#BDB76B"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Taffeta Crisp",
+            "color_swatch_1": "#E6E6FA",
+            "color_swatch_2": "#FFF0F5",
+            "color_swatch_3": "#FFF5EE",
+            "color_swatch_4": "#F5F5DC",
+            "color_swatch_5": "#FFEBCD"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Brocade Rich",
+            "color_swatch_1": "#800000",
+            "color_swatch_2": "#8B0000",
+            "color_swatch_3": "#A52A2A",
+            "color_swatch_4": "#B22222",
+            "color_swatch_5": "#DC143C"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Muslin Light",
+            "color_swatch_1": "#F5F5F5",
+            "color_swatch_2": "#DCDCDC",
+            "color_swatch_3": "#D3D3D3",
+            "color_swatch_4": "#C0C0C0",
+            "color_swatch_5": "#A9A9A9"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Tweed Classic",
+            "color_swatch_1": "#2F4F4F",
+            "color_swatch_2": "#708090",
+            "color_swatch_3": "#778899",
+            "color_swatch_4": "#B0C4DE",
+            "color_swatch_5": "#ADD8E6"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Seersucker Striped",
+            "color_swatch_1": "#191970",
+            "color_swatch_2": "#000080",
+            "color_swatch_3": "#6495ED",
+            "color_swatch_4": "#483D8B",
+            "color_swatch_5": "#6A5ACD"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Voile Lightweight",
+            "color_swatch_1": "#98FB98",
+            "color_swatch_2": "#90EE90",
+            "color_swatch_3": "#00FA9A",
+            "color_swatch_4": "#00FF7F",
+            "color_swatch_5": "#3CB371"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Georgette Flowy",
+            "color_swatch_1": "#FFB6C1",
+            "color_swatch_2": "#FFC0CB",
+            "color_swatch_3": "#DC143C",
+            "color_swatch_4": "#FF69B4",
+            "color_swatch_5": "#FF1493"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Crepe Textured",
+            "color_swatch_1": "#4B0082",
+            "color_swatch_2": "#8A2BE2",
+            "color_swatch_3": "#9370DB",
+            "color_swatch_4": "#BA55D3",
+            "color_swatch_5": "#DA70D6"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Gabardine Durable",
+            "color_swatch_1": "#A0522D",
+            "color_swatch_2": "#CD853F",
+            "color_swatch_3": "#DEB887",
+            "color_swatch_4": "#F4A460",
+            "color_swatch_5": "#D2B48C"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Flannel Cozy",
+            "color_swatch_1": "#FF4500",
+            "color_swatch_2": "#FF6347",
+            "color_swatch_3": "#FF7F50",
+            "color_swatch_4": "#FF8C00",
+            "color_swatch_5": "#FFA500"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Terrycloth Absorbent",
+            "color_swatch_1": "#00FFFF",
+            "color_swatch_2": "#7FFFD4",
+            "color_swatch_3": "#40E0D0",
+            "color_swatch_4": "#48D1CC",
+            "color_swatch_5": "#00CED1"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Fleece Warm",
+            "color_swatch_1": "#FFD700",
+            "color_swatch_2": "#FFFF00",
+            "color_swatch_3": "#FFFFE0",
+            "color_swatch_4": "#FFFACD",
+            "color_swatch_5": "#FAFAD2"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Netting Sheer",
+            "color_swatch_1": "#F0F8FF",
+            "color_swatch_2": "#F5F5F5",
+            "color_swatch_3": "#FFFFFF",
+            "color_swatch_4": "#FFF8DC",
+            "color_swatch_5": "#FFFAF0"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Bamboo Eco",
+            "color_swatch_1": "#98FB98",
+            "color_swatch_2": "#90EE90",
+            "color_swatch_3": "#8FBC8F",
+            "color_swatch_4": "#3CB371",
+            "color_swatch_5": "#2E8B57"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Hemp Natural",
+            "color_swatch_1": "#F5DEB3",
+            "color_swatch_2": "#DEB887",
+            "color_swatch_3": "#D2B48C",
+            "color_swatch_4": "#BC8F8F",
+            "color_swatch_5": "#A0522D"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Lycra Stretch",
+            "color_swatch_1": "#FF69B4",
+            "color_swatch_2": "#FF1493",
+            "color_swatch_3": "#C71585",
+            "color_swatch_4": "#DB7093",
+            "color_swatch_5": "#FFC0CB"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Microfiber Smooth",
+            "color_swatch_1": "#D3D3D3",
+            "color_swatch_2": "#C0C0C0",
+            "color_swatch_3": "#A9A9A9",
+            "color_swatch_4": "#808080",
+            "color_swatch_5": "#696969"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Oxford Cloth",
+            "color_swatch_1": "#F0FFF0",
+            "color_swatch_2": "#F5FFFA",
+            "color_swatch_3": "#F0F8FF",
+            "color_swatch_4": "#F8F8FF",
+            "color_swatch_5": "#FFF5EE"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Poplin Crisp",
+            "color_swatch_1": "#FFFACD",
+            "color_swatch_2": "#FAFAD2",
+            "color_swatch_3": "#FFEFD5",
+            "color_swatch_4": "#FFE4B5",
+            "color_swatch_5": "#FFDAB9"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Rayon Silky",
+            "color_swatch_1": "#E6E6FA",
+            "color_swatch_2": "#D8BFD8",
+            "color_swatch_3": "#DDA0DD",
+            "color_swatch_4": "#EE82EE",
+            "color_swatch_5": "#DA70D6"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Sateen Lustrous",
+            "color_swatch_1": "#FFD700",
+            "color_swatch_2": "#FFF8DC",
+            "color_swatch_3": "#FFFACD",
+            "color_swatch_4": "#FAFAD2",
+            "color_swatch_5": "#FFEFD5"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Shantung Textured",
+            "color_swatch_1": "#DEB887",
+            "color_swatch_2": "#D2B48C",
+            "color_swatch_3": "#BC8F8F",
+            "color_swatch_4": "#F4A460",
+            "color_swatch_5": "#D2691E"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Tencel Eco",
+            "color_swatch_1": "#AFEEEE",
+            "color_swatch_2": "#E0FFFF",
+            "color_swatch_3": "#B0E0E6",
+            "color_swatch_4": "#ADD8E6",
+            "color_swatch_5": "#87CEEB"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Tulle Sheer",
+            "color_swatch_1": "#FFFFFF",
+            "color_swatch_2": "#F8F8FF",
+            "color_swatch_3": "#F0F8FF",
+            "color_swatch_4": "#F5F5F5",
+            "color_swatch_5": "#FFF0F5"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Tussah Silk",
+            "color_swatch_1": "#F5F5DC",
+            "color_swatch_2": "#FFEBCD",
+            "color_swatch_3": "#FFE4C4",
+            "color_swatch_4": "#FFEFD5",
+            "color_swatch_5": "#FFF8DC"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Velour Plush",
+            "color_swatch_1": "#800000",
+            "color_swatch_2": "#8B0000",
+            "color_swatch_3": "#A52A2A",
+            "color_swatch_4": "#B22222",
+            "color_swatch_5": "#DC143C"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Viscose Draping",
+            "color_swatch_1": "#9370DB",
+            "color_swatch_2": "#8A2BE2",
+            "color_swatch_3": "#9400D3",
+            "color_swatch_4": "#9932CC",
+            "color_swatch_5": "#BA55D3"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Waffle Weave",
+            "color_swatch_1": "#F5DEB3",
+            "color_swatch_2": "#DEB887",
+            "color_swatch_3": "#D2B48C",
+            "color_swatch_4": "#BC8F8F",
+            "color_swatch_5": "#F4A460"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Whipcord Durable",
+            "color_swatch_1": "#2F4F4F",
+            "color_swatch_2": "#708090",
+            "color_swatch_3": "#778899",
+            "color_swatch_4": "#696969",
+            "color_swatch_5": "#808080"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Zibeline Luxury",
+            "color_swatch_1": "#4B0082",
+            "color_swatch_2": "#483D8B",
+            "color_swatch_3": "#6A5ACD",
+            "color_swatch_4": "#7B68EE",
+            "color_swatch_5": "#9370DB"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Alpaca Wool",
+            "color_swatch_1": "#F5F5F5",
+            "color_swatch_2": "#DCDCDC",
+            "color_swatch_3": "#D3D3D3",
+            "color_swatch_4": "#C0C0C0",
+            "color_swatch_5": "#A9A9A9"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Angora Soft",
+            "color_swatch_1": "#FFF8DC",
+            "color_swatch_2": "#FFEBCD",
+            "color_swatch_3": "#FFE4C4",
+            "color_swatch_4": "#FFEFD5",
+            "color_swatch_5": "#FFFACD"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Boucle Textured",
+            "color_swatch_1": "#F0E68C",
+            "color_swatch_2": "#EEE8AA",
+            "color_swatch_3": "#BDB76B",
+            "color_swatch_4": "#F0E68C",
+            "color_swatch_5": "#EEE8AA"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Broadcloth Smooth",
+            "color_swatch_1": "#F0F8FF",
+            "color_swatch_2": "#F8F8FF",
+            "color_swatch_3": "#F5F5F5",
+            "color_swatch_4": "#FFFFFF",
+            "color_swatch_5": "#FFF8DC"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Calico Print",
+            "color_swatch_1": "#FFE4E1",
+            "color_swatch_2": "#FFF0F5",
+            "color_swatch_3": "#FFF5EE",
+            "color_swatch_4": "#FDF5E6",
+            "color_swatch_5": "#FAF0E6"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Cambric Fine",
+            "color_swatch_1": "#FAFAD2",
+            "color_swatch_2": "#FFFACD",
+            "color_swatch_3": "#FFF8DC",
+            "color_swatch_4": "#FFEFD5",
+            "color_swatch_5": "#FFE4B5"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Cashmere Luxury",
+            "color_swatch_1": "#F5F5DC",
+            "color_swatch_2": "#FFEBCD",
+            "color_swatch_3": "#FFE4C4",
+            "color_swatch_4": "#FFDEAD",
+            "color_swatch_5": "#F5DEB3"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Charmeuse Shiny",
+            "color_swatch_1": "#E6E6FA",
+            "color_swatch_2": "#D8BFD8",
+            "color_swatch_3": "#DDA0DD",
+            "color_swatch_4": "#EE82EE",
+            "color_swatch_5": "#DA70D6"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Cheviot Wool",
+            "color_swatch_1": "#A9A9A9",
+            "color_swatch_2": "#696969",
+            "color_swatch_3": "#778899",
+            "color_swatch_4": "#708090",
+            "color_swatch_5": "#2F4F4F"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Chino Twill",
+            "color_swatch_1": "#8B4513",
+            "color_swatch_2": "#A0522D",
+            "color_swatch_3": "#D2691E",
+            "color_swatch_4": "#CD853F",
+            "color_swatch_5": "#F4A460"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Covert Twill",
+            "color_swatch_1": "#2F4F4F",
+            "color_swatch_2": "#708090",
+            "color_swatch_3": "#778899",
+            "color_swatch_4": "#696969",
+            "color_swatch_5": "#808080"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Crépon Crinkled",
+            "color_swatch_1": "#FFDAB9",
+            "color_swatch_2": "#FFE4B5",
+            "color_swatch_3": "#FFEFD5",
+            "color_swatch_4": "#FFF8DC",
+            "color_swatch_5": "#FFFACD"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Damask Woven",
+            "color_swatch_1": "#F5F5F5",
+            "color_swatch_2": "#DCDCDC",
+            "color_swatch_3": "#D3D3D3",
+            "color_swatch_4": "#C0C0C0",
+            "color_swatch_5": "#A9A9A9"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Dobby Weave",
+            "color_swatch_1": "#E6E6FA",
+            "color_swatch_2": "#FFF0F5",
+            "color_swatch_3": "#FFF5EE",
+            "color_swatch_4": "#F5F5DC",
+            "color_swatch_5": "#FFEBCD"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Dupioni Silk",
+            "color_swatch_1": "#FFD700",
+            "color_swatch_2": "#FFF8DC",
+            "color_swatch_3": "#FFFACD",
+            "color_swatch_4": "#FAFAD2",
+            "color_swatch_5": "#FFEFD5"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Faille Ribbed",
+            "color_swatch_1": "#D3D3D3",
+            "color_swatch_2": "#C0C0C0",
+            "color_swatch_3": "#A9A9A9",
+            "color_swatch_4": "#808080",
+            "color_swatch_5": "#696969"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Flannelette Soft",
+            "color_swatch_1": "#FFE4E1",
+            "color_swatch_2": "#FFF0F5",
+            "color_swatch_3": "#FFF5EE",
+            "color_swatch_4": "#FDF5E6",
+            "color_swatch_5": "#FAF0E6"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Foulard Print",
+            "color_swatch_1": "#FFB6C1",
+            "color_swatch_2": "#FFC0CB",
+            "color_swatch_3": "#DC143C",
+            "color_swatch_4": "#FF69B4",
+            "color_swatch_5": "#FF1493"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Gauze Sheer",
+            "color_swatch_1": "#F5F5F5",
+            "color_swatch_2": "#FFFFFF",
+            "color_swatch_3": "#F8F8FF",
+            "color_swatch_4": "#F0F8FF",
+            "color_swatch_5": "#FFF8DC"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Grosgrain Ribbed",
+            "color_swatch_1": "#000000",
+            "color_swatch_2": "#2F4F4F",
+            "color_swatch_3": "#696969",
+            "color_swatch_4": "#808080",
+            "color_swatch_5": "#A9A9A9"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Jersey Knit",
+            "color_swatch_1": "#1E90FF",
+            "color_swatch_2": "#00BFFF",
+            "color_swatch_3": "#87CEEB",
+            "color_swatch_4": "#ADD8E6",
+            "color_swatch_5": "#B0E0E6"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Lawn Crisp",
+            "color_swatch_1": "#F0FFF0",
+            "color_swatch_2": "#F5FFFA",
+            "color_swatch_3": "#F0F8FF",
+            "color_swatch_4": "#F8F8FF",
+            "color_swatch_5": "#FFF5EE"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Moiré Watered",
+            "color_swatch_1": "#E6E6FA",
+            "color_swatch_2": "#D8BFD8",
+            "color_swatch_3": "#DDA0DD",
+            "color_swatch_4": "#EE82EE",
+            "color_swatch_5": "#DA70D6"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Piqué Textured",
+            "color_swatch_1": "#F5F5DC",
+            "color_swatch_2": "#FFEBCD",
+            "color_swatch_3": "#FFE4C4",
+            "color_swatch_4": "#FFDEAD",
+            "color_swatch_5": "#F5DEB3"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Pointelle Knit",
+            "color_swatch_1": "#FFB6C1",
+            "color_swatch_2": "#FFC0CB",
+            "color_swatch_3": "#DC143C",
+            "color_swatch_4": "#FF69B4",
+            "color_swatch_5": "#FF1493"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Pongee Silk",
+            "color_swatch_1": "#FFD700",
+            "color_swatch_2": "#FFF8DC",
+            "color_swatch_3": "#FFFACD",
+            "color_swatch_4": "#FAFAD2",
+            "color_swatch_5": "#FFEFD5"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Sharkskin Smooth",
+            "color_swatch_1": "#2F4F4F",
+            "color_swatch_2": "#708090",
+            "color_swatch_3": "#778899",
+            "color_swatch_4": "#696969",
+            "color_swatch_5": "#808080"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Tartan Plaid",
+            "color_swatch_1": "#8B0000",
+            "color_swatch_2": "#006400",
+            "color_swatch_3": "#00008B",
+            "color_swatch_4": "#FFD700",
+            "color_swatch_5": "#000000"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Toile Printed",
+            "color_swatch_1": "#F5F5F5",
+            "color_swatch_2": "#FFFFFF",
+            "color_swatch_3": "#F8F8FF",
+            "color_swatch_4": "#F0F8FF",
+            "color_swatch_5": "#FFF8DC"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Tussore Silk",
+            "color_swatch_1": "#F5DEB3",
+            "color_swatch_2": "#DEB887",
+            "color_swatch_3": "#D2B48C",
+            "color_swatch_4": "#BC8F8F",
+            "color_swatch_5": "#F4A460"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Velveteen Plush",
+            "color_swatch_1": "#800000",
+            "color_swatch_2": "#8B0000",
+            "color_swatch_3": "#A52A2A",
+            "color_swatch_4": "#B22222",
+            "color_swatch_5": "#DC143C"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Worsted Wool",
+            "color_swatch_1": "#2F4F4F",
+            "color_swatch_2": "#708090",
+            "color_swatch_3": "#778899",
+            "color_swatch_4": "#696969",
+            "color_swatch_5": "#808080"
+          }
+        },
+        {
+          "type": "fabric",
+          "settings": {
+            "title": "Zephyr Light",
+            "color_swatch_1": "#F0F8FF",
+            "color_swatch_2": "#F8F8FF",
+            "color_swatch_3": "#F5F5F5",
+            "color_swatch_4": "#FFFFFF",
+            "color_swatch_5": "#FFF8DC"
           }
         }
       ]
