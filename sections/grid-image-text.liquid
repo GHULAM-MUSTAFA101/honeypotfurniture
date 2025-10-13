@@ -111,6 +111,15 @@
         </a>
       </div>
     {% endif %}
+
+    <!-- Pagination for large number of swatches -->
+    {% if section.blocks.size > 12 %}
+    <div class="swatches-pagination" style="text-align: center; margin-top: 30px;">
+      <button class="page-prev" style="margin-right: 10px; padding: 8px 16px; background: #f0f0f0; border: none; border-radius: 4px;">Previous</button>
+      <span class="page-info" style="padding: 8px 16px;">Page 1 of {{ section.blocks.size | divided_by: section.settings.swatches_per_row | ceil }}</span>
+      <button class="page-next" style="margin-left: 10px; padding: 8px 16px; background: #f0f0f0; border: none; border-radius: 4px;">Next</button>
+    </div>
+    {% endif %}
   </div>
 </section>
 
@@ -134,6 +143,11 @@
 .swatch-item {
   display: flex;
   flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+.swatch-item:hover {
+  transform: translateY(-5px);
 }
 
 .swatch-image-container {
@@ -144,13 +158,14 @@
 
 .swatch-image {
   width: 100%;
-  height: auto;
+  height: 250px;
+  object-fit: cover;
   display: block;
   transition: transform 0.3s ease;
 }
 
 .swatch-image:hover {
-  transform: scale(1.03);
+  transform: scale(1.05);
 }
 
 .swatch-placeholder {
@@ -181,6 +196,10 @@
 .swatch-info {
   padding: 15px 5px;
   text-align: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .cta-button:hover {
@@ -188,8 +207,25 @@
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
+/* Pagination Styles */
+.swatches-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.page-prev, .page-next {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.page-prev:hover, .page-next:hover {
+  background-color: #e0e0e0 !important;
+}
+
 /* Responsive Design */
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
   .swatches-grid {
     grid-template-columns: repeat(3, 1fr) !important;
   }
@@ -210,14 +246,66 @@
   .swatch-info {
     padding: 10px 0;
   }
+  
+  .swatch-image {
+    height: 200px;
+  }
 }
 </style>
+
+<script>
+// Simple pagination functionality for large collections
+document.addEventListener('DOMContentLoaded', function() {
+  const swatchesGrid = document.querySelector('.swatches-grid');
+  const pagePrev = document.querySelector('.page-prev');
+  const pageNext = document.querySelector('.page-next');
+  const pageInfo = document.querySelector('.page-info');
+  
+  if (swatchesGrid && pagePrev && pageNext) {
+    const swatches = Array.from(swatchesGrid.children);
+    const swatchesPerPage = {{ section.settings.swatches_per_row }} * 2; // 2 rows per page
+    let currentPage = 1;
+    const totalPages = Math.ceil(swatches.length / swatchesPerPage);
+    
+    function showPage(page) {
+      const start = (page - 1) * swatchesPerPage;
+      const end = start + swatchesPerPage;
+      
+      swatches.forEach((swatch, index) => {
+        swatch.style.display = (index >= start && index < end) ? 'block' : 'none';
+      });
+      
+      pageInfo.textContent = `Page ${page} of ${totalPages}`;
+      pagePrev.disabled = page === 1;
+      pageNext.disabled = page === totalPages;
+    }
+    
+    pagePrev.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        showPage(currentPage);
+      }
+    });
+    
+    pageNext.addEventListener('click', () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        showPage(currentPage);
+      }
+    });
+    
+    // Show first page initially
+    showPage(1);
+  }
+});
+</script>
 
 {% schema %}
 {
   "name": "Fabric Swatches",
   "tag": "section",
   "class": "section",
+  "max_blocks": 100,
   "settings": [
     {
       "type": "header",
@@ -664,7 +752,7 @@
   ],
   "presets": [
     {
-      "name": "Fabric Swatches",
+      "name": "Fabric Swatches - Large Collection",
       "category": "Custom Sections",
       "blocks": [
         {
@@ -719,6 +807,132 @@
             "swatch_description": "Warm and cozy winter fabric",
             "swatch_price": "From $44.99",
             "swatch_badge": "Winter"
+          }
+        },
+        {
+          "type": "swatch",
+          "settings": {
+            "swatch_name": "Polyester",
+            "swatch_description": "Durable and easy to clean",
+            "swatch_price": "From $19.99",
+            "swatch_badge": "Budget"
+          }
+        },
+        {
+          "type": "swatch",
+          "settings": {
+            "swatch_name": "Jacquard",
+            "swatch_description": "Intricate woven patterns",
+            "swatch_price": "From $54.99",
+            "swatch_badge": "Designer"
+          }
+        },
+        {
+          "type": "swatch",
+          "settings": {
+            "swatch_name": "Twill",
+            "swatch_description": "Diagonal weave pattern",
+            "swatch_price": "From $32.99",
+            "swatch_badge": ""
+          }
+        },
+        {
+          "type": "swatch",
+          "settings": {
+            "swatch_name": "Satin",
+            "swatch_description": "Smooth and glossy finish",
+            "swatch_price": "From $47.99",
+            "swatch_badge": "Luxury"
+          }
+        },
+        {
+          "type": "swatch",
+          "settings": {
+            "swatch_name": "Denim",
+            "swatch_description": "Classic durable fabric",
+            "swatch_price": "From $27.99",
+            "swatch_badge": "Casual"
+          }
+        },
+        {
+          "type": "swatch",
+          "settings": {
+            "swatch_name": "Corduroy",
+            "swatch_description": "Ribbed textured fabric",
+            "swatch_price": "From $36.99",
+            "swatch_badge": "Vintage"
+          }
+        },
+        {
+          "type": "swatch",
+          "settings": {
+            "swatch_name": "Faux Leather",
+            "swatch_description": "Modern vegan alternative",
+            "swatch_price": "From $42.99",
+            "swatch_badge": "Modern"
+          }
+        },
+        {
+          "type": "swatch",
+          "settings": {
+            "swatch_name": "Suede",
+            "swatch_description": "Soft napped surface",
+            "swatch_price": "From $59.99",
+            "swatch_badge": "Premium"
+          }
+        },
+        {
+          "type": "swatch",
+          "settings": {
+            "swatch_name": "Canvas Duck",
+            "swatch_description": "Heavy duty cotton fabric",
+            "swatch_price": "From $31.99",
+            "swatch_badge": "Durable"
+          }
+        },
+        {
+          "type": "swatch",
+          "settings": {
+            "swatch_name": "Chiffon",
+            "swatch_description": "Sheer lightweight fabric",
+            "swatch_price": "From $38.99",
+            "swatch_badge": "Elegant"
+          }
+        },
+        {
+          "type": "swatch",
+          "settings": {
+            "swatch_name": "Organza",
+            "swatch_description": "Stiff transparent fabric",
+            "swatch_price": "From $41.99",
+            "swatch_badge": "Formal"
+          }
+        },
+        {
+          "type": "swatch",
+          "settings": {
+            "swatch_name": "Taffeta",
+            "swatch_description": "Crisp smooth fabric",
+            "swatch_price": "From $46.99",
+            "swatch_badge": "Luxury"
+          }
+        },
+        {
+          "type": "swatch",
+          "settings": {
+            "swatch_name": "Brocade",
+            "swatch_description": "Rich embroidered fabric",
+            "swatch_price": "From $62.99",
+            "swatch_badge": "Royal"
+          }
+        },
+        {
+          "type": "swatch",
+          "settings": {
+            "swatch_name": "Muslin",
+            "swatch_description": "Lightweight cotton fabric",
+            "swatch_price": "From $22.99",
+            "swatch_badge": "Basic"
           }
         }
       ]
