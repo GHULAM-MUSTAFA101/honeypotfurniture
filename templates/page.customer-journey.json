@@ -754,9 +754,8 @@
         },
         "fabric_Kgt4kn": {
           "type": "fabric",
-          "disabled": true,
           "settings": {
-            "title": "Boucle",
+            "title": "Chenille - look",
             "main_image": "shopify://shop_images/Rectangle_34624297_11zon_1.webp",
             "color_swatch_1": "",
             "color_swatch_2": "",
@@ -782,9 +781,8 @@
         },
         "fabric_Y99Pyb": {
           "type": "fabric",
-          "disabled": true,
           "settings": {
-            "title": "Chenille",
+            "title": "Velvet - look",
             "main_image": "shopify://shop_images/Rectangle_34624298_11zon.webp",
             "color_swatch_1": "",
             "color_swatch_2": "",
@@ -810,9 +808,8 @@
         },
         "fabric_xqALjy": {
           "type": "fabric",
-          "disabled": true,
           "settings": {
-            "title": "Velvet",
+            "title": "Suede - look",
             "main_image": "shopify://shop_images/Rectangle_34624299_11zon.webp",
             "color_swatch_1": "",
             "color_swatch_2": "",
@@ -838,9 +835,8 @@
         },
         "fabric_8jkn4B": {
           "type": "fabric",
-          "disabled": true,
           "settings": {
-            "title": "Suede",
+            "title": "Leather - look",
             "main_image": "shopify://shop_images/Rectangle_34624300_11zon.webp",
             "color_swatch_1": "",
             "color_swatch_2": "",
