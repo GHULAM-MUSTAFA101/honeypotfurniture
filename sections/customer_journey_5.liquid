@@ -37,14 +37,14 @@
             
             {% if swatch_color != blank or swatch_image != blank %}
               {% assign swatch_count = swatch_count | plus: 1 %}
-              <span
-                class="fabric-swatch {% if swatch_image != blank %}has-image{% endif %}"
-                style="{% if swatch_color != blank %}background-color: {{ swatch_color }};{% endif %}"
-                data-swatch-image="{% if swatch_image != blank %}{{ swatch_image | image_url: width: 500 }}{% endif %}">
-                {% if swatch_image != blank %}
+              {% if swatch_image != blank %}  
+                <span
+                  class="fabric-swatch {% if swatch_image != blank %}has-image{% endif %}"
+                  style="{% if swatch_color != blank %}background-color: {{ swatch_color }};{% endif %}"
+                  data-swatch-image="{% if swatch_image != blank %}{{ swatch_image | image_url: width: 500 }}{% endif %}">
                   <img src="{{ swatch_image | image_url: width: 40 }}" alt="Swatch {{ i }}" class="swatch-thumb">
-                {% endif %}
-              </span>
+                </span>
+              {% endif %}
             {% endif %}
           {% endfor %}
           
