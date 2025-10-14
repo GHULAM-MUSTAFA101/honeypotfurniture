@@ -1,8 +1,7 @@
 {% comment %}
 ==============================================
-Creation & Delivery (With 3D Rotate Image)
-- Centered layout
-- 3D image rotation on hover
+Creation & Delivery
+Centered layout (matches screenshot exactly)
 ==============================================
 {% endcomment %}
 
@@ -45,47 +44,31 @@ Creation & Delivery (With 3D Rotate Image)
   text-align: center;
   padding: 60px 20px;
 }
-
 .creation-delivery__container {
   max-width: 1000px;
   margin: 0 auto;
 }
-
 .creation-delivery__step {
   font-size: 35px;
   font-weight: 700;
   letter-spacing: 1px;
   margin-bottom: 10px;
 }
-
 .creation-delivery__subtitle {
   font-size: 2.5rem;
   color: #222;
   margin-bottom: 30px;
 }
-
-/* 🔸 3D Rotate Image Effect */
 .creation-delivery__image-wrapper {
   max-width: 100%;
   margin: 0 auto 30px;
-  perspective: 1000px; /* 3D depth */
 }
-
 .creation-delivery__image {
   width: 100%;
   height: auto;
   display: block;
   margin: 0 auto;
-  transition: transform 0.8s ease, box-shadow 0.8s ease;
-  transform-style: preserve-3d;
 }
-
-.creation-delivery__image:hover {
-  transform: rotateY(25deg) rotateX(10deg) scale(1.05);
-  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-}
-
 .creation-delivery__description {
   font-size: 16px;
   color: #555;
@@ -93,7 +76,6 @@ Creation & Delivery (With 3D Rotate Image)
   margin: 0 auto 25px;
   line-height: 1.6;
 }
-
 .creation-delivery__btn {
   display: inline-block;
   padding: 12px 28px;
@@ -107,13 +89,11 @@ Creation & Delivery (With 3D Rotate Image)
   text-decoration: none;
   transition: all 0.3s ease;
 }
-
 .creation-delivery__btn:hover {
   background: #f5f5f5;
   color: #000;
   border-color: #999;
 }
-
 @media (max-width: 768px) {
   .creation-delivery__subtitle {
     font-size: 1.3rem;
