@@ -278,39 +278,63 @@ border: 1px solid #565656;
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Swatch click functionality
+  // Swatch click functionality - OPTIMIZED FAST TRANSITION
   document.querySelectorAll('[data-fabric-item]').forEach(function(item) {
     const mainImg = item.querySelector('[data-fabric-main-image]');
     const swatches = item.querySelectorAll('.fabric-swatch');
 
     if (!swatches.length || !mainImg) return;
 
+    // Preload images for instant switching
+    const imageCache = {};
+    swatches.forEach(function(swatch) {
+      const imageUrl = swatch.getAttribute('data-swatch-image');
+      if (imageUrl && !imageCache[imageUrl]) {
+        const img = new Image();
+        img.src = imageUrl;
+        imageCache[imageUrl] = img;
+      }
+    });
+
     // Auto-activate first swatch with image
     const first = Array.from(swatches).find(s => s.dataset.swatchImage);
     if (first) {
       first.classList.add('active');
-      mainImg.src = first.dataset.swatchImage;
+      const firstImage = first.getAttribute('data-swatch-image');
+      if (firstImage) {
+        mainImg.src = firstImage;
+      }
     }
 
+    // Optimized click handler with FAST transition
     swatches.forEach(function(swatch) {
       swatch.addEventListener('click', function() {
-        const newImg = swatch.getAttribute('data-swatch-image');
-        if (!newImg) return;
+        const newImgUrl = swatch.getAttribute('data-swatch-image');
+        if (!newImgUrl) return;
 
+        // Remove active class from all swatches
         swatches.forEach(s => s.classList.remove('active'));
+        
+        // Add active class to clicked swatch
         swatch.classList.add('active');
-
-        // Fade transition
-        mainImg.style.opacity = 0;
+        
+        // FAST transition (only 100ms instead of 200ms)
+        mainImg.style.opacity = '0.7';
+        
+        // Use setTimeout with minimal delay for smooth transition
         setTimeout(() => {
-          mainImg.src = newImg;
-          mainImg.style.opacity = 1;
-        }, 200);
+          if (imageCache[newImgUrl]) {
+            mainImg.src = newImgUrl;
+          } else {
+            mainImg.src = newImgUrl;
+          }
+          mainImg.style.opacity = '1';
+        }, 50); // Reduced from 200ms to 50ms
       });
     });
   });
 
-  // Pagination functionality for large fabric collections
+  // Pagination functionality remains same
   function initializePagination() {
     const fabricGrid = document.querySelector('.fabric-grid');
     const fabricItems = document.querySelectorAll('.fabric-item');
@@ -339,7 +363,6 @@ document.addEventListener('DOMContentLoaded', function() {
       prevBtn.disabled = page === 1;
       nextBtn.disabled = page === totalPages;
       
-      // Scroll to top of section when changing pages
       fabricGrid.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
     
@@ -357,7 +380,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
     
-    // Show first page initially
     showPage(1);
   }
   
