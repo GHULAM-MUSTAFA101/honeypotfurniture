@@ -708,32 +708,53 @@
         "fabric_B6w8xQ": {
           "type": "fabric",
           "settings": {
-            "title": "Boucle",
+            "title": "Suede - look",
             "main_image": "shopify://shop_images/Rectangle_34624296_11zon.webp",
             "color_swatch_1": "",
+            "color_image_1": "shopify://shop_images/image_94.png",
             "color_swatch_2": "",
+            "color_image_2": "shopify://shop_images/image_95.png",
             "color_swatch_3": "",
+            "color_image_3": "shopify://shop_images/image_96.png",
             "color_swatch_4": "",
+            "color_image_4": "shopify://shop_images/image_97.png",
             "color_swatch_5": "",
+            "color_image_5": "shopify://shop_images/image_98.png",
             "color_swatch_6": "",
+            "color_image_6": "shopify://shop_images/image_99.png",
             "color_swatch_7": "",
+            "color_image_7": "shopify://shop_images/image_100.png",
             "color_swatch_8": "",
+            "color_image_8": "shopify://shop_images/image_101.png",
             "color_swatch_9": "",
+            "color_image_9": "shopify://shop_images/image_102.png",
             "color_swatch_10": "",
+            "color_image_10": "shopify://shop_images/image_103.png",
             "color_swatch_11": "#8a2be2",
+            "color_image_11": "shopify://shop_images/image_104.png",
             "color_swatch_12": "#ff4500",
+            "color_image_12": "shopify://shop_images/image_105.png",
             "color_swatch_13": "#2e8b57",
+            "color_image_13": "shopify://shop_images/image_106.png",
             "color_swatch_14": "#da70d6",
+            "color_image_14": "shopify://shop_images/image_107.png",
             "color_swatch_15": "#f0e68c",
+            "color_image_15": "shopify://shop_images/image_108.png",
             "color_swatch_16": "#ffa500",
+            "color_image_16": "shopify://shop_images/image_109.png",
             "color_swatch_17": "#ffc0cb",
+            "color_image_17": "shopify://shop_images/image_110.png",
             "color_swatch_18": "#a52a2a",
+            "color_image_18": "shopify://shop_images/image_111.png",
             "color_swatch_19": "#deb887",
-            "color_swatch_20": "#5f9ea0"
+            "color_image_19": "shopify://shop_images/image_112.png",
+            "color_swatch_20": "#5f9ea0",
+            "color_image_20": "shopify://shop_images/image_113.png"
           }
         },
         "fabric_Kgt4kn": {
           "type": "fabric",
+          "disabled": true,
           "settings": {
             "title": "Boucle",
             "main_image": "shopify://shop_images/Rectangle_34624297_11zon_1.webp",
@@ -761,6 +782,7 @@
         },
         "fabric_Y99Pyb": {
           "type": "fabric",
+          "disabled": true,
           "settings": {
             "title": "Chenille",
             "main_image": "shopify://shop_images/Rectangle_34624298_11zon.webp",
@@ -788,6 +810,7 @@
         },
         "fabric_xqALjy": {
           "type": "fabric",
+          "disabled": true,
           "settings": {
             "title": "Velvet",
             "main_image": "shopify://shop_images/Rectangle_34624299_11zon.webp",
@@ -815,6 +838,7 @@
         },
         "fabric_8jkn4B": {
           "type": "fabric",
+          "disabled": true,
           "settings": {
             "title": "Suede",
             "main_image": "shopify://shop_images/Rectangle_34624300_11zon.webp",
