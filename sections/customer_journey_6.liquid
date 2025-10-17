@@ -275,13 +275,18 @@
 
 @media (max-width: 480px) {
   .steps {
-    flex-direction: column;
+    flex-direction: row;
     gap: {{ section.settings.mobile_steps_gap }}px;
   }
   
   .customer-journey-section .arrow {
     {% comment %} transform: rotate(90deg); {% endcomment %}
   }
+    .customer-journey-section  .step-item {
+        font-size: 11px;
+        white-space: normal;
+        text-align: center;
+    }
 }
 </style>
 
