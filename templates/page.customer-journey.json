@@ -70,7 +70,7 @@
         "image_width": 60,
         "mobile_content_height": 200,
         "mobile_image_height": 200,
-        "heading": "Your Custom Sofa Journey",
+        "heading": "Your Custom <br> Sofa Journey",
         "heading_size": 60,
         "mobile_heading_size": 30,
         "content": "<p>With Honeypot Furniture</p>",
@@ -944,6 +944,7 @@
       "settings": {
         "step_title": "STEP 6",
         "subtitle": "Creation & Delivery",
+        "cylindo_product_id": "",
         "image": "shopify://shop_images/Mask_group_4__11zon.webp",
         "image_alt": "Custom Sofa Creation & Delivery",
         "description": "Once you've finalised your design and fabric choice, we handcraft your sofa to order and deliver it within 7–14 days.",
