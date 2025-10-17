@@ -619,6 +619,12 @@
       object-fit: cover;
     }
   }
+   @media (max-width: 480px) {
+  .custom_main_sofa_section .sofa-content.with-border-left {
+      margin: 18px;
+    margin-bottom: 0px;
+  }
+  }
 
   /* Dynamic styles for this specific section instance */
   #{{ section.settings.section_id | default: 'sofa-section-1' }} .custom_main_sofa_section {
