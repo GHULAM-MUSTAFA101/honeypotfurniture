@@ -741,13 +741,16 @@
       
       <!-- Content Block -->
       <div class="sofa-content {% if section.settings.show_content_border %}{% if section.settings.border_side == 'left' %}with-border-left{% else %}with-border-right{% endif %}{% endif %}">
-        <h2 class="sofa-heading">
+       <div class="for_border_sofa">
+ <h2 class="sofa-heading">
           {{ section.settings.heading }}
         </h2>
         
         <div class="sofa-text">
           {{ section.settings.content }}
         </div>
+
+       </div>
         
         {% if section.settings.button_text != blank %}
           <a href="{{ section.settings.button_link }}" 
